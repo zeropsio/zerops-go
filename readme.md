@@ -1,3 +1,7 @@
+# Installation
+
+`go get -u github.com/zeropsio/zerops-go`
+
 # Basic example
 
 ```go

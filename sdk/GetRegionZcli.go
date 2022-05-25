@@ -3,23 +3,15 @@
 package sdk
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
-	"context"
-
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
-
-var _ strconv.NumError
 
 type GetRegionZcliResponse struct {
 	success            output.FileDownload
@@ -47,17 +39,8 @@ func (r GetRegionZcliResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetRegionZcli(ctx context.Context, inputDtoQuery query.Dev) (getRegionZcliResponse GetRegionZcliResponse, err error) {
+func (h Handler) GetRegionZcli(ctx context.Context) (getRegionZcliResponse GetRegionZcliResponse, err error) {
 	u := "/api/rest/public/region/zcli"
-
-	var queryParams []string
-	if param, ok := inputDtoQuery.Dev.Get(); ok {
-		queryParams = append(queryParams, "dev="+url.QueryEscape(strconv.FormatBool(param.Native())))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
 
 	var response GetRegionZcliResponse
 	sdkResponse := sdkBase.Get(

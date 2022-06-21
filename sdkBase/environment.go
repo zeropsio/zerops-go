@@ -35,6 +35,7 @@ func (e Environment) Request(ctx context.Context, method string, url string, bod
 	}
 	req = req.WithContext(ctx)
 	req.Header = e.headers.Clone()
+	req.Header.Add("Content-Type", "application/json")
 	if e.headers.Get("host") != "" {
 		req.Host = e.headers.Get("host")
 	}

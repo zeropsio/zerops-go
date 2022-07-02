@@ -3,10 +3,11 @@
 package sdk
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"net/http"
+
+	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/output"

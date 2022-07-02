@@ -10,11 +10,13 @@ const (
 	ServicePortSchemeEnumHttp       = ServicePortSchemeEnum("http")
 	ServicePortSchemeEnumHttps      = ServicePortSchemeEnum("https")
 	ServicePortSchemeEnumRedis      = ServicePortSchemeEnum("redis")
-	ServicePortSchemeEnumRabbitmq   = ServicePortSchemeEnum("rabbitmq")
 	ServicePortSchemeEnumMysql      = ServicePortSchemeEnum("mysql")
 	ServicePortSchemeEnumUdpinflux  = ServicePortSchemeEnum("udpinflux")
 	ServicePortSchemeEnumMongodb    = ServicePortSchemeEnum("mongodb")
 	ServicePortSchemeEnumPostgresql = ServicePortSchemeEnum("postgresql")
+	ServicePortSchemeEnumAmqp       = ServicePortSchemeEnum("amqp")
+	ServicePortSchemeEnumStomp      = ServicePortSchemeEnum("stomp")
+	ServicePortSchemeEnumMqtt       = ServicePortSchemeEnum("mqtt")
 )
 
 func NewServicePortSchemeEnumFromString(value string) (out ServicePortSchemeEnum, err error) {
@@ -56,19 +58,19 @@ func (enum ServicePortSchemeEnum) Is(values ...ServicePortSchemeEnum) bool {
 
 func ServicePortSchemeEnumAllStrings() []string {
 	return []string{
-		string(ServicePortSchemeEnumTcp), string(ServicePortSchemeEnumUdp), string(ServicePortSchemeEnumHttp), string(ServicePortSchemeEnumHttps), string(ServicePortSchemeEnumRedis), string(ServicePortSchemeEnumRabbitmq), string(ServicePortSchemeEnumMysql), string(ServicePortSchemeEnumUdpinflux), string(ServicePortSchemeEnumMongodb), string(ServicePortSchemeEnumPostgresql),
+		string(ServicePortSchemeEnumTcp), string(ServicePortSchemeEnumUdp), string(ServicePortSchemeEnumHttp), string(ServicePortSchemeEnumHttps), string(ServicePortSchemeEnumRedis), string(ServicePortSchemeEnumMysql), string(ServicePortSchemeEnumUdpinflux), string(ServicePortSchemeEnumMongodb), string(ServicePortSchemeEnumPostgresql), string(ServicePortSchemeEnumAmqp), string(ServicePortSchemeEnumStomp), string(ServicePortSchemeEnumMqtt),
 	}
 }
 
 func ServicePortSchemeEnumAll() []ServicePortSchemeEnum {
 	return []ServicePortSchemeEnum{
-		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumRabbitmq, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql,
+		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt,
 	}
 }
 
 func ServicePortSchemeEnumAllPublic() []ServicePortSchemeEnum {
 	return []ServicePortSchemeEnum{
-		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumRabbitmq, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql,
+		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt,
 	}
 }
 
@@ -100,10 +102,6 @@ func (enum ServicePortSchemeEnum) IsRedis() bool {
 	return enum.Is(ServicePortSchemeEnumRedis)
 }
 
-func (enum ServicePortSchemeEnum) IsRabbitmq() bool {
-	return enum.Is(ServicePortSchemeEnumRabbitmq)
-}
-
 func (enum ServicePortSchemeEnum) IsMysql() bool {
 	return enum.Is(ServicePortSchemeEnumMysql)
 }
@@ -118,4 +116,16 @@ func (enum ServicePortSchemeEnum) IsMongodb() bool {
 
 func (enum ServicePortSchemeEnum) IsPostgresql() bool {
 	return enum.Is(ServicePortSchemeEnumPostgresql)
+}
+
+func (enum ServicePortSchemeEnum) IsAmqp() bool {
+	return enum.Is(ServicePortSchemeEnumAmqp)
+}
+
+func (enum ServicePortSchemeEnum) IsStomp() bool {
+	return enum.Is(ServicePortSchemeEnumStomp)
+}
+
+func (enum ServicePortSchemeEnum) IsMqtt() bool {
+	return enum.Is(ServicePortSchemeEnumMqtt)
 }

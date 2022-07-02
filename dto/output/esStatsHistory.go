@@ -17,13 +17,11 @@ type EsStatsHistory struct {
 	ServiceStackId types.String     `json:"serviceStackId"`
 	ServiceId      types.StringNull `json:"serviceId"`
 	ContainerId    types.StringNull `json:"containerId"`
-	CpuUsedMin     types.Float      `json:"cpuUsedMin"`
-	CpuUsedMedian  types.Float      `json:"cpuUsedMedian"`
-	CpuUsedMax     types.Float      `json:"cpuUsedMax"`
-	RamUsedMin     types.Float      `json:"ramUsedMin"`
-	RamUsedMedian  types.Float      `json:"ramUsedMedian"`
-	RamUsedMax     types.Float      `json:"ramUsedMax"`
-	DiskUsedMin    types.Float      `json:"diskUsedMin"`
-	DiskUsedMedian types.Float      `json:"diskUsedMedian"`
-	DiskUsedMax    types.Float      `json:"diskUsedMax"`
+	ContainerCount types.IntNull    `json:"containerCount"`
+	CpuLimit       types.Float      `json:"cpuLimit"`
+	CpuUsed        types.Float      `json:"cpuUsed"`
+	RamLimit       types.Float      `json:"ramLimit"`
+	RamUsed        types.Float      `json:"ramUsed"`
+	DiskLimit      types.Float      `json:"diskLimit"`
+	DiskUsed       types.Float      `json:"diskUsed"`
 }

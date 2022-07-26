@@ -4,33 +4,42 @@ package types
 
 import (
 	"encoding/json"
-	"errors"
 )
 
-type JsonRawMessage []byte
+type TypeScope int
 
-func NewJsonRawMessage(value string) JsonRawMessage {
-	return JsonRawMessage(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter JsonRawMessage) Native() []byte {
-	return parameter
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter JsonRawMessage) MarshalJSON() ([]byte, error) {
-	if parameter == nil {
-		return []byte("null"), nil
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return parameter, nil
+
+	return []byte("null"), nil
 }
 
-func (parameter *JsonRawMessage) UnmarshalJSON(data []byte) error {
-	if parameter == nil {
-		return errors.New("json.RawMessage: UnmarshalJSON on nil pointer")
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
-	*parameter = append((*parameter)[0:0], data...)
-	return nil
-}
 
-var _ json.Marshaler = (*JsonRawMessage)(nil)
-var _ json.Unmarshaler = (*JsonRawMessage)(nil)
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
+}

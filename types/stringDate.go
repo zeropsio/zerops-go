@@ -2,16 +2,44 @@
 
 package types
 
-type StringDate string
+import (
+	"encoding/json"
+)
 
-func NewStringDate(value string) StringDate {
-	return StringDate(value)
+type TypeScope int
+
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewStringDateFromString(value string) (out StringDate, err error) {
-	return StringDate(value), nil
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter StringDate) Native() string {
-	return string(parameter)
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
+	}
+
+	return []byte("null"), nil
+}
+
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

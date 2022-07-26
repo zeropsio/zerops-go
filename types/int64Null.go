@@ -6,49 +6,33 @@ import (
 	"encoding/json"
 )
 
-var _ json.Unmarshaler
+type TypeScope int
 
-type Int64Null struct {
-	value  Int64
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
 	filled bool
 }
 
-func NewInt64Null(value int64) Int64Null {
-	return Int64Null{
-		value:  NewInt64(value),
-		filled: true,
-	}
-}
-
-func NewInt64NullFromString(value string) (Int64Null, error) {
-	val, err := NewInt64FromString(value)
-	if err != nil {
-		return Int64Null{}, err
-	}
-	return Int64Null{
-		value:  NewInt64(val.Native()),
-		filled: true,
-	}, nil
-}
-
-func (parameter Int64Null) Get() (Int64, bool) {
-	return parameter.value, parameter.filled
-}
-
-func (parameter Int64Null) Filled() bool {
+func (parameter Base) Filled() bool {
 	return parameter.filled
 }
 
-func (parameter Int64Null) MarshalJSON() ([]byte, error) {
+func (parameter Base) MarshalJSON() ([]byte, error) {
 	if parameter.filled {
-		bytes, err := json.Marshal(parameter.value)
-		return bytes, err
+		return json.Marshal(parameter.value)
 	}
 
 	return []byte("null"), nil
 }
 
-func (parameter *Int64Null) UnmarshalJSON(data []byte) error {
+func (parameter *Base) UnmarshalJSON(data []byte) error {
 	if string(data) == "null" {
 		parameter.filled = false
 		return nil

@@ -2,32 +2,44 @@
 
 package types
 
-type String string
+import (
+	"encoding/json"
+)
 
-func NewString(value string) String {
-	return String(value)
+type TypeScope int
+
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewStringFromString(value string) (out String, err error) {
-	return String(value), nil
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter String) StringNull() StringNull {
-	return NewStringNull(parameter.Native())
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
+	}
+
+	return []byte("null"), nil
 }
 
-func (parameter String) Native() string {
-	return string(parameter)
-}
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
 
-func (parameter String) String() string {
-	return string(parameter)
-}
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
 
-func (parameter String) Pointer() *string {
-	return (*string)(&parameter)
-}
-
-func (parameter String) Bytes() []byte {
-	return []byte(parameter)
+	return err
 }

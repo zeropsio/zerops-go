@@ -3,23 +3,43 @@
 package types
 
 import (
-	"strconv"
+	"encoding/json"
 )
 
-type Bool bool
+type TypeScope int
 
-func NewBool(value bool) Bool {
-	return Bool(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewBoolFromString(value string) (out Bool, err error) {
-	b, err := strconv.ParseBool(value)
-	if err != nil {
-		return out, err
+func (parameter Base) Filled() bool {
+	return parameter.filled
+}
+
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return Bool(b), nil
+
+	return []byte("null"), nil
 }
 
-func (parameter Bool) Native() bool {
-	return bool(parameter)
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

@@ -4,35 +4,42 @@ package types
 
 import (
 	"encoding/json"
-	"errors"
 )
 
-type StringArray []string
+type TypeScope int
 
-func NewStringArray(value []string) StringArray {
-	return StringArray(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter StringArray) Native() []string {
-	return []string(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter StringArray) MarshalJSON() ([]byte, error) {
-	if parameter == nil {
-		return nil, errors.New("value can't be nil")
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return json.Marshal([]string(parameter))
+
+	return []byte("null"), nil
 }
 
-func (parameter *StringArray) UnmarshalJSON(data []byte) error {
-	var arr []string
-	err := json.Unmarshal(data, &arr)
-	if err != nil {
-		return err
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
-	if arr == nil {
-		arr = make([]string, 0)
-	}
-	*parameter = StringArray(arr)
-	return nil
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

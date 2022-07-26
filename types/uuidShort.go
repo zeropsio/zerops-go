@@ -2,20 +2,44 @@
 
 package types
 
-type UuidShort string
+import (
+	"encoding/json"
+)
 
-func NewUuidShort(value string) UuidShort {
-	return UuidShort(value)
+type TypeScope int
+
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewUuidShortFromString(value string) (out UuidShort, err error) {
-	return UuidShort(value), nil
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter UuidShort) UuidShortNull() UuidShortNull {
-	return NewUuidShortNull(parameter.Native())
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
+	}
+
+	return []byte("null"), nil
 }
 
-func (parameter UuidShort) Native() string {
-	return string(parameter)
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

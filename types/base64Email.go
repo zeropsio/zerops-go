@@ -3,25 +3,43 @@
 package types
 
 import (
-	"encoding/base64"
-	"errors"
+	"encoding/json"
 )
 
-type Base64Email string
+type TypeScope int
 
-func NewBase64Email(value string) Base64Email {
-	return Base64Email(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter Base64Email) Native() string {
-	return string(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter Base64Email) Decoded() (string, error) {
-	decodedEmail, err := base64.StdEncoding.DecodeString(string(parameter))
-	if err != nil {
-		return "", errors.New("value is not valid base64 format, " + err.Error())
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
 
-	return string(decodedEmail), nil
+	return []byte("null"), nil
+}
+
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

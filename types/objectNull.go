@@ -6,38 +6,33 @@ import (
 	"encoding/json"
 )
 
-var _ json.Unmarshaler
+type TypeScope int
 
-type ObjectNull struct {
-	value  Object
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
 	filled bool
 }
 
-func NewObjectNull(value string) ObjectNull {
-	return ObjectNull{
-		value:  NewObject(value),
-		filled: true,
-	}
-}
-
-func (parameter ObjectNull) Get() (Object, bool) {
-	return parameter.value, parameter.filled
-}
-
-func (parameter ObjectNull) Filled() bool {
+func (parameter Base) Filled() bool {
 	return parameter.filled
 }
 
-func (parameter ObjectNull) MarshalJSON() ([]byte, error) {
+func (parameter Base) MarshalJSON() ([]byte, error) {
 	if parameter.filled {
-		bytes, err := json.Marshal(parameter.value)
-		return bytes, err
+		return json.Marshal(parameter.value)
 	}
 
 	return []byte("null"), nil
 }
 
-func (parameter *ObjectNull) UnmarshalJSON(data []byte) error {
+func (parameter *Base) UnmarshalJSON(data []byte) error {
 	if string(data) == "null" {
 		parameter.filled = false
 		return nil

@@ -3,31 +3,43 @@
 package types
 
 import (
-	"encoding/base64"
-	"errors"
-	"net/url"
+	"encoding/json"
 )
 
-type UrlEncodedBase64Email string
+type TypeScope int
 
-func NewUrlEncodedBase64Email(value string) UrlEncodedBase64Email {
-	return UrlEncodedBase64Email(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter UrlEncodedBase64Email) Native() string {
-	return string(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter UrlEncodedBase64Email) Decoded() (string, error) {
-	urlDecoded, err := url.QueryUnescape(string(parameter))
-	if err != nil {
-		return "", errors.New("value is not valid url format, " + err.Error())
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
 
-	base64Decoded, err := base64.StdEncoding.DecodeString(urlDecoded)
-	if err != nil {
-		return "", errors.New("value is not valid base64 format, " + err.Error())
+	return []byte("null"), nil
+}
+
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
 
-	return string(base64Decoded), nil
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

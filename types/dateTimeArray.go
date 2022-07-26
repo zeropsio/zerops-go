@@ -4,36 +4,42 @@ package types
 
 import (
 	"encoding/json"
-	"errors"
-	"time"
 )
 
-type DateTimeArray []time.Time
+type TypeScope int
 
-func NewDateTimeArray(value []time.Time) DateTimeArray {
-	return DateTimeArray(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter DateTimeArray) Native() []time.Time {
-	return []time.Time(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter DateTimeArray) MarshalJSON() ([]byte, error) {
-	if parameter == nil {
-		return nil, errors.New("value can't be nil")
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return json.Marshal([]time.Time(parameter))
+
+	return []byte("null"), nil
 }
 
-func (parameter *DateTimeArray) UnmarshalJSON(data []byte) error {
-	var arr []time.Time
-	err := json.Unmarshal(data, &arr)
-	if err != nil {
-		return err
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
-	if arr == nil {
-		arr = make([]time.Time, 0)
-	}
-	*parameter = DateTimeArray(arr)
-	return nil
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

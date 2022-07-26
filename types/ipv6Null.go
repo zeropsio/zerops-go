@@ -6,38 +6,33 @@ import (
 	"encoding/json"
 )
 
-var _ json.Unmarshaler
+type TypeScope int
 
-type Ipv6Null struct {
-	value  Ipv6
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
 	filled bool
 }
 
-func NewIpv6Null(value string) Ipv6Null {
-	return Ipv6Null{
-		value:  NewIpv6(value),
-		filled: true,
-	}
-}
-
-func (parameter Ipv6Null) Get() (Ipv6, bool) {
-	return parameter.value, parameter.filled
-}
-
-func (parameter Ipv6Null) Filled() bool {
+func (parameter Base) Filled() bool {
 	return parameter.filled
 }
 
-func (parameter Ipv6Null) MarshalJSON() ([]byte, error) {
+func (parameter Base) MarshalJSON() ([]byte, error) {
 	if parameter.filled {
-		bytes, err := json.Marshal(parameter.value)
-		return bytes, err
+		return json.Marshal(parameter.value)
 	}
 
 	return []byte("null"), nil
 }
 
-func (parameter *Ipv6Null) UnmarshalJSON(data []byte) error {
+func (parameter *Base) UnmarshalJSON(data []byte) error {
 	if string(data) == "null" {
 		parameter.filled = false
 		return nil

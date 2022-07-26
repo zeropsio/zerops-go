@@ -17,7 +17,7 @@ import (
 )
 
 type PutServiceStackExternalRepositoryIntegrationResponse struct {
-	success            output.ProcessNull
+	success            output.ProcessNil
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutServiceStackExternalRepositoryIntegrationResponse) OutputInterface() 
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Output() (output output.ProcessNull, err error) {
+func (r PutServiceStackExternalRepositoryIntegrationResponse) Output() (output output.ProcessNil, err error) {
 	return r.success, r.err
 }
 

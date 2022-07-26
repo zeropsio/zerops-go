@@ -6,23 +6,40 @@ import (
 	"encoding/json"
 )
 
-type Map map[string]interface{}
+type TypeScope int
 
-func NewMap(value map[string]interface{}) Map {
-	return Map(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter Map) Native() map[string]interface{} {
-	return map[string]interface{}(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter Map) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]interface{}(parameter))
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
+	}
+
+	return []byte("null"), nil
 }
 
-func (parameter *Map) UnmarshalJSON(data []byte) error {
-	var x map[string]interface{}
-	err := json.Unmarshal(data, &x)
-	*parameter = Map(x)
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
 	return err
 }

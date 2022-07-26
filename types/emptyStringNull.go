@@ -6,49 +6,33 @@ import (
 	"encoding/json"
 )
 
-var _ json.Unmarshaler
+type TypeScope int
 
-type EmptyStringNull struct {
-	value  EmptyString
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
 	filled bool
 }
 
-func NewEmptyStringNull(value string) EmptyStringNull {
-	return EmptyStringNull{
-		value:  NewEmptyString(value),
-		filled: true,
-	}
-}
-
-func NewEmptyStringNullFromString(value string) (EmptyStringNull, error) {
-	val, err := NewEmptyStringFromString(value)
-	if err != nil {
-		return EmptyStringNull{}, err
-	}
-	return EmptyStringNull{
-		value:  NewEmptyString(val.Native()),
-		filled: true,
-	}, nil
-}
-
-func (parameter EmptyStringNull) Get() (EmptyString, bool) {
-	return parameter.value, parameter.filled
-}
-
-func (parameter EmptyStringNull) Filled() bool {
+func (parameter Base) Filled() bool {
 	return parameter.filled
 }
 
-func (parameter EmptyStringNull) MarshalJSON() ([]byte, error) {
+func (parameter Base) MarshalJSON() ([]byte, error) {
 	if parameter.filled {
-		bytes, err := json.Marshal(parameter.value)
-		return bytes, err
+		return json.Marshal(parameter.value)
 	}
 
 	return []byte("null"), nil
 }
 
-func (parameter *EmptyStringNull) UnmarshalJSON(data []byte) error {
+func (parameter *Base) UnmarshalJSON(data []byte) error {
 	if string(data) == "null" {
 		parameter.filled = false
 		return nil

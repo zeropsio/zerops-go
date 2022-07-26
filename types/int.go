@@ -3,33 +3,43 @@
 package types
 
 import (
-	"strconv"
+	"encoding/json"
 )
 
-type Int int
+type TypeScope int
 
-func NewInt(value int) Int {
-	return Int(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewIntFromString(value string) (out Int, err error) {
-	i, err := strconv.Atoi(value)
-	if err != nil {
-		return out, err
+func (parameter Base) Filled() bool {
+	return parameter.filled
+}
+
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	out = Int(i)
 
-	return
+	return []byte("null"), nil
 }
 
-func (parameter Int) IntNull() IntNull {
-	return NewIntNull(parameter.Native())
-}
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
 
-func (parameter Int) Native() int {
-	return int(parameter)
-}
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
 
-func (parameter Int) Pointer() *int {
-	return (*int)(&parameter)
+	return err
 }

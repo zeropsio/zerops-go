@@ -2,24 +2,44 @@
 
 package types
 
-type Float float64
+import (
+	"encoding/json"
+)
 
-func NewFloat(value float64) Float {
-	return Float(value)
+type TypeScope int
+
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter Float) Native() float64 {
-	return float64(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter Float) Pointer() *float64 {
-	return (*float64)(&parameter)
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
+	}
+
+	return []byte("null"), nil
 }
 
-func (parameter Float) Decimal() Decimal {
-	return NewDecimalFromFloat(parameter.Native())
-}
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
 
-func (parameter Float) FloatNull() FloatNull {
-	return NewFloatNull(parameter.Native())
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

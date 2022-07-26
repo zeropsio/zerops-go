@@ -2,6 +2,9 @@
 
 package body
 
+// specifier
+// template pkg/shared/specifier/generator/publicSdk/golang/dtoGenerator/templates/jsonInputDto.go.tmpl
+
 import (
 	"encoding/json"
 	"strconv"

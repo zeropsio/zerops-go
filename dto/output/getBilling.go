@@ -2,6 +2,9 @@
 
 package output
 
+// specifier
+// template pkg/shared/specifier/generator/publicSdk/golang/dtoGenerator/templates/jsonOutputDto.go.tmpl
+
 import (
 	"strconv"
 )

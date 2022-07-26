@@ -4,31 +4,42 @@ package types
 
 import (
 	"encoding/json"
-	"regexp"
-	"strings"
 )
 
-const emailPattern = `(?:[a-z0-9!#$%&'*+/=?^_` + "`" + `{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_` + "`" + `{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])`
+type TypeScope int
 
-var emailPatternRegexp = regexp.MustCompile(emailPattern)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
 
-type Email string
-
-func NewEmail(value string) Email {
-	return Email(strings.ToLower(value))
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter Email) Native() string {
-	return strings.ToLower(string(parameter))
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter *Email) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
-		return err
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	*parameter = NewEmail(s)
-	return nil
+
+	return []byte("null"), nil
 }
 
-var _ json.Unmarshaler = (*Email)(nil)
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
+	}
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
+}

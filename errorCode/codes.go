@@ -302,6 +302,8 @@ const (
 	ModeUpdateForbiddenForThisStackCategory                  ErrorCode = "modeUpdateForbiddenForThisStackCategory"
 	YamlValidationInvalidYaml                                ErrorCode = "yamlValidationInvalidYaml"
 	UnexpectedYamlEncoding                                   ErrorCode = "unexpectedYamlEncoding"
+	BucketAlreadyExists                                      ErrorCode = "bucketAlreadyExists"
+	S3ApiRequestFailed                                       ErrorCode = "s3ApiRequestFailed"
 	UserIdWasNotFound                                        ErrorCode = "userIdWasNotFound"
 	AuthorIdWasNotFound                                      ErrorCode = "authorIdWasNotFound"
 	UserDoesNotHaveActiveConnectionToAnyClient               ErrorCode = "userDoesNotHaveActiveConnectionToAnyClient"

@@ -3,79 +3,43 @@
 package types
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
-
-	"github.com/shopspring/decimal"
 )
 
-type Decimal decimal.Decimal
+type TypeScope int
 
-func NewDecimal(value decimal.Decimal) Decimal {
-	return Decimal(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func NewDecimalFromString(value string) (Decimal, error) {
-	d, err := decimal.NewFromString(value)
-	if err != nil {
-		return Decimal{}, err
+func (parameter Base) Filled() bool {
+	return parameter.filled
+}
+
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return Decimal(d), nil
+
+	return []byte("null"), nil
 }
 
-func NewDecimalFromFloat(value float64) Decimal {
-	return Decimal(decimal.NewFromFloat(value))
-}
-
-func NewDecimalFromInt(value int) Decimal {
-	return Decimal(decimal.NewFromInt32(int32(value)))
-}
-
-func (parameter Decimal) Native() decimal.Decimal {
-	return decimal.Decimal(parameter)
-}
-
-func (parameter Decimal) DecimalNull() DecimalNull {
-	return NewDecimalNull(parameter.Native())
-}
-
-func (parameter *Decimal) UnmarshalJSON(data []byte) error {
-	var value *float64
-	err := json.NewDecoder(bytes.NewReader(data)).Decode(&value)
-	if err != nil {
-		return errors.New("value is not valid decimal format, " + err.Error())
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
-	if value != nil {
-		*parameter = NewDecimalFromFloat(*value)
-	}
-	return nil
-}
 
-func (parameter Decimal) MarshalJSON() ([]byte, error) {
-	v, _ := parameter.Native().Float64()
-	return json.Marshal(v)
-}
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
 
-// decimal funcs
-
-func (parameter Decimal) Float() Float {
-	f, _ := parameter.Native().Float64()
-	return NewFloat(f)
-}
-
-func (parameter Decimal) Add(d2 Decimal) Decimal {
-	return NewDecimal(parameter.Native().Add(d2.Native()))
-}
-
-func (parameter Decimal) Sub(d2 Decimal) Decimal {
-	return NewDecimal(parameter.Native().Sub(d2.Native()))
-}
-
-func (parameter Decimal) Mul(d2 Decimal) Decimal {
-	return NewDecimal(parameter.Native().Mul(d2.Native()))
-}
-
-func (parameter Decimal) Div(d2 Decimal) Decimal {
-	return NewDecimal(parameter.Native().Div(d2.Native()))
+	return err
 }

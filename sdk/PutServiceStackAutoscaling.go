@@ -17,7 +17,7 @@ import (
 )
 
 type PutServiceStackAutoscalingResponse struct {
-	success            output.ProcessNull
+	success            output.ProcessNil
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutServiceStackAutoscalingResponse) OutputInterface() (output interface{
 	return r.success, r.err
 }
 
-func (r PutServiceStackAutoscalingResponse) Output() (output output.ProcessNull, err error) {
+func (r PutServiceStackAutoscalingResponse) Output() (output output.ProcessNil, err error) {
 	return r.success, r.err
 }
 

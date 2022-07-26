@@ -4,35 +4,42 @@ package types
 
 import (
 	"encoding/json"
-	"errors"
 )
 
-type Int64Array []int64
+type TypeScope int
 
-func NewInt64Array(value []int64) Int64Array {
-	return Int64Array(value)
+const (
+	TypeScopeInput = TypeScope(iota)
+	TypeScopeOutput
+	TypeScopePath
+	TypeScopeQuery
+)
+
+type Base struct {
+	value  interface{}
+	filled bool
 }
 
-func (parameter Int64Array) Native() []int64 {
-	return []int64(parameter)
+func (parameter Base) Filled() bool {
+	return parameter.filled
 }
 
-func (parameter Int64Array) MarshalJSON() ([]byte, error) {
-	if parameter == nil {
-		return nil, errors.New("value can't be nil")
+func (parameter Base) MarshalJSON() ([]byte, error) {
+	if parameter.filled {
+		return json.Marshal(parameter.value)
 	}
-	return json.Marshal([]int64(parameter))
+
+	return []byte("null"), nil
 }
 
-func (parameter *Int64Array) UnmarshalJSON(data []byte) error {
-	var arr []int64
-	err := json.Unmarshal(data, &arr)
-	if err != nil {
-		return err
+func (parameter *Base) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		parameter.filled = false
+		return nil
 	}
-	if arr == nil {
-		arr = make([]int64, 0)
-	}
-	*parameter = Int64Array(arr)
-	return nil
+
+	err := json.Unmarshal(data, &parameter.value)
+	parameter.filled = err == nil
+
+	return err
 }

@@ -10,47 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackExternalRepositoryIntegrationResponse struct {
-	success            output.ProcessNil
+type DeleteS3Response struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) OutputInterface() (output interface{}, err error) {
+func (r DeleteS3Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Output() (output output.ProcessNil, err error) {
+func (r DeleteS3Response) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Err() error {
+func (r DeleteS3Response) Err() error {
 	return r.err
 }
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Headers() http.Header {
+func (r DeleteS3Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) StatusCode() int {
+func (r DeleteS3Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackExternalRepositoryIntegration(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.ExternalRepositoryIntegration) (putServiceStackExternalRepositoryIntegrationResponse PutServiceStackExternalRepositoryIntegrationResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/external-repository-integration"
+func (h Handler) DeleteS3(ctx context.Context, inputDtoPath path.S3Bucket) (deleteS3Response DeleteS3Response, err error) {
+	u := "/api/rest/public/s3/" + inputDtoPath.ServiceStackId.Native() + "/bucket/" + inputDtoPath.Name.Native() + ""
 
-	var response PutServiceStackExternalRepositoryIntegrationResponse
-	sdkResponse := sdkBase.Put(
+	var response DeleteS3Response
+	sdkResponse := sdkBase.Delete(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

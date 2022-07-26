@@ -16,37 +16,37 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackExternalRepositoryIntegrationResponse struct {
-	success            output.ProcessNil
+type PostS3BucketResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) OutputInterface() (output interface{}, err error) {
+func (r PostS3BucketResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Output() (output output.ProcessNil, err error) {
+func (r PostS3BucketResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Err() error {
+func (r PostS3BucketResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Headers() http.Header {
+func (r PostS3BucketResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) StatusCode() int {
+func (r PostS3BucketResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackExternalRepositoryIntegration(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.ExternalRepositoryIntegration) (putServiceStackExternalRepositoryIntegrationResponse PutServiceStackExternalRepositoryIntegrationResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/external-repository-integration"
+func (h Handler) PostS3Bucket(ctx context.Context, inputDtoPath path.ServiceStackIdNamed, inputDtoBody body.PostS3Bucket) (postS3BucketResponse PostS3BucketResponse, err error) {
+	u := "/api/rest/public/s3/" + inputDtoPath.ServiceStackId.Native() + "/bucket"
 
-	var response PutServiceStackExternalRepositoryIntegrationResponse
-	sdkResponse := sdkBase.Put(
+	var response PostS3BucketResponse
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,

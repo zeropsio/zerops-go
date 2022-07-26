@@ -10,47 +10,45 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackExternalRepositoryIntegrationResponse struct {
-	success            output.ProcessNil
+type GetS3BucketResponse struct {
+	success            output.S3BucketItems
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) OutputInterface() (output interface{}, err error) {
+func (r GetS3BucketResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Output() (output output.ProcessNil, err error) {
+func (r GetS3BucketResponse) Output() (output output.S3BucketItems, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Err() error {
+func (r GetS3BucketResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackExternalRepositoryIntegrationResponse) Headers() http.Header {
+func (r GetS3BucketResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackExternalRepositoryIntegrationResponse) StatusCode() int {
+func (r GetS3BucketResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackExternalRepositoryIntegration(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.ExternalRepositoryIntegration) (putServiceStackExternalRepositoryIntegrationResponse PutServiceStackExternalRepositoryIntegrationResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/external-repository-integration"
+func (h Handler) GetS3Bucket(ctx context.Context, inputDtoPath path.ServiceStackIdNamed) (getS3BucketResponse GetS3BucketResponse, err error) {
+	u := "/api/rest/public/s3/" + inputDtoPath.ServiceStackId.Native() + "/bucket"
 
-	var response PutServiceStackExternalRepositoryIntegrationResponse
-	sdkResponse := sdkBase.Put(
+	var response GetS3BucketResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

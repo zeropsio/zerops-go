@@ -8,6 +8,6 @@ import (
 
 var _ strconv.NumError
 
-type ProcessNull struct {
+type ProcessNil struct {
 	Process *Process `json:"process"`
 }

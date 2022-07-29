@@ -21,8 +21,6 @@ type PostUserNginxServiceStack struct {
 	Mode              enum.ServiceStackModeEnum         `json:"mode"`
 	CustomAutoscaling *CustomAutoscaling                `json:"customAutoscaling"`
 	UserData          PostUserNginxServiceStackUserData `json:"userData"`
-	GithubIntegration *GithubIntegration                `json:"githubIntegration"`
-	GitlabIntegration *GitlabIntegration                `json:"gitlabIntegration"`
 	NginxConfig       types.Text                        `json:"nginxConfig"`
 }
 
@@ -40,12 +38,6 @@ func (dto PostUserNginxServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 }
 func (dto PostUserNginxServiceStack) GetUserData() PostUserNginxServiceStackUserData {
 	return dto.UserData
-}
-func (dto PostUserNginxServiceStack) GetGithubIntegration() *GithubIntegration {
-	return dto.GithubIntegration
-}
-func (dto PostUserNginxServiceStack) GetGitlabIntegration() *GitlabIntegration {
-	return dto.GitlabIntegration
 }
 func (dto PostUserNginxServiceStack) GetNginxConfig() types.Text {
 	return dto.NginxConfig
@@ -67,8 +59,6 @@ func (dto *PostUserNginxServiceStack) UnmarshalJSON(b []byte) error {
 		Mode              *enum.ServiceStackModeEnum
 		CustomAutoscaling *CustomAutoscaling
 		UserData          *PostUserNginxServiceStackUserData
-		GithubIntegration *GithubIntegration
-		GitlabIntegration *GitlabIntegration
 		NginxConfig       *types.Text
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -99,8 +89,6 @@ func (dto *PostUserNginxServiceStack) UnmarshalJSON(b []byte) error {
 	dto.Mode = *aux.Mode
 	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.UserData = *aux.UserData
-	dto.GithubIntegration = aux.GithubIntegration
-	dto.GitlabIntegration = aux.GitlabIntegration
 	dto.NginxConfig = *aux.NginxConfig
 
 	return nil

@@ -248,6 +248,7 @@ const (
 	SameServiceStackTypeUsed                                 ErrorCode = "sameServiceStackTypeUsed"
 	GithubWrongRepositoryFullNameFormat                      ErrorCode = "githubWrongRepositoryFullNameFormat"
 	GithubWebhooksLimitExceeded                              ErrorCode = "githubWebhooksLimitExceeded"
+	BranchIsEmpty                                            ErrorCode = "branchIsEmpty"
 	AvatarUploadForbiddenImageType                           ErrorCode = "avatarUploadForbiddenImageType"
 	AvatarUploadMaxSize                                      ErrorCode = "avatarUploadMaxSize"
 	AvatarUploadFileNotFound                                 ErrorCode = "avatarUploadFileNotFound"

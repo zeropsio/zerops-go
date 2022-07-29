@@ -21,8 +21,6 @@ type PostUserServiceStack struct {
 	Mode              enum.ServiceStackModeEnum    `json:"mode"`
 	CustomAutoscaling *CustomAutoscaling           `json:"customAutoscaling"`
 	UserData          PostUserServiceStackUserData `json:"userData"`
-	GithubIntegration *GithubIntegration           `json:"githubIntegration"`
-	GitlabIntegration *GitlabIntegration           `json:"gitlabIntegration"`
 }
 
 func (dto PostUserServiceStack) GetProjectId() uuid.ProjectId {
@@ -39,12 +37,6 @@ func (dto PostUserServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 }
 func (dto PostUserServiceStack) GetUserData() PostUserServiceStackUserData {
 	return dto.UserData
-}
-func (dto PostUserServiceStack) GetGithubIntegration() *GithubIntegration {
-	return dto.GithubIntegration
-}
-func (dto PostUserServiceStack) GetGitlabIntegration() *GitlabIntegration {
-	return dto.GitlabIntegration
 }
 
 type PostUserServiceStackUserData []UserDataPut
@@ -63,8 +55,6 @@ func (dto *PostUserServiceStack) UnmarshalJSON(b []byte) error {
 		Mode              *enum.ServiceStackModeEnum
 		CustomAutoscaling *CustomAutoscaling
 		UserData          *PostUserServiceStackUserData
-		GithubIntegration *GithubIntegration
-		GitlabIntegration *GitlabIntegration
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -91,8 +81,6 @@ func (dto *PostUserServiceStack) UnmarshalJSON(b []byte) error {
 	dto.Mode = *aux.Mode
 	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.UserData = *aux.UserData
-	dto.GithubIntegration = aux.GithubIntegration
-	dto.GitlabIntegration = aux.GitlabIntegration
 
 	return nil
 }

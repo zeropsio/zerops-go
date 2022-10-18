@@ -81,7 +81,7 @@ func CardPaymentStatusEnumAllPrivate() []CardPaymentStatusEnum {
 }
 
 func CardPaymentStatusEnumDefault() CardPaymentStatusEnum {
-	return CardPaymentStatusEnumRequested
+	return ""
 }
 
 func (enum CardPaymentStatusEnum) IsRequested() bool {

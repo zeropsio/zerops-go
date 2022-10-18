@@ -72,7 +72,7 @@ func PublicHttpRoutingDomainSslStatusEnumAllPrivate() []PublicHttpRoutingDomainS
 }
 
 func PublicHttpRoutingDomainSslStatusEnumDefault() PublicHttpRoutingDomainSslStatusEnum {
-	return PublicHttpRoutingDomainSslStatusEnumInactive
+	return ""
 }
 
 func (enum PublicHttpRoutingDomainSslStatusEnum) IsInactive() bool {

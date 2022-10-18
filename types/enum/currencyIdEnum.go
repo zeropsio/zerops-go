@@ -68,7 +68,7 @@ func CurrencyIdEnumAllPrivate() []CurrencyIdEnum {
 }
 
 func CurrencyIdEnumDefault() CurrencyIdEnum {
-	return CurrencyIdEnumUsd
+	return ""
 }
 
 func (enum CurrencyIdEnum) IsUsd() bool {

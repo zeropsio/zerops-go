@@ -79,7 +79,7 @@ func ServicePortSchemeEnumAllPrivate() []ServicePortSchemeEnum {
 }
 
 func ServicePortSchemeEnumDefault() ServicePortSchemeEnum {
-	return ServicePortSchemeEnumTcp
+	return ""
 }
 
 func (enum ServicePortSchemeEnum) IsTcp() bool {

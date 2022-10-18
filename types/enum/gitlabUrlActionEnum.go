@@ -70,7 +70,7 @@ func GitlabUrlActionEnumAllPrivate() []GitlabUrlActionEnum {
 }
 
 func GitlabUrlActionEnumDefault() GitlabUrlActionEnum {
-	return GitlabUrlActionEnumRegistration
+	return ""
 }
 
 func (enum GitlabUrlActionEnum) IsRegistration() bool {

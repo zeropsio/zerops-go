@@ -69,7 +69,7 @@ func GitlabIntegrationEventTypeEnumAllPrivate() []GitlabIntegrationEventTypeEnum
 }
 
 func GitlabIntegrationEventTypeEnumDefault() GitlabIntegrationEventTypeEnum {
-	return GitlabIntegrationEventTypeEnumBranch
+	return ""
 }
 
 func (enum GitlabIntegrationEventTypeEnum) IsBranch() bool {

@@ -70,7 +70,7 @@ func EsStatsHistoryGroupByEnumAllPrivate() []EsStatsHistoryGroupByEnum {
 }
 
 func EsStatsHistoryGroupByEnumDefault() EsStatsHistoryGroupByEnum {
-	return EsStatsHistoryGroupByEnumServiceStackId
+	return ""
 }
 
 func (enum EsStatsHistoryGroupByEnum) IsServiceStackId() bool {

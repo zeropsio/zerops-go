@@ -68,7 +68,7 @@ func CardPaymentProviderEnumAllPrivate() []CardPaymentProviderEnum {
 }
 
 func CardPaymentProviderEnumDefault() CardPaymentProviderEnum {
-	return CardPaymentProviderEnumStripe
+	return ""
 }
 
 func (enum CardPaymentProviderEnum) IsStripe() bool {

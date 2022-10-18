@@ -68,7 +68,7 @@ func ClientUserLightRoleCodeEnumAllPrivate() []ClientUserLightRoleCodeEnum {
 }
 
 func ClientUserLightRoleCodeEnumDefault() ClientUserLightRoleCodeEnum {
-	return ClientUserLightRoleCodeEnumManager
+	return ""
 }
 
 func (enum ClientUserLightRoleCodeEnum) IsManager() bool {

@@ -68,7 +68,7 @@ func CardPaymentApplicationEnumAllPrivate() []CardPaymentApplicationEnum {
 }
 
 func CardPaymentApplicationEnumDefault() CardPaymentApplicationEnum {
-	return CardPaymentApplicationEnumZerops
+	return ""
 }
 
 func (enum CardPaymentApplicationEnum) IsZerops() bool {

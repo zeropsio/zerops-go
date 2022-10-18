@@ -69,7 +69,7 @@ func GithubIntegrationEventTypeEnumAllPrivate() []GithubIntegrationEventTypeEnum
 }
 
 func GithubIntegrationEventTypeEnumDefault() GithubIntegrationEventTypeEnum {
-	return GithubIntegrationEventTypeEnumBranch
+	return ""
 }
 
 func (enum GithubIntegrationEventTypeEnum) IsBranch() bool {

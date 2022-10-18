@@ -69,7 +69,7 @@ func UserStatusEnumAllPrivate() []UserStatusEnum {
 }
 
 func UserStatusEnumDefault() UserStatusEnum {
-	return UserStatusEnumActive
+	return ""
 }
 
 func (enum UserStatusEnum) IsActive() bool {

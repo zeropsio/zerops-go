@@ -5,10 +5,10 @@ package enum
 type UserDataTypeEnum string
 
 const (
-	UserDataTypeEnumRestricted = UserDataTypeEnum("RESTRICTED")
-	UserDataTypeEnumCommon     = UserDataTypeEnum("COMMON")
-	UserDataTypeEnumUser       = UserDataTypeEnum("USER")
-	UserDataTypeEnumInternal   = UserDataTypeEnum("INTERNAL")
+	UserDataTypeEnumReadOnly = UserDataTypeEnum("READ_ONLY")
+	UserDataTypeEnumEditable = UserDataTypeEnum("EDITABLE")
+	UserDataTypeEnumUser     = UserDataTypeEnum("USER")
+	UserDataTypeEnumInternal = UserDataTypeEnum("INTERNAL")
 )
 
 func NewUserDataTypeEnumFromString(value string) (out UserDataTypeEnum, err error) {
@@ -50,19 +50,19 @@ func (enum UserDataTypeEnum) Is(values ...UserDataTypeEnum) bool {
 
 func UserDataTypeEnumAllStrings() []string {
 	return []string{
-		string(UserDataTypeEnumRestricted), string(UserDataTypeEnumCommon), string(UserDataTypeEnumUser), string(UserDataTypeEnumInternal),
+		string(UserDataTypeEnumReadOnly), string(UserDataTypeEnumEditable), string(UserDataTypeEnumUser), string(UserDataTypeEnumInternal),
 	}
 }
 
 func UserDataTypeEnumAll() []UserDataTypeEnum {
 	return []UserDataTypeEnum{
-		UserDataTypeEnumRestricted, UserDataTypeEnumCommon, UserDataTypeEnumUser, UserDataTypeEnumInternal,
+		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumUser, UserDataTypeEnumInternal,
 	}
 }
 
 func UserDataTypeEnumAllPublic() []UserDataTypeEnum {
 	return []UserDataTypeEnum{
-		UserDataTypeEnumRestricted, UserDataTypeEnumCommon, UserDataTypeEnumUser, UserDataTypeEnumInternal,
+		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumUser, UserDataTypeEnumInternal,
 	}
 }
 
@@ -74,12 +74,12 @@ func UserDataTypeEnumDefault() UserDataTypeEnum {
 	return UserDataTypeEnumUser
 }
 
-func (enum UserDataTypeEnum) IsRestricted() bool {
-	return enum.Is(UserDataTypeEnumRestricted)
+func (enum UserDataTypeEnum) IsReadOnly() bool {
+	return enum.Is(UserDataTypeEnumReadOnly)
 }
 
-func (enum UserDataTypeEnum) IsCommon() bool {
-	return enum.Is(UserDataTypeEnumCommon)
+func (enum UserDataTypeEnum) IsEditable() bool {
+	return enum.Is(UserDataTypeEnumEditable)
 }
 
 func (enum UserDataTypeEnum) IsUser() bool {

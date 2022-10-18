@@ -69,7 +69,7 @@ func PaymentInfoAutoChargePeriodEnumAllPrivate() []PaymentInfoAutoChargePeriodEn
 }
 
 func PaymentInfoAutoChargePeriodEnumDefault() PaymentInfoAutoChargePeriodEnum {
-	return PaymentInfoAutoChargePeriodEnumWeek
+	return ""
 }
 
 func (enum PaymentInfoAutoChargePeriodEnum) IsWeek() bool {

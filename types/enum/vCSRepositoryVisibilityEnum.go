@@ -69,7 +69,7 @@ func VCSRepositoryVisibilityEnumAllPrivate() []VCSRepositoryVisibilityEnum {
 }
 
 func VCSRepositoryVisibilityEnumDefault() VCSRepositoryVisibilityEnum {
-	return VCSRepositoryVisibilityEnumPublic
+	return ""
 }
 
 func (enum VCSRepositoryVisibilityEnum) IsPublic() bool {

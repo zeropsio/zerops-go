@@ -70,7 +70,7 @@ func EsTransactionDebitGroupByEnumAllPrivate() []EsTransactionDebitGroupByEnum {
 }
 
 func EsTransactionDebitGroupByEnumDefault() EsTransactionDebitGroupByEnum {
-	return EsTransactionDebitGroupByEnumStackId
+	return ""
 }
 
 func (enum EsTransactionDebitGroupByEnum) IsStackId() bool {

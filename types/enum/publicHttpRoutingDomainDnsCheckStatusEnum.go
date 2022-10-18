@@ -72,7 +72,7 @@ func PublicHttpRoutingDomainDnsCheckStatusEnumAllPrivate() []PublicHttpRoutingDo
 }
 
 func PublicHttpRoutingDomainDnsCheckStatusEnumDefault() PublicHttpRoutingDomainDnsCheckStatusEnum {
-	return PublicHttpRoutingDomainDnsCheckStatusEnumPending
+	return ""
 }
 
 func (enum PublicHttpRoutingDomainDnsCheckStatusEnum) IsPending() bool {

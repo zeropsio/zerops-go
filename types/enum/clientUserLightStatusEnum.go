@@ -70,7 +70,7 @@ func ClientUserLightStatusEnumAllPrivate() []ClientUserLightStatusEnum {
 }
 
 func ClientUserLightStatusEnumDefault() ClientUserLightStatusEnum {
-	return ClientUserLightStatusEnumActive
+	return ""
 }
 
 func (enum ClientUserLightStatusEnum) IsActive() bool {

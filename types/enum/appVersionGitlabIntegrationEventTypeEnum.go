@@ -69,7 +69,7 @@ func AppVersionGitlabIntegrationEventTypeEnumAllPrivate() []AppVersionGitlabInte
 }
 
 func AppVersionGitlabIntegrationEventTypeEnumDefault() AppVersionGitlabIntegrationEventTypeEnum {
-	return AppVersionGitlabIntegrationEventTypeEnumBranch
+	return ""
 }
 
 func (enum AppVersionGitlabIntegrationEventTypeEnum) IsBranch() bool {

@@ -71,7 +71,7 @@ func UserJsonObjectTypeEnumAllPrivate() []UserJsonObjectTypeEnum {
 }
 
 func UserJsonObjectTypeEnumDefault() UserJsonObjectTypeEnum {
-	return UserJsonObjectTypeEnumGithub
+	return ""
 }
 
 func (enum UserJsonObjectTypeEnum) IsGithub() bool {

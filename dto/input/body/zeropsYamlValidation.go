@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -15,9 +16,10 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ZeropsYamlValidation)(nil)
 
 type ZeropsYamlValidation struct {
-	Name               types.String                `json:"name"`
-	ServiceStackTypeId stringId.ServiceStackTypeId `json:"serviceStackTypeId"`
-	ZeropsYaml         types.Text                  `json:"zeropsYaml"`
+	Name               types.String                           `json:"name"`
+	ServiceStackTypeId stringId.ServiceStackTypeId            `json:"serviceStackTypeId"`
+	ZeropsYaml         types.Text                             `json:"zeropsYaml"`
+	Operation          enum.ZeropsYamlValidationOperationEnum `json:"operation"`
 }
 
 func (dto ZeropsYamlValidation) GetName() types.String {
@@ -29,12 +31,16 @@ func (dto ZeropsYamlValidation) GetServiceStackTypeId() stringId.ServiceStackTyp
 func (dto ZeropsYamlValidation) GetZeropsYaml() types.Text {
 	return dto.ZeropsYaml
 }
+func (dto ZeropsYamlValidation) GetOperation() enum.ZeropsYamlValidationOperationEnum {
+	return dto.Operation
+}
 
 func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Name               *types.String
 		ServiceStackTypeId *stringId.ServiceStackTypeId
 		ZeropsYaml         *types.Text
+		Operation          *enum.ZeropsYamlValidationOperationEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -50,12 +56,16 @@ func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	if aux.ZeropsYaml == nil {
 		errorList = errorList.With(validator.NewError("zeropsYaml", "field is required"))
 	}
+	if aux.Operation == nil {
+		errorList = errorList.With(validator.NewError("operation", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
 	dto.Name = *aux.Name
 	dto.ServiceStackTypeId = *aux.ServiceStackTypeId
 	dto.ZeropsYaml = *aux.ZeropsYaml
+	dto.Operation = *aux.Operation
 
 	return nil
 }

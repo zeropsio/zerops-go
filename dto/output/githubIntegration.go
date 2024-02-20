@@ -15,6 +15,7 @@ type GithubIntegration struct {
 	UserId                types.String                        `json:"userId"`
 	AuthorizationRequired types.Bool                          `json:"authorizationRequired"`
 	BranchName            types.StringNull                    `json:"branchName"`
+	TagRegex              types.StringNull                    `json:"tagRegex"`
 	EventType             enum.GithubIntegrationEventTypeEnum `json:"eventType"`
 	IsActive              types.Bool                          `json:"isActive"`
 	RepositoryFullName    types.String                        `json:"repositoryFullName"`

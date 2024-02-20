@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
-	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -17,7 +17,7 @@ var _ json.Unmarshaler = (*PostBillingPayment)(nil)
 
 type PostBillingPayment struct {
 	AmountVat  types.Float         `json:"amountVat"`
-	CurrencyId enum.CurrencyIdEnum `json:"currencyId"`
+	CurrencyId stringId.CurrencyId `json:"currencyId"`
 	ClientId   uuid.ClientId       `json:"clientId"`
 	SourceId   types.StringNull    `json:"sourceId"`
 }
@@ -25,7 +25,7 @@ type PostBillingPayment struct {
 func (dto PostBillingPayment) GetAmountVat() types.Float {
 	return dto.AmountVat
 }
-func (dto PostBillingPayment) GetCurrencyId() enum.CurrencyIdEnum {
+func (dto PostBillingPayment) GetCurrencyId() stringId.CurrencyId {
 	return dto.CurrencyId
 }
 func (dto PostBillingPayment) GetClientId() uuid.ClientId {
@@ -38,7 +38,7 @@ func (dto PostBillingPayment) GetSourceId() types.StringNull {
 func (dto *PostBillingPayment) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		AmountVat  *types.Float
-		CurrencyId *enum.CurrencyIdEnum
+		CurrencyId *stringId.CurrencyId
 		ClientId   *uuid.ClientId
 		SourceId   types.StringNull
 	}{}

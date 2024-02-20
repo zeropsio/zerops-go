@@ -15,9 +15,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostObjectStorageServiceStack)(nil)
 
 type PostObjectStorageServiceStack struct {
-	ProjectId  uuid.ProjectId `json:"projectId"`
-	Name       types.String   `json:"name"`
-	DiskGBytes types.Int      `json:"diskGBytes"`
+	ProjectId         uuid.ProjectId     `json:"projectId"`
+	Name              types.String       `json:"name"`
+	CustomAutoscaling *CustomAutoscaling `json:"customAutoscaling"`
+	DiskGBytes        types.Int          `json:"diskGBytes"`
+	Policy            types.StringNull   `json:"policy"`
+	RawPolicy         types.TextNull     `json:"rawPolicy"`
 }
 
 func (dto PostObjectStorageServiceStack) GetProjectId() uuid.ProjectId {
@@ -26,15 +29,27 @@ func (dto PostObjectStorageServiceStack) GetProjectId() uuid.ProjectId {
 func (dto PostObjectStorageServiceStack) GetName() types.String {
 	return dto.Name
 }
+func (dto PostObjectStorageServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
+	return dto.CustomAutoscaling
+}
 func (dto PostObjectStorageServiceStack) GetDiskGBytes() types.Int {
 	return dto.DiskGBytes
+}
+func (dto PostObjectStorageServiceStack) GetPolicy() types.StringNull {
+	return dto.Policy
+}
+func (dto PostObjectStorageServiceStack) GetRawPolicy() types.TextNull {
+	return dto.RawPolicy
 }
 
 func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ProjectId  *uuid.ProjectId
-		Name       *types.String
-		DiskGBytes *types.Int
+		ProjectId         *uuid.ProjectId
+		Name              *types.String
+		CustomAutoscaling *CustomAutoscaling
+		DiskGBytes        *types.Int
+		Policy            types.StringNull
+		RawPolicy         types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -55,7 +70,10 @@ func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
+	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.DiskGBytes = *aux.DiskGBytes
+	dto.Policy = aux.Policy
+	dto.RawPolicy = aux.RawPolicy
 
 	return nil
 }

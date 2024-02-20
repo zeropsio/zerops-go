@@ -14,6 +14,7 @@ var _ strconv.NumError
 type AppVersionGitlabIntegration struct {
 	EventType          enum.AppVersionGitlabIntegrationEventTypeEnum `json:"eventType"`
 	BranchName         types.StringNull                              `json:"branchName"`
+	TagRegex           types.StringNull                              `json:"tagRegex"`
 	Pusher             types.String                                  `json:"pusher"`
 	Commit             types.String                                  `json:"commit"`
 	RepositoryFullName types.String                                  `json:"repositoryFullName"`

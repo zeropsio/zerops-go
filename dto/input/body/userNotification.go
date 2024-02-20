@@ -16,7 +16,6 @@ var _ json.Unmarshaler = (*UserNotification)(nil)
 type UserNotification struct {
 	ProjectId      types.StringNull `json:"projectId"`
 	ServiceStackId types.StringNull `json:"serviceStackId"`
-	Sync           types.BoolNull   `json:"sync"`
 }
 
 func (dto UserNotification) GetProjectId() types.StringNull {
@@ -25,15 +24,11 @@ func (dto UserNotification) GetProjectId() types.StringNull {
 func (dto UserNotification) GetServiceStackId() types.StringNull {
 	return dto.ServiceStackId
 }
-func (dto UserNotification) GetSync() types.BoolNull {
-	return dto.Sync
-}
 
 func (dto *UserNotification) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ProjectId      types.StringNull
 		ServiceStackId types.StringNull
-		Sync           types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -46,7 +41,6 @@ func (dto *UserNotification) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = aux.ProjectId
 	dto.ServiceStackId = aux.ServiceStackId
-	dto.Sync = aux.Sync
 
 	return nil
 }

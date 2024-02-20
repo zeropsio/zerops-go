@@ -15,21 +15,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ClientUser)(nil)
 
 type ClientUser struct {
-	ClientId uuid.ClientId                    `json:"clientId"`
-	RoleCode enum.ClientUserLightRoleCodeEnum `json:"roleCode"`
+	ClientId uuid.ClientId               `json:"clientId"`
+	RoleCode enum.ClientUserRoleCodeEnum `json:"roleCode"`
 }
 
 func (dto ClientUser) GetClientId() uuid.ClientId {
 	return dto.ClientId
 }
-func (dto ClientUser) GetRoleCode() enum.ClientUserLightRoleCodeEnum {
+func (dto ClientUser) GetRoleCode() enum.ClientUserRoleCodeEnum {
 	return dto.RoleCode
 }
 
 func (dto *ClientUser) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ClientId *uuid.ClientId
-		RoleCode *enum.ClientUserLightRoleCodeEnum
+		RoleCode *enum.ClientUserRoleCodeEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {

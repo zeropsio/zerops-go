@@ -12,8 +12,7 @@ import (
 var _ strconv.NumError
 
 type EsClient struct {
-	Id                   uuid.ClientId  `json:"id"`
-	InstanceGroupCreated types.Bool     `json:"instanceGroupCreated"`
-	Created              types.DateTime `json:"created"`
-	LastUpdate           types.DateTime `json:"lastUpdate"`
+	Id         uuid.ClientId  `json:"id"`
+	Created    types.DateTime `json:"created"`
+	LastUpdate types.DateTime `json:"lastUpdate"`
 }

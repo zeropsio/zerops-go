@@ -12,10 +12,10 @@ import (
 var _ strconv.NumError
 
 type UserLight struct {
-	Id        uuid.UserId  `json:"id"`
-	Email     types.Email  `json:"email"`
-	FullName  types.String `json:"fullName"`
-	FirstName types.String `json:"firstName"`
-	LastName  types.String `json:"lastName"`
-	Avatar    *UserAvatar  `json:"avatar"`
+	Id        uuid.UserId       `json:"id"`
+	Email     types.Email       `json:"email"`
+	FullName  types.String      `json:"fullName"`
+	FirstName types.String      `json:"firstName"`
+	LastName  types.EmptyString `json:"lastName"`
+	Avatar    *UserAvatar       `json:"avatar"`
 }

@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -14,12 +15,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserRegistration)(nil)
 
 type UserRegistration struct {
-	Email       types.Email      `json:"email"`
-	Password    types.String     `json:"password"`
-	LanguageId  types.String     `json:"languageId"`
-	AccountName types.String     `json:"accountName"`
-	FirstName   types.String     `json:"firstName"`
-	LastName    types.StringNull `json:"lastName"`
+	Email       types.Email         `json:"email"`
+	Password    types.String        `json:"password"`
+	LanguageId  stringId.LanguageId `json:"languageId"`
+	AccountName types.String        `json:"accountName"`
+	FirstName   types.String        `json:"firstName"`
+	LastName    types.StringNull    `json:"lastName"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -28,7 +29,7 @@ func (dto UserRegistration) GetEmail() types.Email {
 func (dto UserRegistration) GetPassword() types.String {
 	return dto.Password
 }
-func (dto UserRegistration) GetLanguageId() types.String {
+func (dto UserRegistration) GetLanguageId() stringId.LanguageId {
 	return dto.LanguageId
 }
 func (dto UserRegistration) GetAccountName() types.String {
@@ -45,7 +46,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Email       *types.Email
 		Password    *types.String
-		LanguageId  *types.String
+		LanguageId  *stringId.LanguageId
 		AccountName *types.String
 		FirstName   *types.String
 		LastName    types.StringNull

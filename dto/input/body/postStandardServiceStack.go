@@ -18,8 +18,8 @@ var _ json.Unmarshaler = (*PostStandardServiceStack)(nil)
 type PostStandardServiceStack struct {
 	ProjectId         uuid.ProjectId            `json:"projectId"`
 	Name              types.String              `json:"name"`
-	Mode              enum.ServiceStackModeEnum `json:"mode"`
 	CustomAutoscaling *CustomAutoscaling        `json:"customAutoscaling"`
+	Mode              enum.ServiceStackModeEnum `json:"mode"`
 }
 
 func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
@@ -28,19 +28,19 @@ func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
 func (dto PostStandardServiceStack) GetName() types.String {
 	return dto.Name
 }
-func (dto PostStandardServiceStack) GetMode() enum.ServiceStackModeEnum {
-	return dto.Mode
-}
 func (dto PostStandardServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
+}
+func (dto PostStandardServiceStack) GetMode() enum.ServiceStackModeEnum {
+	return dto.Mode
 }
 
 func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ProjectId         *uuid.ProjectId
 		Name              *types.String
-		Mode              *enum.ServiceStackModeEnum
 		CustomAutoscaling *CustomAutoscaling
+		Mode              *enum.ServiceStackModeEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -61,8 +61,8 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
-	dto.Mode = *aux.Mode
 	dto.CustomAutoscaling = aux.CustomAutoscaling
+	dto.Mode = *aux.Mode
 
 	return nil
 }

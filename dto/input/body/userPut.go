@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -15,12 +16,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserPut)(nil)
 
 type UserPut struct {
-	ClientId           uuid.ClientId `json:"clientId"`
-	FirstName          types.String  `json:"firstName"`
-	LastName           types.String  `json:"lastName"`
-	LanguageId         types.String  `json:"languageId"`
-	CountryCallingCode types.IntNull `json:"countryCallingCode"`
-	PhoneNumber        types.IntNull `json:"phoneNumber"`
+	ClientId           uuid.ClientId       `json:"clientId"`
+	FirstName          types.String        `json:"firstName"`
+	LastName           types.EmptyString   `json:"lastName"`
+	LanguageId         stringId.LanguageId `json:"languageId"`
+	CountryCallingCode types.IntNull       `json:"countryCallingCode"`
+	PhoneNumber        types.IntNull       `json:"phoneNumber"`
 }
 
 func (dto UserPut) GetClientId() uuid.ClientId {
@@ -29,10 +30,10 @@ func (dto UserPut) GetClientId() uuid.ClientId {
 func (dto UserPut) GetFirstName() types.String {
 	return dto.FirstName
 }
-func (dto UserPut) GetLastName() types.String {
+func (dto UserPut) GetLastName() types.EmptyString {
 	return dto.LastName
 }
-func (dto UserPut) GetLanguageId() types.String {
+func (dto UserPut) GetLanguageId() stringId.LanguageId {
 	return dto.LanguageId
 }
 func (dto UserPut) GetCountryCallingCode() types.IntNull {
@@ -46,8 +47,8 @@ func (dto *UserPut) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ClientId           *uuid.ClientId
 		FirstName          *types.String
-		LastName           *types.String
-		LanguageId         *types.String
+		LastName           *types.EmptyString
+		LanguageId         *stringId.LanguageId
 		CountryCallingCode types.IntNull
 		PhoneNumber        types.IntNull
 	}{}

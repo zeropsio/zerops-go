@@ -14,16 +14,26 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PutServiceStackObjectStorageSize)(nil)
 
 type PutServiceStackObjectStorageSize struct {
-	DiskGBytes types.Int `json:"diskGBytes"`
+	DiskGBytes types.Int        `json:"diskGBytes"`
+	Policy     types.StringNull `json:"policy"`
+	RawPolicy  types.TextNull   `json:"rawPolicy"`
 }
 
 func (dto PutServiceStackObjectStorageSize) GetDiskGBytes() types.Int {
 	return dto.DiskGBytes
 }
+func (dto PutServiceStackObjectStorageSize) GetPolicy() types.StringNull {
+	return dto.Policy
+}
+func (dto PutServiceStackObjectStorageSize) GetRawPolicy() types.TextNull {
+	return dto.RawPolicy
+}
 
 func (dto *PutServiceStackObjectStorageSize) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		DiskGBytes *types.Int
+		Policy     types.StringNull
+		RawPolicy  types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -37,6 +47,8 @@ func (dto *PutServiceStackObjectStorageSize) UnmarshalJSON(b []byte) error {
 		return errorList.GetError()
 	}
 	dto.DiskGBytes = *aux.DiskGBytes
+	dto.Policy = aux.Policy
+	dto.RawPolicy = aux.RawPolicy
 
 	return nil
 }

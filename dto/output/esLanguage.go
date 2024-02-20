@@ -6,11 +6,12 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/stringId"
 )
 
 var _ strconv.NumError
 
 type EsLanguage struct {
-	Id   types.String `json:"id"`
-	Name types.String `json:"name"`
+	Id   stringId.LanguageId `json:"id"`
+	Name types.String        `json:"name"`
 }

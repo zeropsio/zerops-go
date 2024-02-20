@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
-	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -18,7 +17,6 @@ var _ json.Unmarshaler = (*PostUserNginxServiceStack)(nil)
 type PostUserNginxServiceStack struct {
 	ProjectId         uuid.ProjectId                    `json:"projectId"`
 	Name              types.String                      `json:"name"`
-	Mode              enum.ServiceStackModeEnum         `json:"mode"`
 	CustomAutoscaling *CustomAutoscaling                `json:"customAutoscaling"`
 	UserData          PostUserNginxServiceStackUserData `json:"userData"`
 	NginxConfig       types.Text                        `json:"nginxConfig"`
@@ -29,9 +27,6 @@ func (dto PostUserNginxServiceStack) GetProjectId() uuid.ProjectId {
 }
 func (dto PostUserNginxServiceStack) GetName() types.String {
 	return dto.Name
-}
-func (dto PostUserNginxServiceStack) GetMode() enum.ServiceStackModeEnum {
-	return dto.Mode
 }
 func (dto PostUserNginxServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
@@ -56,7 +51,6 @@ func (dto *PostUserNginxServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ProjectId         *uuid.ProjectId
 		Name              *types.String
-		Mode              *enum.ServiceStackModeEnum
 		CustomAutoscaling *CustomAutoscaling
 		UserData          *PostUserNginxServiceStackUserData
 		NginxConfig       *types.Text
@@ -72,9 +66,6 @@ func (dto *PostUserNginxServiceStack) UnmarshalJSON(b []byte) error {
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
-	if aux.Mode == nil {
-		errorList = errorList.With(validator.NewError("mode", "field is required"))
-	}
 	if aux.UserData == nil {
 		errorList = errorList.With(validator.NewError("userData", "field is required"))
 	}
@@ -86,7 +77,6 @@ func (dto *PostUserNginxServiceStack) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
-	dto.Mode = *aux.Mode
 	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.UserData = *aux.UserData
 	dto.NginxConfig = *aux.NginxConfig

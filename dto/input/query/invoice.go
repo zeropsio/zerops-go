@@ -3,9 +3,9 @@
 package query
 
 import (
-	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/stringId"
 )
 
 type Invoice struct {
-	LanguageId types.String
+	LanguageId stringId.LanguageId
 }

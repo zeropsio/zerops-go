@@ -18,7 +18,7 @@ type UserAuthorize struct {
 	Email              types.Email                 `json:"email"`
 	FullName           types.String                `json:"fullName"`
 	FirstName          types.String                `json:"firstName"`
-	LastName           types.String                `json:"lastName"`
+	LastName           types.EmptyString           `json:"lastName"`
 	Avatar             *UserAvatar                 `json:"avatar"`
 	CountryCallingCode types.IntNull               `json:"countryCallingCode"`
 	PhoneNumber        types.IntNull               `json:"phoneNumber"`
@@ -28,6 +28,7 @@ type UserAuthorize struct {
 	Status             enum.UserStatusEnum         `json:"status"`
 	ClientUserList     UserAuthorizeClientUserList `json:"clientUserList"`
 	PasswordIsSet      types.Bool                  `json:"passwordIsSet"`
+	IntercomHash       types.String                `json:"intercomHash"`
 }
 
 type UserAuthorizeClientUserList []ClientUserExtra

@@ -17,6 +17,7 @@ const (
 	AppVersionStatusEnumPreparingRuntime       = AppVersionStatusEnum("PREPARING_RUNTIME")
 	AppVersionStatusEnumPreparingRuntimeFailed = AppVersionStatusEnum("PREPARING_RUNTIME_FAILED")
 	AppVersionStatusEnumBuildValidationFailed  = AppVersionStatusEnum("BUILD_VALIDATION_FAILED")
+	AppVersionStatusEnumCancelled              = AppVersionStatusEnum("CANCELLED")
 )
 
 func NewAppVersionStatusEnumFromString(value string) (out AppVersionStatusEnum, err error) {
@@ -58,19 +59,19 @@ func (enum AppVersionStatusEnum) Is(values ...AppVersionStatusEnum) bool {
 
 func AppVersionStatusEnumAllStrings() []string {
 	return []string{
-		string(AppVersionStatusEnumUploading), string(AppVersionStatusEnumWaitingToDeploy), string(AppVersionStatusEnumDeploying), string(AppVersionStatusEnumDeployFailed), string(AppVersionStatusEnumActive), string(AppVersionStatusEnumBackup), string(AppVersionStatusEnumBuilding), string(AppVersionStatusEnumWaitingToBuild), string(AppVersionStatusEnumBuildFailed), string(AppVersionStatusEnumPreparingRuntime), string(AppVersionStatusEnumPreparingRuntimeFailed), string(AppVersionStatusEnumBuildValidationFailed),
+		string(AppVersionStatusEnumUploading), string(AppVersionStatusEnumWaitingToDeploy), string(AppVersionStatusEnumDeploying), string(AppVersionStatusEnumDeployFailed), string(AppVersionStatusEnumActive), string(AppVersionStatusEnumBackup), string(AppVersionStatusEnumBuilding), string(AppVersionStatusEnumWaitingToBuild), string(AppVersionStatusEnumBuildFailed), string(AppVersionStatusEnumPreparingRuntime), string(AppVersionStatusEnumPreparingRuntimeFailed), string(AppVersionStatusEnumBuildValidationFailed), string(AppVersionStatusEnumCancelled),
 	}
 }
 
 func AppVersionStatusEnumAll() []AppVersionStatusEnum {
 	return []AppVersionStatusEnum{
-		AppVersionStatusEnumUploading, AppVersionStatusEnumWaitingToDeploy, AppVersionStatusEnumDeploying, AppVersionStatusEnumDeployFailed, AppVersionStatusEnumActive, AppVersionStatusEnumBackup, AppVersionStatusEnumBuilding, AppVersionStatusEnumWaitingToBuild, AppVersionStatusEnumBuildFailed, AppVersionStatusEnumPreparingRuntime, AppVersionStatusEnumPreparingRuntimeFailed, AppVersionStatusEnumBuildValidationFailed,
+		AppVersionStatusEnumUploading, AppVersionStatusEnumWaitingToDeploy, AppVersionStatusEnumDeploying, AppVersionStatusEnumDeployFailed, AppVersionStatusEnumActive, AppVersionStatusEnumBackup, AppVersionStatusEnumBuilding, AppVersionStatusEnumWaitingToBuild, AppVersionStatusEnumBuildFailed, AppVersionStatusEnumPreparingRuntime, AppVersionStatusEnumPreparingRuntimeFailed, AppVersionStatusEnumBuildValidationFailed, AppVersionStatusEnumCancelled,
 	}
 }
 
 func AppVersionStatusEnumAllPublic() []AppVersionStatusEnum {
 	return []AppVersionStatusEnum{
-		AppVersionStatusEnumUploading, AppVersionStatusEnumWaitingToDeploy, AppVersionStatusEnumDeploying, AppVersionStatusEnumDeployFailed, AppVersionStatusEnumActive, AppVersionStatusEnumBackup, AppVersionStatusEnumBuilding, AppVersionStatusEnumWaitingToBuild, AppVersionStatusEnumBuildFailed, AppVersionStatusEnumPreparingRuntime, AppVersionStatusEnumPreparingRuntimeFailed, AppVersionStatusEnumBuildValidationFailed,
+		AppVersionStatusEnumUploading, AppVersionStatusEnumWaitingToDeploy, AppVersionStatusEnumDeploying, AppVersionStatusEnumDeployFailed, AppVersionStatusEnumActive, AppVersionStatusEnumBackup, AppVersionStatusEnumBuilding, AppVersionStatusEnumWaitingToBuild, AppVersionStatusEnumBuildFailed, AppVersionStatusEnumPreparingRuntime, AppVersionStatusEnumPreparingRuntimeFailed, AppVersionStatusEnumBuildValidationFailed, AppVersionStatusEnumCancelled,
 	}
 }
 
@@ -128,4 +129,8 @@ func (enum AppVersionStatusEnum) IsPreparingRuntimeFailed() bool {
 
 func (enum AppVersionStatusEnum) IsBuildValidationFailed() bool {
 	return enum.Is(AppVersionStatusEnumBuildValidationFailed)
+}
+
+func (enum AppVersionStatusEnum) IsCancelled() bool {
+	return enum.Is(AppVersionStatusEnumCancelled)
 }

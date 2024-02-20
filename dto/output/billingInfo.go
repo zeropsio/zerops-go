@@ -18,5 +18,5 @@ type BillingInfo struct {
 	InvoiceAddressStreet    types.StringNull `json:"invoiceAddressStreet"`
 	InvoiceAddressCity      types.StringNull `json:"invoiceAddressCity"`
 	InvoiceAddressPostcode  types.StringNull `json:"invoiceAddressPostcode"`
-	InvoiceAddressCountryId types.StringNull `json:"invoiceAddressCountryId"`
+	InvoiceAddressCountryId types.String     `json:"invoiceAddressCountryId"`
 }

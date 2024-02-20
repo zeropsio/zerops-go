@@ -8,6 +8,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -15,19 +16,19 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ClientUserConnection)(nil)
 
 type ClientUserConnection struct {
-	RoleCode           enum.ClientUserLightRoleCodeEnum `json:"roleCode"`
-	LanguageId         types.String                     `json:"languageId"`
-	Email              types.Email                      `json:"email"`
-	FirstName          types.String                     `json:"firstName"`
-	LastName           types.String                     `json:"lastName"`
-	CountryCallingCode types.IntNull                    `json:"countryCallingCode"`
-	PhoneNumber        types.IntNull                    `json:"phoneNumber"`
+	RoleCode           enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	LanguageId         stringId.LanguageId         `json:"languageId"`
+	Email              types.Email                 `json:"email"`
+	FirstName          types.String                `json:"firstName"`
+	LastName           types.EmptyString           `json:"lastName"`
+	CountryCallingCode types.IntNull               `json:"countryCallingCode"`
+	PhoneNumber        types.IntNull               `json:"phoneNumber"`
 }
 
-func (dto ClientUserConnection) GetRoleCode() enum.ClientUserLightRoleCodeEnum {
+func (dto ClientUserConnection) GetRoleCode() enum.ClientUserRoleCodeEnum {
 	return dto.RoleCode
 }
-func (dto ClientUserConnection) GetLanguageId() types.String {
+func (dto ClientUserConnection) GetLanguageId() stringId.LanguageId {
 	return dto.LanguageId
 }
 func (dto ClientUserConnection) GetEmail() types.Email {
@@ -36,7 +37,7 @@ func (dto ClientUserConnection) GetEmail() types.Email {
 func (dto ClientUserConnection) GetFirstName() types.String {
 	return dto.FirstName
 }
-func (dto ClientUserConnection) GetLastName() types.String {
+func (dto ClientUserConnection) GetLastName() types.EmptyString {
 	return dto.LastName
 }
 func (dto ClientUserConnection) GetCountryCallingCode() types.IntNull {
@@ -48,11 +49,11 @@ func (dto ClientUserConnection) GetPhoneNumber() types.IntNull {
 
 func (dto *ClientUserConnection) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		RoleCode           *enum.ClientUserLightRoleCodeEnum
-		LanguageId         *types.String
+		RoleCode           *enum.ClientUserRoleCodeEnum
+		LanguageId         *stringId.LanguageId
 		Email              *types.Email
 		FirstName          *types.String
-		LastName           *types.String
+		LastName           *types.EmptyString
 		CountryCallingCode types.IntNull
 		PhoneNumber        types.IntNull
 	}{}

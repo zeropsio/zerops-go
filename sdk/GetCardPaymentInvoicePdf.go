@@ -48,7 +48,7 @@ func (r GetCardPaymentInvoicePdfResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetCardPaymentInvoicePdf(ctx context.Context, inputDtoPath path.InvoiceId, inputDtoQuery query.Invoice) (getCardPaymentInvoicePdfResponse GetCardPaymentInvoicePdfResponse, err error) {
+func (h Handler) GetCardPaymentInvoicePdf(ctx context.Context, inputDtoPath path.CardPaymentId, inputDtoQuery query.Invoice) (getCardPaymentInvoicePdfResponse GetCardPaymentInvoicePdfResponse, err error) {
 	u := "/api/rest/public/card-payment/" + inputDtoPath.Id.Native() + "/invoice/pdf"
 
 	var queryParams []string

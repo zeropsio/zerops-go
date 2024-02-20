@@ -7,6 +7,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/types/uuid"
 )
 
@@ -19,7 +20,7 @@ type EsCardPayment struct {
 	RequestId       types.StringNull                `json:"requestId"`
 	Created         types.DateTime                  `json:"created"`
 	Amount          types.Float                     `json:"amount"`
-	CurrencyId      uuid.CardPaymentCurrencyId      `json:"currencyId"`
+	CurrencyId      stringId.CurrencyId             `json:"currencyId"`
 	Application     enum.CardPaymentApplicationEnum `json:"application"`
 	DatePaid        types.DateTimeNull              `json:"datePaid"`
 	InteractionType types.String                    `json:"interactionType"`

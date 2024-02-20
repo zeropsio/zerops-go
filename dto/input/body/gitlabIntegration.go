@@ -18,6 +18,7 @@ type GitlabIntegration struct {
 	RepositoryFullName types.String                        `json:"repositoryFullName"`
 	EventType          enum.GitlabIntegrationEventTypeEnum `json:"eventType"`
 	BranchName         types.StringNull                    `json:"branchName"`
+	TagRegex           types.StringNull                    `json:"tagRegex"`
 	IsActive           types.Bool                          `json:"isActive"`
 	TriggerBuild       types.Bool                          `json:"triggerBuild"`
 }
@@ -31,6 +32,9 @@ func (dto GitlabIntegration) GetEventType() enum.GitlabIntegrationEventTypeEnum 
 func (dto GitlabIntegration) GetBranchName() types.StringNull {
 	return dto.BranchName
 }
+func (dto GitlabIntegration) GetTagRegex() types.StringNull {
+	return dto.TagRegex
+}
 func (dto GitlabIntegration) GetIsActive() types.Bool {
 	return dto.IsActive
 }
@@ -43,6 +47,7 @@ func (dto *GitlabIntegration) UnmarshalJSON(b []byte) error {
 		RepositoryFullName *types.String
 		EventType          *enum.GitlabIntegrationEventTypeEnum
 		BranchName         types.StringNull
+		TagRegex           types.StringNull
 		IsActive           *types.Bool
 		TriggerBuild       *types.Bool
 	}{}
@@ -69,6 +74,7 @@ func (dto *GitlabIntegration) UnmarshalJSON(b []byte) error {
 	dto.RepositoryFullName = *aux.RepositoryFullName
 	dto.EventType = *aux.EventType
 	dto.BranchName = aux.BranchName
+	dto.TagRegex = aux.TagRegex
 	dto.IsActive = *aux.IsActive
 	dto.TriggerBuild = *aux.TriggerBuild
 

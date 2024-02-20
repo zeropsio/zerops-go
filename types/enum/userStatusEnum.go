@@ -59,13 +59,13 @@ func UserStatusEnumAll() []UserStatusEnum {
 }
 
 func UserStatusEnumAllPublic() []UserStatusEnum {
-	return []UserStatusEnum{}
-}
-
-func UserStatusEnumAllPrivate() []UserStatusEnum {
 	return []UserStatusEnum{
 		UserStatusEnumActive, UserStatusEnumDeleted,
 	}
+}
+
+func UserStatusEnumAllPrivate() []UserStatusEnum {
+	return []UserStatusEnum{}
 }
 
 func UserStatusEnumDefault() UserStatusEnum {

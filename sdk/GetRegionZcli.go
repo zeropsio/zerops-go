@@ -15,7 +15,7 @@ import (
 )
 
 type GetRegionZcliResponse struct {
-	success            output.FileDownload
+	success            output.RegionList
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -25,7 +25,7 @@ func (r GetRegionZcliResponse) OutputInterface() (output interface{}, err error)
 	return r.success, r.err
 }
 
-func (r GetRegionZcliResponse) Output() (output output.FileDownload, err error) {
+func (r GetRegionZcliResponse) Output() (output output.RegionList, err error) {
 	return r.success, r.err
 }
 

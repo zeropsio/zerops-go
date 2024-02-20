@@ -48,7 +48,7 @@ func (r GetCardPaymentInvoiceResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetCardPaymentInvoice(ctx context.Context, inputDtoPath path.InvoiceId, inputDtoQuery query.Invoice) (getCardPaymentInvoiceResponse GetCardPaymentInvoiceResponse, err error) {
+func (h Handler) GetCardPaymentInvoice(ctx context.Context, inputDtoPath path.CardPaymentId, inputDtoQuery query.Invoice) (getCardPaymentInvoiceResponse GetCardPaymentInvoiceResponse, err error) {
 	u := "/api/rest/public/card-payment/" + inputDtoPath.Id.Native() + "/invoice"
 
 	var queryParams []string

@@ -17,7 +17,7 @@ var _ json.Unmarshaler = (*ClientAuthorize)(nil)
 type ClientAuthorize struct {
 	ClientId uuid.ClientId               `json:"clientId"`
 	Email    types.UrlEncodedBase64Email `json:"email"`
-	Token    uuid.ClientAuthorizeToken   `json:"token"`
+	Token    uuid.AuthorizationTokenId   `json:"token"`
 }
 
 func (dto ClientAuthorize) GetClientId() uuid.ClientId {
@@ -26,7 +26,7 @@ func (dto ClientAuthorize) GetClientId() uuid.ClientId {
 func (dto ClientAuthorize) GetEmail() types.UrlEncodedBase64Email {
 	return dto.Email
 }
-func (dto ClientAuthorize) GetToken() uuid.ClientAuthorizeToken {
+func (dto ClientAuthorize) GetToken() uuid.AuthorizationTokenId {
 	return dto.Token
 }
 
@@ -34,7 +34,7 @@ func (dto *ClientAuthorize) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ClientId *uuid.ClientId
 		Email    *types.UrlEncodedBase64Email
-		Token    *uuid.ClientAuthorizeToken
+		Token    *uuid.AuthorizationTokenId
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {

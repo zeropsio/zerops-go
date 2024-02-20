@@ -12,11 +12,11 @@ import (
 var _ strconv.NumError
 
 type ClientUserExtra struct {
-	Id       uuid.ClientUserId                `json:"id"`
-	ClientId uuid.ClientId                    `json:"clientId"`
-	UserId   uuid.UserId                      `json:"userId"`
-	Status   enum.ClientUserLightStatusEnum   `json:"status"`
-	RoleCode enum.ClientUserLightRoleCodeEnum `json:"roleCode"`
-	Client   ClientExtra                      `json:"client"`
-	User     UserLight                        `json:"user"`
+	Id       uuid.ClientUserId           `json:"id"`
+	ClientId uuid.ClientId               `json:"clientId"`
+	UserId   uuid.UserId                 `json:"userId"`
+	Status   enum.ClientUserStatusEnum   `json:"status"`
+	RoleCode enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	Client   ClientExtra                 `json:"client"`
+	User     UserLight                   `json:"user"`
 }

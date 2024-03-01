@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetProjectVpnResponse struct {
-	success            output.ProjectVpnItem
+type GetServiceStackPostgresqlV16Response struct {
+	success            output.ServiceStackPostgreSql
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetProjectVpnResponse) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackPostgresqlV16Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectVpnResponse) Output() (output output.ProjectVpnItem, err error) {
+func (r GetServiceStackPostgresqlV16Response) Output() (output output.ServiceStackPostgreSql, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectVpnResponse) Err() error {
+func (r GetServiceStackPostgresqlV16Response) Err() error {
 	return r.err
 }
-func (r GetProjectVpnResponse) Headers() http.Header {
+func (r GetServiceStackPostgresqlV16Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetProjectVpnResponse) StatusCode() int {
+func (r GetServiceStackPostgresqlV16Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectVpn(ctx context.Context, inputDtoPath path.ProjectIdBase64PublicKey) (getProjectVpnResponse GetProjectVpnResponse, err error) {
-	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/vpn/" + inputDtoPath.Base64PublicKey.Native() + ""
+func (h Handler) GetServiceStackPostgresqlV16(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPostgresqlV16Response GetServiceStackPostgresqlV16Response, err error) {
+	u := "/api/rest/public/service-stack/postgresql_v16/" + inputDtoPath.Id.Native() + ""
 
-	var response GetProjectVpnResponse
+	var response GetServiceStackPostgresqlV16Response
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

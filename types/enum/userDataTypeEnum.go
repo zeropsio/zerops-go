@@ -7,8 +7,9 @@ type UserDataTypeEnum string
 const (
 	UserDataTypeEnumReadOnly = UserDataTypeEnum("READ_ONLY")
 	UserDataTypeEnumEditable = UserDataTypeEnum("EDITABLE")
-	UserDataTypeEnumUser     = UserDataTypeEnum("USER")
+	UserDataTypeEnumSecret   = UserDataTypeEnum("SECRET")
 	UserDataTypeEnumInternal = UserDataTypeEnum("INTERNAL")
+	UserDataTypeEnumEnv      = UserDataTypeEnum("ENV")
 )
 
 func NewUserDataTypeEnumFromString(value string) (out UserDataTypeEnum, err error) {
@@ -50,19 +51,19 @@ func (enum UserDataTypeEnum) Is(values ...UserDataTypeEnum) bool {
 
 func UserDataTypeEnumAllStrings() []string {
 	return []string{
-		string(UserDataTypeEnumReadOnly), string(UserDataTypeEnumEditable), string(UserDataTypeEnumUser), string(UserDataTypeEnumInternal),
+		string(UserDataTypeEnumReadOnly), string(UserDataTypeEnumEditable), string(UserDataTypeEnumSecret), string(UserDataTypeEnumInternal), string(UserDataTypeEnumEnv),
 	}
 }
 
 func UserDataTypeEnumAll() []UserDataTypeEnum {
 	return []UserDataTypeEnum{
-		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumUser, UserDataTypeEnumInternal,
+		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumSecret, UserDataTypeEnumInternal, UserDataTypeEnumEnv,
 	}
 }
 
 func UserDataTypeEnumAllPublic() []UserDataTypeEnum {
 	return []UserDataTypeEnum{
-		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumUser, UserDataTypeEnumInternal,
+		UserDataTypeEnumReadOnly, UserDataTypeEnumEditable, UserDataTypeEnumSecret, UserDataTypeEnumInternal, UserDataTypeEnumEnv,
 	}
 }
 
@@ -71,7 +72,7 @@ func UserDataTypeEnumAllPrivate() []UserDataTypeEnum {
 }
 
 func UserDataTypeEnumDefault() UserDataTypeEnum {
-	return UserDataTypeEnumUser
+	return UserDataTypeEnumSecret
 }
 
 func (enum UserDataTypeEnum) IsReadOnly() bool {
@@ -82,10 +83,14 @@ func (enum UserDataTypeEnum) IsEditable() bool {
 	return enum.Is(UserDataTypeEnumEditable)
 }
 
-func (enum UserDataTypeEnum) IsUser() bool {
-	return enum.Is(UserDataTypeEnumUser)
+func (enum UserDataTypeEnum) IsSecret() bool {
+	return enum.Is(UserDataTypeEnumSecret)
 }
 
 func (enum UserDataTypeEnum) IsInternal() bool {
 	return enum.Is(UserDataTypeEnumInternal)
+}
+
+func (enum UserDataTypeEnum) IsEnv() bool {
+	return enum.Is(UserDataTypeEnumEnv)
 }

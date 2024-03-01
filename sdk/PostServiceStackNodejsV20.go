@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackNodejsV12Response struct {
+type PostServiceStackNodejsV20Response struct {
 	success            output.ServiceStackProcess
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackNodejsV12Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackNodejsV20Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNodejsV12Response) Output() (output output.ServiceStackProcess, err error) {
+func (r PostServiceStackNodejsV20Response) Output() (output output.ServiceStackProcess, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNodejsV12Response) Err() error {
+func (r PostServiceStackNodejsV20Response) Err() error {
 	return r.err
 }
-func (r PostServiceStackNodejsV12Response) Headers() http.Header {
+func (r PostServiceStackNodejsV20Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackNodejsV12Response) StatusCode() int {
+func (r PostServiceStackNodejsV20Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackNodejsV12(ctx context.Context, inputDtoBody body.PostUserRuntimeServiceStack) (postServiceStackNodejsV12Response PostServiceStackNodejsV12Response, err error) {
-	u := "/api/rest/public/service-stack/nodejs_v12"
+func (h Handler) PostServiceStackNodejsV20(ctx context.Context, inputDtoBody body.PostUserRuntimeServiceStack) (postServiceStackNodejsV20Response PostServiceStackNodejsV20Response, err error) {
+	u := "/api/rest/public/service-stack/nodejs_v20"
 
-	var response PostServiceStackNodejsV12Response
+	var response PostServiceStackNodejsV20Response
 	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,

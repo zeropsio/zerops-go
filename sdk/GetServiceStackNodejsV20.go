@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackNodejsV12Response struct {
+type GetServiceStackNodejsV20Response struct {
 	success            output.ServiceStack
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackNodejsV12Response) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackNodejsV20Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackNodejsV12Response) Output() (output output.ServiceStack, err error) {
+func (r GetServiceStackNodejsV20Response) Output() (output output.ServiceStack, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackNodejsV12Response) Err() error {
+func (r GetServiceStackNodejsV20Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackNodejsV12Response) Headers() http.Header {
+func (r GetServiceStackNodejsV20Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackNodejsV12Response) StatusCode() int {
+func (r GetServiceStackNodejsV20Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackNodejsV12(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackNodejsV12Response GetServiceStackNodejsV12Response, err error) {
-	u := "/api/rest/public/service-stack/nodejs_v12/" + inputDtoPath.Id.Native() + ""
+func (h Handler) GetServiceStackNodejsV20(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackNodejsV20Response GetServiceStackNodejsV20Response, err error) {
+	u := "/api/rest/public/service-stack/nodejs_v20/" + inputDtoPath.Id.Native() + ""
 
-	var response GetServiceStackNodejsV12Response
+	var response GetServiceStackNodejsV20Response
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

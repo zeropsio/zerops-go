@@ -24,6 +24,7 @@ type UserDataLight struct {
 	LastUpdate     types.DateTime           `json:"lastUpdate"`
 	IsSynced       types.Bool               `json:"isSynced"`
 	DeleteOnSync   types.Bool               `json:"deleteOnSync"`
+	Sensitive      types.Bool               `json:"sensitive"`
 	Version        enum.UserDataVersionEnum `json:"version"`
 	LastSync       types.DateTimeNull       `json:"lastSync"`
 }

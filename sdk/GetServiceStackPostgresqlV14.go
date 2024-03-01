@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackMariadbV103Response struct {
-	success            output.ServiceStackMariaDb
+type GetServiceStackPostgresqlV14Response struct {
+	success            output.ServiceStackPostgreSql
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackMariadbV103Response) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackPostgresqlV14Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackMariadbV103Response) Output() (output output.ServiceStackMariaDb, err error) {
+func (r GetServiceStackPostgresqlV14Response) Output() (output output.ServiceStackPostgreSql, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackMariadbV103Response) Err() error {
+func (r GetServiceStackPostgresqlV14Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackMariadbV103Response) Headers() http.Header {
+func (r GetServiceStackPostgresqlV14Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackMariadbV103Response) StatusCode() int {
+func (r GetServiceStackPostgresqlV14Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackMariadbV103(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackMariadbV103Response GetServiceStackMariadbV103Response, err error) {
-	u := "/api/rest/public/service-stack/mariadb_v10_3/" + inputDtoPath.Id.Native() + ""
+func (h Handler) GetServiceStackPostgresqlV14(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPostgresqlV14Response GetServiceStackPostgresqlV14Response, err error) {
+	u := "/api/rest/public/service-stack/postgresql_v14/" + inputDtoPath.Id.Native() + ""
 
-	var response GetServiceStackMariadbV103Response
+	var response GetServiceStackPostgresqlV14Response
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

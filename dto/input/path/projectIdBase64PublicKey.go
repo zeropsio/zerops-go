@@ -7,7 +7,7 @@ import (
 	"github.com/zeropsio/zerops-go/types/uuid"
 )
 
-type ProjectIdVpnPublicKey struct {
-	Id           uuid.ProjectId
-	VpnPublicKey types.String
+type ProjectIdBase64PublicKey struct {
+	Id              uuid.ProjectId
+	Base64PublicKey types.String
 }

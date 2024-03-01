@@ -10,45 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackMariadbV104Response struct {
-	success            output.ServiceStackMariaDb
+type PostServiceStackPostgresqlV14Response struct {
+	success            output.ServiceStackProcessPostgreSql
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackMariadbV104Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackPostgresqlV14Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackMariadbV104Response) Output() (output output.ServiceStackMariaDb, err error) {
+func (r PostServiceStackPostgresqlV14Response) Output() (output output.ServiceStackProcessPostgreSql, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackMariadbV104Response) Err() error {
+func (r PostServiceStackPostgresqlV14Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackMariadbV104Response) Headers() http.Header {
+func (r PostServiceStackPostgresqlV14Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackMariadbV104Response) StatusCode() int {
+func (r PostServiceStackPostgresqlV14Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackMariadbV104(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackMariadbV104Response GetServiceStackMariadbV104Response, err error) {
-	u := "/api/rest/public/service-stack/mariadb_v10_4/" + inputDtoPath.Id.Native() + ""
+func (h Handler) PostServiceStackPostgresqlV14(ctx context.Context, inputDtoBody body.PostStandardServiceStack) (postServiceStackPostgresqlV14Response PostServiceStackPostgresqlV14Response, err error) {
+	u := "/api/rest/public/service-stack/postgresql_v14"
 
-	var response GetServiceStackMariadbV104Response
-	sdkResponse := sdkBase.Get(
+	var response PostServiceStackPostgresqlV14Response
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

@@ -10,45 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackNodejsV14Response struct {
-	success            output.ServiceStack
+type PostServiceStackPostgresqlV16Response struct {
+	success            output.ServiceStackProcessPostgreSql
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackNodejsV14Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackPostgresqlV16Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackNodejsV14Response) Output() (output output.ServiceStack, err error) {
+func (r PostServiceStackPostgresqlV16Response) Output() (output output.ServiceStackProcessPostgreSql, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackNodejsV14Response) Err() error {
+func (r PostServiceStackPostgresqlV16Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackNodejsV14Response) Headers() http.Header {
+func (r PostServiceStackPostgresqlV16Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackNodejsV14Response) StatusCode() int {
+func (r PostServiceStackPostgresqlV16Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackNodejsV14(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackNodejsV14Response GetServiceStackNodejsV14Response, err error) {
-	u := "/api/rest/public/service-stack/nodejs_v14/" + inputDtoPath.Id.Native() + ""
+func (h Handler) PostServiceStackPostgresqlV16(ctx context.Context, inputDtoBody body.PostStandardServiceStack) (postServiceStackPostgresqlV16Response PostServiceStackPostgresqlV16Response, err error) {
+	u := "/api/rest/public/service-stack/postgresql_v16"
 
-	var response GetServiceStackNodejsV14Response
-	sdkResponse := sdkBase.Get(
+	var response PostServiceStackPostgresqlV16Response
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

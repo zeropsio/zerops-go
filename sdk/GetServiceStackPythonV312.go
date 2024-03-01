@@ -10,46 +10,45 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackNodejsV14Response struct {
-	success            output.ServiceStackProcess
+type GetServiceStackPythonV312Response struct {
+	success            output.ServiceStack
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackNodejsV14Response) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackPythonV312Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNodejsV14Response) Output() (output output.ServiceStackProcess, err error) {
+func (r GetServiceStackPythonV312Response) Output() (output output.ServiceStack, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNodejsV14Response) Err() error {
+func (r GetServiceStackPythonV312Response) Err() error {
 	return r.err
 }
-func (r PostServiceStackNodejsV14Response) Headers() http.Header {
+func (r GetServiceStackPythonV312Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackNodejsV14Response) StatusCode() int {
+func (r GetServiceStackPythonV312Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackNodejsV14(ctx context.Context, inputDtoBody body.PostUserRuntimeServiceStack) (postServiceStackNodejsV14Response PostServiceStackNodejsV14Response, err error) {
-	u := "/api/rest/public/service-stack/nodejs_v14"
+func (h Handler) GetServiceStackPythonV312(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPythonV312Response GetServiceStackPythonV312Response, err error) {
+	u := "/api/rest/public/service-stack/python_v3_12/" + inputDtoPath.Id.Native() + ""
 
-	var response PostServiceStackNodejsV14Response
-	sdkResponse := sdkBase.Post(
+	var response GetServiceStackPythonV312Response
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

@@ -16,19 +16,23 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ZeropsYamlValidation)(nil)
 
 type ZeropsYamlValidation struct {
-	Name               types.String                           `json:"name"`
-	ServiceStackTypeId stringId.ServiceStackTypeId            `json:"serviceStackTypeId"`
-	ZeropsYaml         types.Text                             `json:"zeropsYaml"`
-	Operation          enum.ZeropsYamlValidationOperationEnum `json:"operation"`
+	ServiceStackName            types.String                           `json:"serviceStackName"`
+	ServiceStackTypeId          stringId.ServiceStackTypeId            `json:"serviceStackTypeId"`
+	ServiceStackTypeVersionName types.String                           `json:"serviceStackTypeVersionName"`
+	ZeropsYaml                  types.MediumText                       `json:"zeropsYaml"`
+	Operation                   enum.ZeropsYamlValidationOperationEnum `json:"operation"`
 }
 
-func (dto ZeropsYamlValidation) GetName() types.String {
-	return dto.Name
+func (dto ZeropsYamlValidation) GetServiceStackName() types.String {
+	return dto.ServiceStackName
 }
 func (dto ZeropsYamlValidation) GetServiceStackTypeId() stringId.ServiceStackTypeId {
 	return dto.ServiceStackTypeId
 }
-func (dto ZeropsYamlValidation) GetZeropsYaml() types.Text {
+func (dto ZeropsYamlValidation) GetServiceStackTypeVersionName() types.String {
+	return dto.ServiceStackTypeVersionName
+}
+func (dto ZeropsYamlValidation) GetZeropsYaml() types.MediumText {
 	return dto.ZeropsYaml
 }
 func (dto ZeropsYamlValidation) GetOperation() enum.ZeropsYamlValidationOperationEnum {
@@ -37,21 +41,25 @@ func (dto ZeropsYamlValidation) GetOperation() enum.ZeropsYamlValidationOperatio
 
 func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Name               *types.String
-		ServiceStackTypeId *stringId.ServiceStackTypeId
-		ZeropsYaml         *types.Text
-		Operation          *enum.ZeropsYamlValidationOperationEnum
+		ServiceStackName            *types.String
+		ServiceStackTypeId          *stringId.ServiceStackTypeId
+		ServiceStackTypeVersionName *types.String
+		ZeropsYaml                  *types.MediumText
+		Operation                   *enum.ZeropsYamlValidationOperationEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
 		return validator.JsonValidation("ZeropsYamlValidation", err)
 	}
 	var errorList validator.ErrorList
-	if aux.Name == nil {
-		errorList = errorList.With(validator.NewError("name", "field is required"))
+	if aux.ServiceStackName == nil {
+		errorList = errorList.With(validator.NewError("serviceStackName", "field is required"))
 	}
 	if aux.ServiceStackTypeId == nil {
 		errorList = errorList.With(validator.NewError("serviceStackTypeId", "field is required"))
+	}
+	if aux.ServiceStackTypeVersionName == nil {
+		errorList = errorList.With(validator.NewError("serviceStackTypeVersionName", "field is required"))
 	}
 	if aux.ZeropsYaml == nil {
 		errorList = errorList.With(validator.NewError("zeropsYaml", "field is required"))
@@ -62,8 +70,9 @@ func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.Name = *aux.Name
+	dto.ServiceStackName = *aux.ServiceStackName
 	dto.ServiceStackTypeId = *aux.ServiceStackTypeId
+	dto.ServiceStackTypeVersionName = *aux.ServiceStackTypeVersionName
 	dto.ZeropsYaml = *aux.ZeropsYaml
 	dto.Operation = *aux.Operation
 

@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackMariadbV103Response struct {
+type PostServiceStackMariadbV106Response struct {
 	success            output.ServiceStackProcessMariaDb
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackMariadbV103Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackMariadbV106Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackMariadbV103Response) Output() (output output.ServiceStackProcessMariaDb, err error) {
+func (r PostServiceStackMariadbV106Response) Output() (output output.ServiceStackProcessMariaDb, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackMariadbV103Response) Err() error {
+func (r PostServiceStackMariadbV106Response) Err() error {
 	return r.err
 }
-func (r PostServiceStackMariadbV103Response) Headers() http.Header {
+func (r PostServiceStackMariadbV106Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackMariadbV103Response) StatusCode() int {
+func (r PostServiceStackMariadbV106Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackMariadbV103(ctx context.Context, inputDtoBody body.PostStandardServiceStack) (postServiceStackMariadbV103Response PostServiceStackMariadbV103Response, err error) {
-	u := "/api/rest/public/service-stack/mariadb_v10_3"
+func (h Handler) PostServiceStackMariadbV106(ctx context.Context, inputDtoBody body.PostStandardServiceStack) (postServiceStackMariadbV106Response PostServiceStackMariadbV106Response, err error) {
+	u := "/api/rest/public/service-stack/mariadb_v10_6"
 
-	var response PostServiceStackMariadbV103Response
+	var response PostServiceStackMariadbV106Response
 	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,

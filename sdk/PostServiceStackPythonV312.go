@@ -10,45 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetProjectVpnResponse struct {
-	success            output.ProjectVpnItem
+type PostServiceStackPythonV312Response struct {
+	success            output.ServiceStackProcess
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetProjectVpnResponse) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackPythonV312Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectVpnResponse) Output() (output output.ProjectVpnItem, err error) {
+func (r PostServiceStackPythonV312Response) Output() (output output.ServiceStackProcess, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectVpnResponse) Err() error {
+func (r PostServiceStackPythonV312Response) Err() error {
 	return r.err
 }
-func (r GetProjectVpnResponse) Headers() http.Header {
+func (r PostServiceStackPythonV312Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetProjectVpnResponse) StatusCode() int {
+func (r PostServiceStackPythonV312Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectVpn(ctx context.Context, inputDtoPath path.ProjectIdBase64PublicKey) (getProjectVpnResponse GetProjectVpnResponse, err error) {
-	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/vpn/" + inputDtoPath.Base64PublicKey.Native() + ""
+func (h Handler) PostServiceStackPythonV312(ctx context.Context, inputDtoBody body.PostUserRuntimeServiceStack) (postServiceStackPythonV312Response PostServiceStackPythonV312Response, err error) {
+	u := "/api/rest/public/service-stack/python_v3_12"
 
-	var response GetProjectVpnResponse
-	sdkResponse := sdkBase.Get(
+	var response PostServiceStackPythonV312Response
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

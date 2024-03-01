@@ -5,8 +5,8 @@ package enum
 type ZeropsYamlValidationOperationEnum string
 
 const (
-	ZeropsYamlValidationOperationEnumDeploy = ZeropsYamlValidationOperationEnum("DEPLOY")
-	ZeropsYamlValidationOperationEnumPush   = ZeropsYamlValidationOperationEnum("PUSH")
+	ZeropsYamlValidationOperationEnumDeploy         = ZeropsYamlValidationOperationEnum("DEPLOY")
+	ZeropsYamlValidationOperationEnumBuildAndDeploy = ZeropsYamlValidationOperationEnum("BUILD_AND_DEPLOY")
 )
 
 func NewZeropsYamlValidationOperationEnumFromString(value string) (out ZeropsYamlValidationOperationEnum, err error) {
@@ -48,19 +48,19 @@ func (enum ZeropsYamlValidationOperationEnum) Is(values ...ZeropsYamlValidationO
 
 func ZeropsYamlValidationOperationEnumAllStrings() []string {
 	return []string{
-		string(ZeropsYamlValidationOperationEnumDeploy), string(ZeropsYamlValidationOperationEnumPush),
+		string(ZeropsYamlValidationOperationEnumDeploy), string(ZeropsYamlValidationOperationEnumBuildAndDeploy),
 	}
 }
 
 func ZeropsYamlValidationOperationEnumAll() []ZeropsYamlValidationOperationEnum {
 	return []ZeropsYamlValidationOperationEnum{
-		ZeropsYamlValidationOperationEnumDeploy, ZeropsYamlValidationOperationEnumPush,
+		ZeropsYamlValidationOperationEnumDeploy, ZeropsYamlValidationOperationEnumBuildAndDeploy,
 	}
 }
 
 func ZeropsYamlValidationOperationEnumAllPublic() []ZeropsYamlValidationOperationEnum {
 	return []ZeropsYamlValidationOperationEnum{
-		ZeropsYamlValidationOperationEnumDeploy, ZeropsYamlValidationOperationEnumPush,
+		ZeropsYamlValidationOperationEnumDeploy, ZeropsYamlValidationOperationEnumBuildAndDeploy,
 	}
 }
 
@@ -76,6 +76,6 @@ func (enum ZeropsYamlValidationOperationEnum) IsDeploy() bool {
 	return enum.Is(ZeropsYamlValidationOperationEnumDeploy)
 }
 
-func (enum ZeropsYamlValidationOperationEnum) IsPush() bool {
-	return enum.Is(ZeropsYamlValidationOperationEnumPush)
+func (enum ZeropsYamlValidationOperationEnum) IsBuildAndDeploy() bool {
+	return enum.Is(ZeropsYamlValidationOperationEnumBuildAndDeploy)
 }

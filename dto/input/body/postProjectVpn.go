@@ -14,29 +14,29 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostProjectVpn)(nil)
 
 type PostProjectVpn struct {
-	VpnPublicKey types.String `json:"vpnPublicKey"`
+	PublicKey types.String `json:"publicKey"`
 }
 
-func (dto PostProjectVpn) GetVpnPublicKey() types.String {
-	return dto.VpnPublicKey
+func (dto PostProjectVpn) GetPublicKey() types.String {
+	return dto.PublicKey
 }
 
 func (dto *PostProjectVpn) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		VpnPublicKey *types.String
+		PublicKey *types.String
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
 		return validator.JsonValidation("PostProjectVpn", err)
 	}
 	var errorList validator.ErrorList
-	if aux.VpnPublicKey == nil {
-		errorList = errorList.With(validator.NewError("vpnPublicKey", "field is required"))
+	if aux.PublicKey == nil {
+		errorList = errorList.With(validator.NewError("publicKey", "field is required"))
 	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.VpnPublicKey = *aux.VpnPublicKey
+	dto.PublicKey = *aux.PublicKey
 
 	return nil
 }

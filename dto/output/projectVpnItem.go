@@ -10,5 +10,5 @@ var _ strconv.NumError
 
 type ProjectVpnItem struct {
 	Project ProjectVpnSetup     `json:"project"`
-	User    ProjectVpnUserSetup `json:"user"`
+	Peer    ProjectVpnPeerSetup `json:"peer"`
 }

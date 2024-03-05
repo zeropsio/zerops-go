@@ -10,7 +10,7 @@ import (
 
 var _ strconv.NumError
 
-type ProjectVpnUserSetup struct {
+type ProjectVpnPeerSetup struct {
 	PublicKey types.String `json:"publicKey"`
 	Ipv4      VpnIpConfig  `json:"ipv4"`
 	Ipv6      VpnIpConfig  `json:"ipv6"`

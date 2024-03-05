@@ -10,15 +10,15 @@ import (
 var _ strconv.NumError
 
 type ProjectVpnList struct {
-	VpnUsers ProjectVpnListVpnUsers `json:"vpnUsers"`
-	Project  ProjectVpnSetup        `json:"project"`
+	Peers   ProjectVpnListPeers `json:"peers"`
+	Project ProjectVpnSetup     `json:"project"`
 }
 
-type ProjectVpnListVpnUsers []ProjectVpnUserSetup
+type ProjectVpnListPeers []ProjectVpnPeerSetup
 
-func (dto ProjectVpnListVpnUsers) MarshalJSON() ([]byte, error) {
+func (dto ProjectVpnListPeers) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]ProjectVpnUserSetup(dto))
+	return json.Marshal([]ProjectVpnPeerSetup(dto))
 }

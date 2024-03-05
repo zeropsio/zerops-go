@@ -297,6 +297,7 @@ const (
 	PriceListNotFound                                        ErrorCode = "priceListNotFound"
 	CostLimitTooSmall                                        ErrorCode = "costLimitTooSmall"
 	InvalidVpnPublicKey                                      ErrorCode = "invalidVpnPublicKey"
+	VpnPublicKeyNotFound                                     ErrorCode = "vpnPublicKeyNotFound"
 	YamlPreprocessingMaxDurationExceeded                     ErrorCode = "yamlPreprocessingMaxDurationExceeded"
 	YamlPreprocessingError                                   ErrorCode = "yamlPreprocessingError"
 	ProjectImportInvalidYaml                                 ErrorCode = "projectImportInvalidYaml"

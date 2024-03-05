@@ -14,8 +14,9 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PutProjectRemoteLogging)(nil)
 
 type PutProjectRemoteLogging struct {
-	SyslogConfig types.Text `json:"syslogConfig"`
-	Certificate  types.Text `json:"certificate"`
+	SyslogConfig types.Text       `json:"syslogConfig"`
+	Certificate  types.Text       `json:"certificate"`
+	Type         types.StringNull `json:"type"`
 }
 
 func (dto PutProjectRemoteLogging) GetSyslogConfig() types.Text {
@@ -24,11 +25,15 @@ func (dto PutProjectRemoteLogging) GetSyslogConfig() types.Text {
 func (dto PutProjectRemoteLogging) GetCertificate() types.Text {
 	return dto.Certificate
 }
+func (dto PutProjectRemoteLogging) GetType() types.StringNull {
+	return dto.Type
+}
 
 func (dto *PutProjectRemoteLogging) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		SyslogConfig *types.Text
 		Certificate  *types.Text
+		Type         types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -46,6 +51,7 @@ func (dto *PutProjectRemoteLogging) UnmarshalJSON(b []byte) error {
 	}
 	dto.SyslogConfig = *aux.SyslogConfig
 	dto.Certificate = *aux.Certificate
+	dto.Type = aux.Type
 
 	return nil
 }

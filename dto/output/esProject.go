@@ -24,5 +24,6 @@ type EsProject struct {
 	PublicIpV4          types.StringNull       `json:"publicIpV4"`
 	PublicIpV6          types.StringNull       `json:"publicIpV6"`
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
+	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`
 }

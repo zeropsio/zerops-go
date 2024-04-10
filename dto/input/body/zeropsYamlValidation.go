@@ -21,6 +21,7 @@ type ZeropsYamlValidation struct {
 	ServiceStackTypeVersionName types.String                           `json:"serviceStackTypeVersionName"`
 	ZeropsYaml                  types.MediumText                       `json:"zeropsYaml"`
 	Operation                   enum.ZeropsYamlValidationOperationEnum `json:"operation"`
+	ZeropsYamlSetup             types.StringNull                       `json:"zeropsYamlSetup"`
 }
 
 func (dto ZeropsYamlValidation) GetServiceStackName() types.String {
@@ -38,6 +39,9 @@ func (dto ZeropsYamlValidation) GetZeropsYaml() types.MediumText {
 func (dto ZeropsYamlValidation) GetOperation() enum.ZeropsYamlValidationOperationEnum {
 	return dto.Operation
 }
+func (dto ZeropsYamlValidation) GetZeropsYamlSetup() types.StringNull {
+	return dto.ZeropsYamlSetup
+}
 
 func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -46,6 +50,7 @@ func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 		ServiceStackTypeVersionName *types.String
 		ZeropsYaml                  *types.MediumText
 		Operation                   *enum.ZeropsYamlValidationOperationEnum
+		ZeropsYamlSetup             types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -75,6 +80,7 @@ func (dto *ZeropsYamlValidation) UnmarshalJSON(b []byte) error {
 	dto.ServiceStackTypeVersionName = *aux.ServiceStackTypeVersionName
 	dto.ZeropsYaml = *aux.ZeropsYaml
 	dto.Operation = *aux.Operation
+	dto.ZeropsYamlSetup = aux.ZeropsYamlSetup
 
 	return nil
 }

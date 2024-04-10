@@ -20,6 +20,7 @@ type GitlabIntegration struct {
 	BranchName         types.StringNull                    `json:"branchName"`
 	TagRegex           types.StringNull                    `json:"tagRegex"`
 	IsActive           types.Bool                          `json:"isActive"`
+	ZeropsYamlSetup    types.StringNull                    `json:"zeropsYamlSetup"`
 	TriggerBuild       types.Bool                          `json:"triggerBuild"`
 }
 
@@ -38,6 +39,9 @@ func (dto GitlabIntegration) GetTagRegex() types.StringNull {
 func (dto GitlabIntegration) GetIsActive() types.Bool {
 	return dto.IsActive
 }
+func (dto GitlabIntegration) GetZeropsYamlSetup() types.StringNull {
+	return dto.ZeropsYamlSetup
+}
 func (dto GitlabIntegration) GetTriggerBuild() types.Bool {
 	return dto.TriggerBuild
 }
@@ -49,6 +53,7 @@ func (dto *GitlabIntegration) UnmarshalJSON(b []byte) error {
 		BranchName         types.StringNull
 		TagRegex           types.StringNull
 		IsActive           *types.Bool
+		ZeropsYamlSetup    types.StringNull
 		TriggerBuild       *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -76,6 +81,7 @@ func (dto *GitlabIntegration) UnmarshalJSON(b []byte) error {
 	dto.BranchName = aux.BranchName
 	dto.TagRegex = aux.TagRegex
 	dto.IsActive = *aux.IsActive
+	dto.ZeropsYamlSetup = aux.ZeropsYamlSetup
 	dto.TriggerBuild = *aux.TriggerBuild
 
 	return nil

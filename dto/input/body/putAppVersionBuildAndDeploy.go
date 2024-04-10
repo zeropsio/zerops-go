@@ -14,21 +14,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PutAppVersionBuildAndDeploy)(nil)
 
 type PutAppVersionBuildAndDeploy struct {
-	ZeropsYaml types.MediumText `json:"zeropsYaml"`
-	Source     types.StringNull `json:"source"`
+	ZeropsYaml      types.MediumText `json:"zeropsYaml"`
+	ZeropsYamlSetup types.StringNull `json:"zeropsYamlSetup"`
 }
 
 func (dto PutAppVersionBuildAndDeploy) GetZeropsYaml() types.MediumText {
 	return dto.ZeropsYaml
 }
-func (dto PutAppVersionBuildAndDeploy) GetSource() types.StringNull {
-	return dto.Source
+func (dto PutAppVersionBuildAndDeploy) GetZeropsYamlSetup() types.StringNull {
+	return dto.ZeropsYamlSetup
 }
 
 func (dto *PutAppVersionBuildAndDeploy) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ZeropsYaml *types.MediumText
-		Source     types.StringNull
+		ZeropsYaml      *types.MediumText
+		ZeropsYamlSetup types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -42,7 +42,7 @@ func (dto *PutAppVersionBuildAndDeploy) UnmarshalJSON(b []byte) error {
 		return errorList.GetError()
 	}
 	dto.ZeropsYaml = *aux.ZeropsYaml
-	dto.Source = aux.Source
+	dto.ZeropsYamlSetup = aux.ZeropsYamlSetup
 
 	return nil
 }

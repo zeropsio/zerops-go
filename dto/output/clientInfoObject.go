@@ -13,8 +13,8 @@ var _ strconv.NumError
 type ClientInfoObject struct {
 	Id               types.String             `json:"id"`
 	CompanyName      types.String             `json:"companyName"`
-	CompanyNumber    types.String             `json:"companyNumber"`
-	VatNumber        types.String             `json:"vatNumber"`
+	CompanyNumber    types.StringNull         `json:"companyNumber"`
+	VatNumber        types.StringNull         `json:"vatNumber"`
 	Created          types.DateTime           `json:"created"`
 	LastUpdate       types.DateTime           `json:"lastUpdate"`
 	LastPublicUpdate types.DateTime           `json:"lastPublicUpdate"`
@@ -22,7 +22,7 @@ type ClientInfoObject struct {
 	VatCountry       types.String             `json:"vatCountry"`
 	VatPayer         types.Bool               `json:"vatPayer"`
 	VatRate          types.Float              `json:"vatRate"`
-	VatMode          types.String             `json:"vatMode"`
+	VatMode          types.StringNull         `json:"vatMode"`
 	Currency         ClientInfoObjectCurrency `json:"currency"`
 	Language         ClientInfoLanguageObject `json:"language"`
 }

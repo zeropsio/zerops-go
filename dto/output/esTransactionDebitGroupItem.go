@@ -17,6 +17,7 @@ type EsTransactionDebitGroupItem struct {
 	StackId       types.String   `json:"stackId"`
 	ProjectName   types.String   `json:"projectName"`
 	StackName     types.String   `json:"stackName"`
+	VCpu          types.Decimal  `json:"vCpu"`
 	Cpu           types.Decimal  `json:"cpu"`
 	Ram           types.Decimal  `json:"ram"`
 	Disc          types.Decimal  `json:"disc"`

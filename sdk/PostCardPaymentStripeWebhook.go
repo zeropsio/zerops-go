@@ -11,42 +11,41 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
-	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackPhpV81NginxV120Response struct {
-	success            output.Process
+type PostCardPaymentStripeWebhookResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackPhpV81NginxV120Response) OutputInterface() (output interface{}, err error) {
+func (r PostCardPaymentStripeWebhookResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackPhpV81NginxV120Response) Output() (output output.Process, err error) {
+func (r PostCardPaymentStripeWebhookResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackPhpV81NginxV120Response) Err() error {
+func (r PostCardPaymentStripeWebhookResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackPhpV81NginxV120Response) Headers() http.Header {
+func (r PostCardPaymentStripeWebhookResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackPhpV81NginxV120Response) StatusCode() int {
+func (r PostCardPaymentStripeWebhookResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackPhpV81NginxV120(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PutUserPhpNginxServiceStack) (putServiceStackPhpV81NginxV120Response PutServiceStackPhpV81NginxV120Response, err error) {
-	u := "/api/rest/public/service-stack/php_v8_1_nginx_v1_20/" + inputDtoPath.Id.Native() + ""
+func (h Handler) PostCardPaymentStripeWebhook(ctx context.Context, inputDtoBody body.StripeWebhook) (postCardPaymentStripeWebhookResponse PostCardPaymentStripeWebhookResponse, err error) {
+	u := "/api/rest/public/card-payment/stripe-webhook"
 
-	var response PutServiceStackPhpV81NginxV120Response
-	sdkResponse := sdkBase.Put(
+	var response PostCardPaymentStripeWebhookResponse
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,

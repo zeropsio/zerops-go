@@ -13,21 +13,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*CustomAutoscaling)(nil)
 
 type CustomAutoscaling struct {
-	VerticalAutoscaling   *VerticalAutoscaling   `json:"verticalAutoscaling"`
-	HorizontalAutoscaling *HorizontalAutoscaling `json:"horizontalAutoscaling"`
+	VerticalAutoscaling   *VerticalAutoscalingNullable   `json:"verticalAutoscaling"`
+	HorizontalAutoscaling *HorizontalAutoscalingNullable `json:"horizontalAutoscaling"`
 }
 
-func (dto CustomAutoscaling) GetVerticalAutoscaling() *VerticalAutoscaling {
+func (dto CustomAutoscaling) GetVerticalAutoscaling() *VerticalAutoscalingNullable {
 	return dto.VerticalAutoscaling
 }
-func (dto CustomAutoscaling) GetHorizontalAutoscaling() *HorizontalAutoscaling {
+func (dto CustomAutoscaling) GetHorizontalAutoscaling() *HorizontalAutoscalingNullable {
 	return dto.HorizontalAutoscaling
 }
 
 func (dto *CustomAutoscaling) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		VerticalAutoscaling   *VerticalAutoscaling
-		HorizontalAutoscaling *HorizontalAutoscaling
+		VerticalAutoscaling   *VerticalAutoscalingNullable
+		HorizontalAutoscaling *HorizontalAutoscalingNullable
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {

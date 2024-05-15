@@ -10,45 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackPhpV80NginxV120Response struct {
-	success            output.ServiceStackPhpNginx
+type PostServiceStackPhpV83NginxV122Response struct {
+	success            output.ServiceStackProcessNginx
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackPhpV80NginxV120Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackPhpV83NginxV122Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackPhpV80NginxV120Response) Output() (output output.ServiceStackPhpNginx, err error) {
+func (r PostServiceStackPhpV83NginxV122Response) Output() (output output.ServiceStackProcessNginx, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackPhpV80NginxV120Response) Err() error {
+func (r PostServiceStackPhpV83NginxV122Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackPhpV80NginxV120Response) Headers() http.Header {
+func (r PostServiceStackPhpV83NginxV122Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackPhpV80NginxV120Response) StatusCode() int {
+func (r PostServiceStackPhpV83NginxV122Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackPhpV80NginxV120(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPhpV80NginxV120Response GetServiceStackPhpV80NginxV120Response, err error) {
-	u := "/api/rest/public/service-stack/php_v8_0_nginx_v1_20/" + inputDtoPath.Id.Native() + ""
+func (h Handler) PostServiceStackPhpV83NginxV122(ctx context.Context, inputDtoBody body.PostUserNginxServiceStack) (postServiceStackPhpV83NginxV122Response PostServiceStackPhpV83NginxV122Response, err error) {
+	u := "/api/rest/public/service-stack/php_v8_3_nginx_v1_22"
 
-	var response GetServiceStackPhpV80NginxV120Response
-	sdkResponse := sdkBase.Get(
+	var response PostServiceStackPhpV83NginxV122Response
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

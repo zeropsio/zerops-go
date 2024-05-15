@@ -15,36 +15,36 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetServiceStackPhpV74NginxV120Response struct {
+type GetServiceStackPhpV83NginxV122Response struct {
 	success            output.ServiceStackPhpNginx
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackPhpV74NginxV120Response) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackPhpV83NginxV122Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackPhpV74NginxV120Response) Output() (output output.ServiceStackPhpNginx, err error) {
+func (r GetServiceStackPhpV83NginxV122Response) Output() (output output.ServiceStackPhpNginx, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackPhpV74NginxV120Response) Err() error {
+func (r GetServiceStackPhpV83NginxV122Response) Err() error {
 	return r.err
 }
-func (r GetServiceStackPhpV74NginxV120Response) Headers() http.Header {
+func (r GetServiceStackPhpV83NginxV122Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackPhpV74NginxV120Response) StatusCode() int {
+func (r GetServiceStackPhpV83NginxV122Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackPhpV74NginxV120(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPhpV74NginxV120Response GetServiceStackPhpV74NginxV120Response, err error) {
-	u := "/api/rest/public/service-stack/php_v7_4_nginx_v1_20/" + inputDtoPath.Id.Native() + ""
+func (h Handler) GetServiceStackPhpV83NginxV122(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackPhpV83NginxV122Response GetServiceStackPhpV83NginxV122Response, err error) {
+	u := "/api/rest/public/service-stack/php_v8_3_nginx_v1_22/" + inputDtoPath.Id.Native() + ""
 
-	var response GetServiceStackPhpV74NginxV120Response
+	var response GetServiceStackPhpV83NginxV122Response
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

@@ -17,6 +17,6 @@ type ClientUserExtra struct {
 	UserId   uuid.UserId                 `json:"userId"`
 	Status   enum.ClientUserStatusEnum   `json:"status"`
 	RoleCode enum.ClientUserRoleCodeEnum `json:"roleCode"`
-	Client   ClientExtra                 `json:"client"`
+	Client   Client                      `json:"client"`
 	User     UserLight                   `json:"user"`
 }

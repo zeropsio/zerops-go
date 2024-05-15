@@ -12,8 +12,7 @@ import (
 var _ strconv.NumError
 
 type Country struct {
-	Id      stringId.CountryId `json:"id"`
-	Name    types.String       `json:"name"`
-	InEu    types.Bool         `json:"inEu"`
-	VatRate types.Float        `json:"vatRate"`
+	Id   stringId.CountryId `json:"id"`
+	Name types.String       `json:"name"`
+	InEu types.Bool         `json:"inEu"`
 }

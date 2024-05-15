@@ -14,18 +14,18 @@ import (
 var _ strconv.NumError
 
 type EsCardPayment struct {
-	Id              uuid.CardPaymentId              `json:"id"`
-	ClientId        uuid.ClientId                   `json:"clientId"`
-	Status          enum.CardPaymentStatusEnum      `json:"status"`
-	RequestId       types.StringNull                `json:"requestId"`
-	Created         types.DateTime                  `json:"created"`
-	Amount          types.Float                     `json:"amount"`
-	CurrencyId      stringId.CurrencyId             `json:"currencyId"`
-	Application     enum.CardPaymentApplicationEnum `json:"application"`
-	DatePaid        types.DateTimeNull              `json:"datePaid"`
-	InteractionType types.String                    `json:"interactionType"`
-	LastUpdate      types.DateTime                  `json:"lastUpdate"`
-	PaymentMethod   types.String                    `json:"paymentMethod"`
-	PaymentObject   types.JsonRawMessage            `json:"paymentObject"`
-	Provider        enum.CardPaymentProviderEnum    `json:"provider"`
+	Id                uuid.CardPaymentId              `json:"id"`
+	ClientId          uuid.ClientId                   `json:"clientId"`
+	Status            enum.PaymentStatusEnum          `json:"status"`
+	RequestId         types.StringNull                `json:"requestId"`
+	Created           types.DateTime                  `json:"created"`
+	Amount            types.Decimal                   `json:"amount"`
+	AmountVat         types.Decimal                   `json:"amountVat"`
+	CurrencyId        stringId.CurrencyId             `json:"currencyId"`
+	DatePaid          types.DateTimeNull              `json:"datePaid"`
+	InteractionType   enum.PaymentInteractionTypeEnum `json:"interactionType"`
+	LastUpdate        types.DateTime                  `json:"lastUpdate"`
+	PaymentMethod     types.StringNull                `json:"paymentMethod"`
+	PaymentObject     types.JsonRawMessage            `json:"paymentObject"`
+	BillingInfoObject types.JsonRawMessage            `json:"billingInfoObject"`
 }

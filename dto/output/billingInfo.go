@@ -6,17 +6,22 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 )
 
 var _ strconv.NumError
 
 type BillingInfo struct {
-	VatPayer                types.Bool       `json:"vatPayer"`
-	VatNumber               types.StringNull `json:"vatNumber"`
-	CompanyNumber           types.StringNull `json:"companyNumber"`
-	CompanyName             types.String     `json:"companyName"`
-	InvoiceAddressStreet    types.StringNull `json:"invoiceAddressStreet"`
-	InvoiceAddressCity      types.StringNull `json:"invoiceAddressCity"`
-	InvoiceAddressPostcode  types.StringNull `json:"invoiceAddressPostcode"`
-	InvoiceAddressCountryId types.String     `json:"invoiceAddressCountryId"`
+	VatNumber               types.StringNull            `json:"vatNumber"`
+	CompanyNumber           types.StringNull            `json:"companyNumber"`
+	CompanyName             types.String                `json:"companyName"`
+	InvoiceAddressStreet    types.String                `json:"invoiceAddressStreet"`
+	InvoiceAddressCity      types.String                `json:"invoiceAddressCity"`
+	InvoiceAddressPostcode  types.String                `json:"invoiceAddressPostcode"`
+	InvoiceAddressCountryId stringId.CountryId          `json:"invoiceAddressCountryId"`
+	VatCountryId            stringId.CountryId          `json:"vatCountryId"`
+	VatMode                 enum.BillingInfoVatModeEnum `json:"vatMode"`
+	VatRate                 types.Decimal               `json:"vatRate"`
+	VatVerified             types.Bool                  `json:"vatVerified"`
 }

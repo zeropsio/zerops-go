@@ -14,14 +14,14 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*Autoscaling)(nil)
 
 type Autoscaling struct {
-	Mode              enum.ServiceStackModeEnum `json:"mode"`
-	CustomAutoscaling CustomAutoscaling         `json:"customAutoscaling"`
+	Mode              *enum.ServiceStackModeEnum `json:"mode"`
+	CustomAutoscaling *CustomAutoscaling         `json:"customAutoscaling"`
 }
 
-func (dto Autoscaling) GetMode() enum.ServiceStackModeEnum {
+func (dto Autoscaling) GetMode() *enum.ServiceStackModeEnum {
 	return dto.Mode
 }
-func (dto Autoscaling) GetCustomAutoscaling() CustomAutoscaling {
+func (dto Autoscaling) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
 }
 
@@ -35,17 +35,12 @@ func (dto *Autoscaling) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("Autoscaling", err)
 	}
 	var errorList validator.ErrorList
-	if aux.Mode == nil {
-		errorList = errorList.With(validator.NewError("mode", "field is required"))
-	}
-	if aux.CustomAutoscaling == nil {
-		errorList = errorList.With(validator.NewError("customAutoscaling", "field is required"))
-	}
+
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.Mode = *aux.Mode
-	dto.CustomAutoscaling = *aux.CustomAutoscaling
+	dto.Mode = aux.Mode
+	dto.CustomAutoscaling = aux.CustomAutoscaling
 
 	return nil
 }

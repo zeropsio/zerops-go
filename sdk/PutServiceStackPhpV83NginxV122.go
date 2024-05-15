@@ -11,41 +11,42 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackPhpV81NginxV120Response struct {
-	success            output.ServiceStackProcessNginx
+type PutServiceStackPhpV83NginxV122Response struct {
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackPhpV81NginxV120Response) OutputInterface() (output interface{}, err error) {
+func (r PutServiceStackPhpV83NginxV122Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackPhpV81NginxV120Response) Output() (output output.ServiceStackProcessNginx, err error) {
+func (r PutServiceStackPhpV83NginxV122Response) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackPhpV81NginxV120Response) Err() error {
+func (r PutServiceStackPhpV83NginxV122Response) Err() error {
 	return r.err
 }
-func (r PostServiceStackPhpV81NginxV120Response) Headers() http.Header {
+func (r PutServiceStackPhpV83NginxV122Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackPhpV81NginxV120Response) StatusCode() int {
+func (r PutServiceStackPhpV83NginxV122Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackPhpV81NginxV120(ctx context.Context, inputDtoBody body.PostUserNginxServiceStack) (postServiceStackPhpV81NginxV120Response PostServiceStackPhpV81NginxV120Response, err error) {
-	u := "/api/rest/public/service-stack/php_v8_1_nginx_v1_20"
+func (h Handler) PutServiceStackPhpV83NginxV122(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PutUserPhpNginxServiceStack) (putServiceStackPhpV83NginxV122Response PutServiceStackPhpV83NginxV122Response, err error) {
+	u := "/api/rest/public/service-stack/php_v8_3_nginx_v1_22/" + inputDtoPath.Id.Native() + ""
 
-	var response PostServiceStackPhpV81NginxV120Response
-	sdkResponse := sdkBase.Post(
+	var response PutServiceStackPhpV83NginxV122Response
+	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,
 		u,

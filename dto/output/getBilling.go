@@ -9,6 +9,5 @@ import (
 var _ strconv.NumError
 
 type GetBilling struct {
-	Current BillingInfo  `json:"current"`
-	Future  *BillingInfo `json:"future"`
+	Current *BillingInfo `json:"current"`
 }

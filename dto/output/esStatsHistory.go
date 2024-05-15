@@ -20,6 +20,8 @@ type EsStatsHistory struct {
 	ContainerCount types.IntNull    `json:"containerCount"`
 	CpuLimit       types.Float      `json:"cpuLimit"`
 	CpuUsed        types.Float      `json:"cpuUsed"`
+	VCpuLimit      types.Float      `json:"vCpuLimit"`
+	VCpuUsed       types.Float      `json:"vCpuUsed"`
 	RamLimit       types.Float      `json:"ramLimit"`
 	RamUsed        types.Float      `json:"ramUsed"`
 	DiskLimit      types.Float      `json:"diskLimit"`

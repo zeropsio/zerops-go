@@ -16,10 +16,11 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostStandardServiceStack)(nil)
 
 type PostStandardServiceStack struct {
-	ProjectId         uuid.ProjectId            `json:"projectId"`
-	Name              types.String              `json:"name"`
-	CustomAutoscaling *CustomAutoscaling        `json:"customAutoscaling"`
-	Mode              enum.ServiceStackModeEnum `json:"mode"`
+	ProjectId         uuid.ProjectId                   `json:"projectId"`
+	Name              types.String                     `json:"name"`
+	CustomAutoscaling *CustomAutoscaling               `json:"customAutoscaling"`
+	Mode              *enum.ServiceStackModeEnum       `json:"mode"`
+	UserData          PostStandardServiceStackUserData `json:"userData"`
 }
 
 func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
@@ -31,8 +32,20 @@ func (dto PostStandardServiceStack) GetName() types.String {
 func (dto PostStandardServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
 }
-func (dto PostStandardServiceStack) GetMode() enum.ServiceStackModeEnum {
+func (dto PostStandardServiceStack) GetMode() *enum.ServiceStackModeEnum {
 	return dto.Mode
+}
+func (dto PostStandardServiceStack) GetUserData() PostStandardServiceStackUserData {
+	return dto.UserData
+}
+
+type PostStandardServiceStackUserData []UserDataPut
+
+func (dto PostStandardServiceStackUserData) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]UserDataPut(dto))
 }
 
 func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
@@ -41,6 +54,7 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 		Name              *types.String
 		CustomAutoscaling *CustomAutoscaling
 		Mode              *enum.ServiceStackModeEnum
+		UserData          *PostStandardServiceStackUserData
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -53,8 +67,8 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
-	if aux.Mode == nil {
-		errorList = errorList.With(validator.NewError("mode", "field is required"))
+	if aux.UserData == nil {
+		errorList = errorList.With(validator.NewError("userData", "field is required"))
 	}
 	if errorList != nil {
 		return errorList.GetError()
@@ -62,7 +76,8 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
 	dto.CustomAutoscaling = aux.CustomAutoscaling
-	dto.Mode = *aux.Mode
+	dto.Mode = aux.Mode
+	dto.UserData = *aux.UserData
 
 	return nil
 }

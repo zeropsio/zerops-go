@@ -10,46 +10,44 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackPhpV80ApacheV24Response struct {
-	success            output.ServiceStackProcess
+type GetSettingsImportProjectYmlJsonSchemaJsonResponse struct {
+	success            output.FileDownload
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackPhpV80ApacheV24Response) OutputInterface() (output interface{}, err error) {
+func (r GetSettingsImportProjectYmlJsonSchemaJsonResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackPhpV80ApacheV24Response) Output() (output output.ServiceStackProcess, err error) {
+func (r GetSettingsImportProjectYmlJsonSchemaJsonResponse) Output() (output output.FileDownload, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackPhpV80ApacheV24Response) Err() error {
+func (r GetSettingsImportProjectYmlJsonSchemaJsonResponse) Err() error {
 	return r.err
 }
-func (r PostServiceStackPhpV80ApacheV24Response) Headers() http.Header {
+func (r GetSettingsImportProjectYmlJsonSchemaJsonResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackPhpV80ApacheV24Response) StatusCode() int {
+func (r GetSettingsImportProjectYmlJsonSchemaJsonResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackPhpV80ApacheV24(ctx context.Context, inputDtoBody body.PostUserServiceStack) (postServiceStackPhpV80ApacheV24Response PostServiceStackPhpV80ApacheV24Response, err error) {
-	u := "/api/rest/public/service-stack/php_v8_0_apache_v2_4"
+func (h Handler) GetSettingsImportProjectYmlJsonSchemaJson(ctx context.Context) (getSettingsImportProjectYmlJsonSchemaJsonResponse GetSettingsImportProjectYmlJsonSchemaJsonResponse, err error) {
+	u := "/api/rest/public/settings/import-project-yml-json-schema.json"
 
-	var response PostServiceStackPhpV80ApacheV24Response
-	sdkResponse := sdkBase.Post(
+	var response GetSettingsImportProjectYmlJsonSchemaJsonResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

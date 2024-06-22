@@ -10,46 +10,44 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackElasticsearchV6Response struct {
-	success            output.ServiceStackProcess
+type GetSettingsZeropsYmlJsonSchemaJsonResponse struct {
+	success            output.FileDownload
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackElasticsearchV6Response) OutputInterface() (output interface{}, err error) {
+func (r GetSettingsZeropsYmlJsonSchemaJsonResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackElasticsearchV6Response) Output() (output output.ServiceStackProcess, err error) {
+func (r GetSettingsZeropsYmlJsonSchemaJsonResponse) Output() (output output.FileDownload, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackElasticsearchV6Response) Err() error {
+func (r GetSettingsZeropsYmlJsonSchemaJsonResponse) Err() error {
 	return r.err
 }
-func (r PostServiceStackElasticsearchV6Response) Headers() http.Header {
+func (r GetSettingsZeropsYmlJsonSchemaJsonResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackElasticsearchV6Response) StatusCode() int {
+func (r GetSettingsZeropsYmlJsonSchemaJsonResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackElasticsearchV6(ctx context.Context, inputDtoBody body.PostStandardServiceStack) (postServiceStackElasticsearchV6Response PostServiceStackElasticsearchV6Response, err error) {
-	u := "/api/rest/public/service-stack/elasticsearch_v6"
+func (h Handler) GetSettingsZeropsYmlJsonSchemaJson(ctx context.Context) (getSettingsZeropsYmlJsonSchemaJsonResponse GetSettingsZeropsYmlJsonSchemaJsonResponse, err error) {
+	u := "/api/rest/public/settings/zerops-yml-json-schema.json"
 
-	var response PostServiceStackElasticsearchV6Response
-	sdkResponse := sdkBase.Post(
+	var response GetSettingsZeropsYmlJsonSchemaJsonResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

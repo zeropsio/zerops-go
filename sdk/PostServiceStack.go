@@ -11,40 +11,41 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostServiceStackNginxV122Response struct {
-	success            output.ServiceStackProcessNginx
+type PostServiceStackResponse struct {
+	success            output.ServiceStackProcess
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostServiceStackNginxV122Response) OutputInterface() (output interface{}, err error) {
+func (r PostServiceStackResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNginxV122Response) Output() (output output.ServiceStackProcessNginx, err error) {
+func (r PostServiceStackResponse) Output() (output output.ServiceStackProcess, err error) {
 	return r.success, r.err
 }
 
-func (r PostServiceStackNginxV122Response) Err() error {
+func (r PostServiceStackResponse) Err() error {
 	return r.err
 }
-func (r PostServiceStackNginxV122Response) Headers() http.Header {
+func (r PostServiceStackResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostServiceStackNginxV122Response) StatusCode() int {
+func (r PostServiceStackResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackNginxV122(ctx context.Context, inputDtoBody body.PostUserNginxServiceStack) (postServiceStackNginxV122Response PostServiceStackNginxV122Response, err error) {
-	u := "/api/rest/public/service-stack/nginx_v1_22"
+func (h Handler) PostServiceStack(ctx context.Context, inputDtoPath path.ServiceStackServiceStackTypeVersionId, inputDtoBody body.PostStandardServiceStack) (postServiceStackResponse PostServiceStackResponse, err error) {
+	u := "/api/rest/public/service-stack/" + inputDtoPath.ServiceStackTypeVersionId.Native() + ""
 
-	var response PostServiceStackNginxV122Response
+	var response PostServiceStackResponse
 	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,

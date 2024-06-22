@@ -18,6 +18,8 @@ type AppVersionJsonObject struct {
 	ProjectId            uuid.ProjectIdNull           `json:"projectId"`
 	Status               *enum.AppVersionStatusEnum   `json:"status"`
 	Source               enum.AppVersionSourceEnum    `json:"source"`
+	Os                   types.StringNull             `json:"os"`
+	Base                 types.StringNull             `json:"base"`
 	Sequence             types.Int                    `json:"sequence"`
 	Name                 types.StringNull             `json:"name"`
 	Created              types.DateTimeNull           `json:"created"`
@@ -29,4 +31,5 @@ type AppVersionJsonObject struct {
 	ActivationDate       types.DateTimeNull           `json:"activationDate"`
 	PublicGitSource      *AppVersionPublicGitSource   `json:"publicGitSource"`
 	ConfigContent        types.TextNull               `json:"configContent"`
+	ZeropsYamlJson       types.TextNull               `json:"zeropsYamlJson"`
 }

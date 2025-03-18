@@ -17,4 +17,5 @@ type PrepareCustomRuntime struct {
 	EndDate                types.DateTimeNull      `json:"endDate"`
 	ServiceStackId         uuid.ServiceStackIdNull `json:"serviceStackId"`
 	ServiceStackName       types.StringNull        `json:"serviceStackName"`
+	Reason                 types.StringNull        `json:"reason"`
 }

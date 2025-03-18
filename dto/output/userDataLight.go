@@ -13,18 +13,14 @@ import (
 var _ strconv.NumError
 
 type UserDataLight struct {
-	Id             uuid.UserDataId          `json:"id"`
-	ClientId       uuid.ClientId            `json:"clientId"`
-	ProjectId      uuid.ProjectId           `json:"projectId"`
-	ServiceStackId uuid.ServiceStackId      `json:"serviceStackId"`
-	Key            types.String             `json:"key"`
-	Content        types.Text               `json:"content"`
-	Type           enum.UserDataTypeEnum    `json:"type"`
-	Created        types.DateTime           `json:"created"`
-	LastUpdate     types.DateTime           `json:"lastUpdate"`
-	IsSynced       types.Bool               `json:"isSynced"`
-	DeleteOnSync   types.Bool               `json:"deleteOnSync"`
-	Sensitive      types.Bool               `json:"sensitive"`
-	Version        enum.UserDataVersionEnum `json:"version"`
-	LastSync       types.DateTimeNull       `json:"lastSync"`
+	Id             uuid.UserDataId       `json:"id"`
+	ClientId       uuid.ClientId         `json:"clientId"`
+	ProjectId      uuid.ProjectId        `json:"projectId"`
+	ServiceStackId uuid.ServiceStackId   `json:"serviceStackId"`
+	Key            types.String          `json:"key"`
+	Content        types.Text            `json:"content"`
+	Type           enum.UserDataTypeEnum `json:"type"`
+	Created        types.DateTime        `json:"created"`
+	LastUpdate     types.DateTime        `json:"lastUpdate"`
+	Sensitive      types.Bool            `json:"sensitive"`
 }

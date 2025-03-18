@@ -19,8 +19,8 @@ type UserRegistration struct {
 	Password    types.String        `json:"password"`
 	LanguageId  stringId.LanguageId `json:"languageId"`
 	AccountName types.String        `json:"accountName"`
-	FirstName   types.String        `json:"firstName"`
-	LastName    types.StringNull    `json:"lastName"`
+	Name        types.String        `json:"name"`
+	PromoCode   types.StringNull    `json:"promoCode"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -35,11 +35,11 @@ func (dto UserRegistration) GetLanguageId() stringId.LanguageId {
 func (dto UserRegistration) GetAccountName() types.String {
 	return dto.AccountName
 }
-func (dto UserRegistration) GetFirstName() types.String {
-	return dto.FirstName
+func (dto UserRegistration) GetName() types.String {
+	return dto.Name
 }
-func (dto UserRegistration) GetLastName() types.StringNull {
-	return dto.LastName
+func (dto UserRegistration) GetPromoCode() types.StringNull {
+	return dto.PromoCode
 }
 
 func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
@@ -48,8 +48,8 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 		Password    *types.String
 		LanguageId  *stringId.LanguageId
 		AccountName *types.String
-		FirstName   *types.String
-		LastName    types.StringNull
+		Name        *types.String
+		PromoCode   types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -68,8 +68,8 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	if aux.AccountName == nil {
 		errorList = errorList.With(validator.NewError("accountName", "field is required"))
 	}
-	if aux.FirstName == nil {
-		errorList = errorList.With(validator.NewError("firstName", "field is required"))
+	if aux.Name == nil {
+		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
 	if errorList != nil {
 		return errorList.GetError()
@@ -78,8 +78,8 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	dto.Password = *aux.Password
 	dto.LanguageId = *aux.LanguageId
 	dto.AccountName = *aux.AccountName
-	dto.FirstName = *aux.FirstName
-	dto.LastName = aux.LastName
+	dto.Name = *aux.Name
+	dto.PromoCode = aux.PromoCode
 
 	return nil
 }

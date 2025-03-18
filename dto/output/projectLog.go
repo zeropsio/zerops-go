@@ -15,4 +15,5 @@ type ProjectLog struct {
 	AccessToken uuid.ProjectLogAccessToken `json:"accessToken"`
 	Expiration  types.DateTime             `json:"expiration"`
 	Url         types.String               `json:"url"`
+	UrlInfo     types.String               `json:"urlInfo"`
 }

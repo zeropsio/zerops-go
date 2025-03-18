@@ -16,11 +16,13 @@ type Project struct {
 	Id                  uuid.ProjectId         `json:"id"`
 	ClientId            uuid.ClientId          `json:"clientId"`
 	Name                types.String           `json:"name"`
+	Mode                enum.ProjectModeEnum   `json:"mode"`
 	Description         types.TextNull         `json:"description"`
 	TagList             types.StringArray      `json:"tagList"`
 	Status              enum.ProjectStatusEnum `json:"status"`
 	Created             types.DateTime         `json:"created"`
 	LastUpdate          types.DateTime         `json:"lastUpdate"`
+	RecipeSource        types.TextNull         `json:"recipeSource"`
 	PublicIpV4          types.StringNull       `json:"publicIpV4"`
 	PublicIpV6          types.StringNull       `json:"publicIpV6"`
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`

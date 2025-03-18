@@ -16,7 +16,7 @@ import (
 )
 
 type DeleteServiceStackBuildCacheResponse struct {
-	success            output.Success
+	success            output.ProcessNil
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r DeleteServiceStackBuildCacheResponse) OutputInterface() (output interfac
 	return r.success, r.err
 }
 
-func (r DeleteServiceStackBuildCacheResponse) Output() (output output.Success, err error) {
+func (r DeleteServiceStackBuildCacheResponse) Output() (output output.ProcessNil, err error) {
 	return r.success, r.err
 }
 

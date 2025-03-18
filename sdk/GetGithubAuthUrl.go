@@ -65,6 +65,9 @@ func (h Handler) GetGithubAuthUrl(ctx context.Context, inputDtoQuery query.Githu
 	if param, ok := inputDtoQuery.NonHaRecipe.Get(); ok {
 		queryParams = append(queryParams, "nonHaRecipe="+url.QueryEscape(param.Native()))
 	}
+	if param, ok := inputDtoQuery.Email.Get(); ok {
+		queryParams = append(queryParams, "email="+url.QueryEscape(param.Native()))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

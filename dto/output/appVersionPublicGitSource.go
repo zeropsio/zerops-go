@@ -11,7 +11,8 @@ import (
 var _ strconv.NumError
 
 type AppVersionPublicGitSource struct {
-	GitUrl                  types.String `json:"gitUrl"`
-	BranchName              types.String `json:"branchName"`
-	ConfigContentFromImport types.Bool   `json:"configContentFromImport"`
+	GitUrl                  types.String   `json:"gitUrl"`
+	BranchName              types.String   `json:"branchName"`
+	ConfigContentFromImport types.Bool     `json:"configContentFromImport"`
+	ExplicitSetup           types.BoolNull `json:"explicitSetup"`
 }

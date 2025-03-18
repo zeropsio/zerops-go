@@ -16,7 +16,7 @@ import (
 )
 
 type PostUserDataResponse struct {
-	success            output.UserData
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PostUserDataResponse) OutputInterface() (output interface{}, err error) 
 	return r.success, r.err
 }
 
-func (r PostUserDataResponse) Output() (output output.UserData, err error) {
+func (r PostUserDataResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

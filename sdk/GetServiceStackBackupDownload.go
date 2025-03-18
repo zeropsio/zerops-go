@@ -15,41 +15,40 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutUserDataRestoreResponse struct {
-	success            output.UserData
+type GetServiceStackBackupDownloadResponse struct {
+	success            output.FileDownload
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutUserDataRestoreResponse) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackBackupDownloadResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutUserDataRestoreResponse) Output() (output output.UserData, err error) {
+func (r GetServiceStackBackupDownloadResponse) Output() (output output.FileDownload, err error) {
 	return r.success, r.err
 }
 
-func (r PutUserDataRestoreResponse) Err() error {
+func (r GetServiceStackBackupDownloadResponse) Err() error {
 	return r.err
 }
-func (r PutUserDataRestoreResponse) Headers() http.Header {
+func (r GetServiceStackBackupDownloadResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutUserDataRestoreResponse) StatusCode() int {
+func (r GetServiceStackBackupDownloadResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutUserDataRestore(ctx context.Context, inputDtoPath path.UserDataId) (putUserDataRestoreResponse PutUserDataRestoreResponse, err error) {
-	u := "/api/rest/public/user-data/" + inputDtoPath.Id.Native() + "/restore"
+func (h Handler) GetServiceStackBackupDownload(ctx context.Context, inputDtoPath path.ServiceStackBackup) (getServiceStackBackupDownloadResponse GetServiceStackBackupDownloadResponse, err error) {
+	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/backup/download/" + inputDtoPath.Date.Native() + ""
 
-	var response PutUserDataRestoreResponse
-	sdkResponse := sdkBase.Put(
+	var response GetServiceStackBackupDownloadResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

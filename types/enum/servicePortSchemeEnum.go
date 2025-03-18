@@ -17,6 +17,7 @@ const (
 	ServicePortSchemeEnumAmqp       = ServicePortSchemeEnum("amqp")
 	ServicePortSchemeEnumStomp      = ServicePortSchemeEnum("stomp")
 	ServicePortSchemeEnumMqtt       = ServicePortSchemeEnum("mqtt")
+	ServicePortSchemeEnumNats       = ServicePortSchemeEnum("nats")
 )
 
 func NewServicePortSchemeEnumFromString(value string) (out ServicePortSchemeEnum, err error) {
@@ -58,19 +59,19 @@ func (enum ServicePortSchemeEnum) Is(values ...ServicePortSchemeEnum) bool {
 
 func ServicePortSchemeEnumAllStrings() []string {
 	return []string{
-		string(ServicePortSchemeEnumTcp), string(ServicePortSchemeEnumUdp), string(ServicePortSchemeEnumHttp), string(ServicePortSchemeEnumHttps), string(ServicePortSchemeEnumRedis), string(ServicePortSchemeEnumMysql), string(ServicePortSchemeEnumUdpinflux), string(ServicePortSchemeEnumMongodb), string(ServicePortSchemeEnumPostgresql), string(ServicePortSchemeEnumAmqp), string(ServicePortSchemeEnumStomp), string(ServicePortSchemeEnumMqtt),
+		string(ServicePortSchemeEnumTcp), string(ServicePortSchemeEnumUdp), string(ServicePortSchemeEnumHttp), string(ServicePortSchemeEnumHttps), string(ServicePortSchemeEnumRedis), string(ServicePortSchemeEnumMysql), string(ServicePortSchemeEnumUdpinflux), string(ServicePortSchemeEnumMongodb), string(ServicePortSchemeEnumPostgresql), string(ServicePortSchemeEnumAmqp), string(ServicePortSchemeEnumStomp), string(ServicePortSchemeEnumMqtt), string(ServicePortSchemeEnumNats),
 	}
 }
 
 func ServicePortSchemeEnumAll() []ServicePortSchemeEnum {
 	return []ServicePortSchemeEnum{
-		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt,
+		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt, ServicePortSchemeEnumNats,
 	}
 }
 
 func ServicePortSchemeEnumAllPublic() []ServicePortSchemeEnum {
 	return []ServicePortSchemeEnum{
-		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt,
+		ServicePortSchemeEnumTcp, ServicePortSchemeEnumUdp, ServicePortSchemeEnumHttp, ServicePortSchemeEnumHttps, ServicePortSchemeEnumRedis, ServicePortSchemeEnumMysql, ServicePortSchemeEnumUdpinflux, ServicePortSchemeEnumMongodb, ServicePortSchemeEnumPostgresql, ServicePortSchemeEnumAmqp, ServicePortSchemeEnumStomp, ServicePortSchemeEnumMqtt, ServicePortSchemeEnumNats,
 	}
 }
 
@@ -128,4 +129,8 @@ func (enum ServicePortSchemeEnum) IsStomp() bool {
 
 func (enum ServicePortSchemeEnum) IsMqtt() bool {
 	return enum.Is(ServicePortSchemeEnumMqtt)
+}
+
+func (enum ServicePortSchemeEnum) IsNats() bool {
+	return enum.Is(ServicePortSchemeEnumNats)
 }

@@ -18,9 +18,11 @@ var _ json.Unmarshaler = (*PostStandardServiceStack)(nil)
 type PostStandardServiceStack struct {
 	ProjectId         uuid.ProjectId                   `json:"projectId"`
 	Name              types.String                     `json:"name"`
+	StartWithoutCode  types.Bool                       `json:"startWithoutCode"`
 	CustomAutoscaling *CustomAutoscaling               `json:"customAutoscaling"`
 	Mode              *enum.ServiceStackModeEnum       `json:"mode"`
 	UserData          PostStandardServiceStackUserData `json:"userData"`
+	UserDataEnvFile   types.TextNull                   `json:"userDataEnvFile"`
 }
 
 func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
@@ -28,6 +30,9 @@ func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
 }
 func (dto PostStandardServiceStack) GetName() types.String {
 	return dto.Name
+}
+func (dto PostStandardServiceStack) GetStartWithoutCode() types.Bool {
+	return dto.StartWithoutCode
 }
 func (dto PostStandardServiceStack) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
@@ -37,6 +42,9 @@ func (dto PostStandardServiceStack) GetMode() *enum.ServiceStackModeEnum {
 }
 func (dto PostStandardServiceStack) GetUserData() PostStandardServiceStackUserData {
 	return dto.UserData
+}
+func (dto PostStandardServiceStack) GetUserDataEnvFile() types.TextNull {
+	return dto.UserDataEnvFile
 }
 
 type PostStandardServiceStackUserData []UserDataPut
@@ -52,9 +60,11 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ProjectId         *uuid.ProjectId
 		Name              *types.String
+		StartWithoutCode  *types.Bool
 		CustomAutoscaling *CustomAutoscaling
 		Mode              *enum.ServiceStackModeEnum
 		UserData          *PostStandardServiceStackUserData
+		UserDataEnvFile   types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -67,6 +77,9 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
+	if aux.StartWithoutCode == nil {
+		errorList = errorList.With(validator.NewError("startWithoutCode", "field is required"))
+	}
 	if aux.UserData == nil {
 		errorList = errorList.With(validator.NewError("userData", "field is required"))
 	}
@@ -75,9 +88,11 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
+	dto.StartWithoutCode = *aux.StartWithoutCode
 	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.Mode = aux.Mode
 	dto.UserData = *aux.UserData
+	dto.UserDataEnvFile = aux.UserDataEnvFile
 
 	return nil
 }

@@ -25,4 +25,5 @@ type ServiceStackLight struct {
 	GithubIntegration         *GithubIntegration                 `json:"githubIntegration"`
 	GitlabIntegration         *GitlabIntegration                 `json:"gitlabIntegration"`
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
+	BuildCache                *BuildCache                        `json:"buildCache"`
 }

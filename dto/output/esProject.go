@@ -3,6 +3,7 @@
 package output
 
 import (
+	"encoding/json"
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
@@ -26,4 +27,14 @@ type EsProject struct {
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`
+	EnvList             EsProjectEnvList       `json:"envList"`
+}
+
+type EsProjectEnvList []Env
+
+func (dto EsProjectEnvList) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]Env(dto))
 }

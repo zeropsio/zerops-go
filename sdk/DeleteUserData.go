@@ -16,7 +16,7 @@ import (
 )
 
 type DeleteUserDataResponse struct {
-	success            output.DeleteUserData
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r DeleteUserDataResponse) OutputInterface() (output interface{}, err error
 	return r.success, r.err
 }
 
-func (r DeleteUserDataResponse) Output() (output output.DeleteUserData, err error) {
+func (r DeleteUserDataResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

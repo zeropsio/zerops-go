@@ -17,7 +17,7 @@ import (
 )
 
 type PutUserDataResponse struct {
-	success            output.UserData
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutUserDataResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutUserDataResponse) Output() (output output.UserData, err error) {
+func (r PutUserDataResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

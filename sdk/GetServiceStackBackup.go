@@ -15,41 +15,40 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackSyncUserDataResponse struct {
-	success            output.Process
+type GetServiceStackBackupResponse struct {
+	success            output.ServiceStackBackupFileList
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackSyncUserDataResponse) OutputInterface() (output interface{}, err error) {
+func (r GetServiceStackBackupResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackSyncUserDataResponse) Output() (output output.Process, err error) {
+func (r GetServiceStackBackupResponse) Output() (output output.ServiceStackBackupFileList, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackSyncUserDataResponse) Err() error {
+func (r GetServiceStackBackupResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackSyncUserDataResponse) Headers() http.Header {
+func (r GetServiceStackBackupResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackSyncUserDataResponse) StatusCode() int {
+func (r GetServiceStackBackupResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackSyncUserData(ctx context.Context, inputDtoPath path.ServiceStackId) (putServiceStackSyncUserDataResponse PutServiceStackSyncUserDataResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/sync-user-data"
+func (h Handler) GetServiceStackBackup(ctx context.Context, inputDtoPath path.ServiceStackId) (getServiceStackBackupResponse GetServiceStackBackupResponse, err error) {
+	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/backup"
 
-	var response PutServiceStackSyncUserDataResponse
-	sdkResponse := sdkBase.Put(
+	var response GetServiceStackBackupResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

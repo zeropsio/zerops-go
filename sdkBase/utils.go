@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -16,8 +17,16 @@ func Put(ctx context.Context, e Environment, url string, in interface{}) *Respon
 	return MethodBody(ctx, e, http.MethodPut, url, in)
 }
 
+func PutRaw(ctx context.Context, e Environment, url string, body io.Reader) *Response {
+	return Method(ctx, e, http.MethodPut, url, body)
+}
+
 func Post(ctx context.Context, e Environment, url string, in interface{}) *Response {
 	return MethodBody(ctx, e, http.MethodPost, url, in)
+}
+
+func PostRaw(ctx context.Context, e Environment, url string, body io.Reader) *Response {
+	return Method(ctx, e, http.MethodPost, url, body)
 }
 
 func Delete(ctx context.Context, e Environment, url string, in interface{}) *Response {
@@ -36,12 +45,14 @@ func MethodBody(ctx context.Context, e Environment, method string, url string, i
 func Method(ctx context.Context, e Environment, method string, url string, body io.Reader) (r *Response) {
 	r = &Response{}
 	if r.Request, r.Err = e.Request(ctx, method, url, body); r.Err != nil {
+		fmt.Println("Method Request error:", r.Err)
 		return
 	}
 
 	resp, err := e.Do(r.Request)
 	if err != nil {
 		r.Err = err
+		fmt.Println("Method Do error:", r.Err)
 		return
 	}
 	defer resp.Body.Close()

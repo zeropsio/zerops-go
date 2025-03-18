@@ -22,7 +22,5 @@ type UserData struct {
 	Key              types.String          `json:"key"`
 	Content          types.Text            `json:"content"`
 	Type             enum.UserDataTypeEnum `json:"type"`
-	IsSynced         types.Bool            `json:"isSynced"`
-	DeleteOnSync     types.Bool            `json:"deleteOnSync"`
 	ServiceStackName types.String          `json:"serviceStackName"`
 }

@@ -10,6 +10,7 @@ const (
 	AppVersionSourceEnumGithub = AppVersionSourceEnum("GITHUB")
 	AppVersionSourceEnumGitlab = AppVersionSourceEnum("GITLAB")
 	AppVersionSourceEnumGit    = AppVersionSourceEnum("GIT")
+	AppVersionSourceEnumNone   = AppVersionSourceEnum("NONE")
 )
 
 func NewAppVersionSourceEnumFromString(value string) (out AppVersionSourceEnum, err error) {
@@ -51,19 +52,19 @@ func (enum AppVersionSourceEnum) Is(values ...AppVersionSourceEnum) bool {
 
 func AppVersionSourceEnumAllStrings() []string {
 	return []string{
-		string(AppVersionSourceEnumCli), string(AppVersionSourceEnumGui), string(AppVersionSourceEnumGithub), string(AppVersionSourceEnumGitlab), string(AppVersionSourceEnumGit),
+		string(AppVersionSourceEnumCli), string(AppVersionSourceEnumGui), string(AppVersionSourceEnumGithub), string(AppVersionSourceEnumGitlab), string(AppVersionSourceEnumGit), string(AppVersionSourceEnumNone),
 	}
 }
 
 func AppVersionSourceEnumAll() []AppVersionSourceEnum {
 	return []AppVersionSourceEnum{
-		AppVersionSourceEnumCli, AppVersionSourceEnumGui, AppVersionSourceEnumGithub, AppVersionSourceEnumGitlab, AppVersionSourceEnumGit,
+		AppVersionSourceEnumCli, AppVersionSourceEnumGui, AppVersionSourceEnumGithub, AppVersionSourceEnumGitlab, AppVersionSourceEnumGit, AppVersionSourceEnumNone,
 	}
 }
 
 func AppVersionSourceEnumAllPublic() []AppVersionSourceEnum {
 	return []AppVersionSourceEnum{
-		AppVersionSourceEnumCli, AppVersionSourceEnumGui, AppVersionSourceEnumGithub, AppVersionSourceEnumGitlab, AppVersionSourceEnumGit,
+		AppVersionSourceEnumCli, AppVersionSourceEnumGui, AppVersionSourceEnumGithub, AppVersionSourceEnumGitlab, AppVersionSourceEnumGit, AppVersionSourceEnumNone,
 	}
 }
 
@@ -93,4 +94,8 @@ func (enum AppVersionSourceEnum) IsGitlab() bool {
 
 func (enum AppVersionSourceEnum) IsGit() bool {
 	return enum.Is(AppVersionSourceEnumGit)
+}
+
+func (enum AppVersionSourceEnum) IsNone() bool {
+	return enum.Is(AppVersionSourceEnumNone)
 }

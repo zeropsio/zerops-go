@@ -14,8 +14,9 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*GithubAuth)(nil)
 
 type GithubAuth struct {
-	Code  types.String `json:"code"`
-	State types.String `json:"state"`
+	Code  types.String     `json:"code"`
+	State types.String     `json:"state"`
+	Email types.StringNull `json:"email"`
 }
 
 func (dto GithubAuth) GetCode() types.String {
@@ -24,11 +25,15 @@ func (dto GithubAuth) GetCode() types.String {
 func (dto GithubAuth) GetState() types.String {
 	return dto.State
 }
+func (dto GithubAuth) GetEmail() types.StringNull {
+	return dto.Email
+}
 
 func (dto *GithubAuth) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Code  *types.String
 		State *types.String
+		Email types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -46,6 +51,7 @@ func (dto *GithubAuth) UnmarshalJSON(b []byte) error {
 	}
 	dto.Code = *aux.Code
 	dto.State = *aux.State
+	dto.Email = aux.Email
 
 	return nil
 }

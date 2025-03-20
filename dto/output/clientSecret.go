@@ -10,7 +10,6 @@ import (
 
 var _ strconv.NumError
 
-type DeleteUserData struct {
-	Deleted  types.Bool `json:"deleted"`
-	UserData *UserData  `json:"userData"`
+type ClientSecret struct {
+	ClientSecret types.String `json:"clientSecret"`
 }

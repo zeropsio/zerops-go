@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -15,11 +16,13 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostProject)(nil)
 
 type PostProject struct {
-	ClientId       uuid.ClientId     `json:"clientId"`
-	Name           types.String      `json:"name"`
-	Description    types.TextNull    `json:"description"`
-	TagList        types.StringArray `json:"tagList"`
-	MaxCreditLimit types.DecimalNull `json:"maxCreditLimit"`
+	ClientId       uuid.ClientId           `json:"clientId"`
+	Name           types.String            `json:"name"`
+	Description    types.TextNull          `json:"description"`
+	Mode           *enum.ProjectModeEnum   `json:"mode"`
+	TagList        types.StringArray       `json:"tagList"`
+	EnvVariables   PostProjectEnvVariables `json:"envVariables"`
+	MaxCreditLimit types.DecimalNull       `json:"maxCreditLimit"`
 }
 
 func (dto PostProject) GetClientId() uuid.ClientId {
@@ -31,11 +34,26 @@ func (dto PostProject) GetName() types.String {
 func (dto PostProject) GetDescription() types.TextNull {
 	return dto.Description
 }
+func (dto PostProject) GetMode() *enum.ProjectModeEnum {
+	return dto.Mode
+}
 func (dto PostProject) GetTagList() types.StringArray {
 	return dto.TagList
 }
+func (dto PostProject) GetEnvVariables() PostProjectEnvVariables {
+	return dto.EnvVariables
+}
 func (dto PostProject) GetMaxCreditLimit() types.DecimalNull {
 	return dto.MaxCreditLimit
+}
+
+type PostProjectEnvVariables []ProjectEnvPut
+
+func (dto PostProjectEnvVariables) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]ProjectEnvPut(dto))
 }
 
 func (dto *PostProject) UnmarshalJSON(b []byte) error {
@@ -43,7 +61,9 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 		ClientId       *uuid.ClientId
 		Name           *types.String
 		Description    types.TextNull
+		Mode           *enum.ProjectModeEnum
 		TagList        *types.StringArray
+		EnvVariables   *PostProjectEnvVariables
 		MaxCreditLimit types.DecimalNull
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -60,13 +80,18 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	if aux.TagList == nil {
 		errorList = errorList.With(validator.NewError("tagList", "field is required"))
 	}
+	if aux.EnvVariables == nil {
+		errorList = errorList.With(validator.NewError("envVariables", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
 	dto.ClientId = *aux.ClientId
 	dto.Name = *aux.Name
 	dto.Description = aux.Description
+	dto.Mode = aux.Mode
 	dto.TagList = *aux.TagList
+	dto.EnvVariables = *aux.EnvVariables
 	dto.MaxCreditLimit = aux.MaxCreditLimit
 
 	return nil

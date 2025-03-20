@@ -16,9 +16,10 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostBillingPayment)(nil)
 
 type PostBillingPayment struct {
-	Amount   types.Decimal                `json:"amount"`
-	ClientId uuid.ClientId                `json:"clientId"`
-	SourceId stringId.PaymentSourceIdNull `json:"sourceId"`
+	Amount    types.Decimal                `json:"amount"`
+	ClientId  uuid.ClientId                `json:"clientId"`
+	SourceId  stringId.PaymentSourceIdNull `json:"sourceId"`
+	PromoCode types.StringNull             `json:"promoCode"`
 }
 
 func (dto PostBillingPayment) GetAmount() types.Decimal {
@@ -30,12 +31,16 @@ func (dto PostBillingPayment) GetClientId() uuid.ClientId {
 func (dto PostBillingPayment) GetSourceId() stringId.PaymentSourceIdNull {
 	return dto.SourceId
 }
+func (dto PostBillingPayment) GetPromoCode() types.StringNull {
+	return dto.PromoCode
+}
 
 func (dto *PostBillingPayment) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Amount   *types.Decimal
-		ClientId *uuid.ClientId
-		SourceId stringId.PaymentSourceIdNull
+		Amount    *types.Decimal
+		ClientId  *uuid.ClientId
+		SourceId  stringId.PaymentSourceIdNull
+		PromoCode types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -54,6 +59,7 @@ func (dto *PostBillingPayment) UnmarshalJSON(b []byte) error {
 	dto.Amount = *aux.Amount
 	dto.ClientId = *aux.ClientId
 	dto.SourceId = aux.SourceId
+	dto.PromoCode = aux.PromoCode
 
 	return nil
 }

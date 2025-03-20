@@ -15,8 +15,9 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ProjectImport)(nil)
 
 type ProjectImport struct {
-	ClientId uuid.ClientId `json:"clientId"`
-	Yaml     types.Text    `json:"yaml"`
+	ClientId     uuid.ClientId  `json:"clientId"`
+	Yaml         types.Text     `json:"yaml"`
+	RecipeSource types.TextNull `json:"recipeSource"`
 }
 
 func (dto ProjectImport) GetClientId() uuid.ClientId {
@@ -25,11 +26,15 @@ func (dto ProjectImport) GetClientId() uuid.ClientId {
 func (dto ProjectImport) GetYaml() types.Text {
 	return dto.Yaml
 }
+func (dto ProjectImport) GetRecipeSource() types.TextNull {
+	return dto.RecipeSource
+}
 
 func (dto *ProjectImport) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId *uuid.ClientId
-		Yaml     *types.Text
+		ClientId     *uuid.ClientId
+		Yaml         *types.Text
+		RecipeSource types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -47,6 +52,7 @@ func (dto *ProjectImport) UnmarshalJSON(b []byte) error {
 	}
 	dto.ClientId = *aux.ClientId
 	dto.Yaml = *aux.Yaml
+	dto.RecipeSource = aux.RecipeSource
 
 	return nil
 }

@@ -10,46 +10,47 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackRevertChangesUserDataResponse struct {
-	success            output.Success
+type PutServiceStackDebugResponse struct {
+	success            output.ServiceStackDebug
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackRevertChangesUserDataResponse) OutputInterface() (output interface{}, err error) {
+func (r PutServiceStackDebugResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackRevertChangesUserDataResponse) Output() (output output.Success, err error) {
+func (r PutServiceStackDebugResponse) Output() (output output.ServiceStackDebug, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackRevertChangesUserDataResponse) Err() error {
+func (r PutServiceStackDebugResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackRevertChangesUserDataResponse) Headers() http.Header {
+func (r PutServiceStackDebugResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackRevertChangesUserDataResponse) StatusCode() int {
+func (r PutServiceStackDebugResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackRevertChangesUserData(ctx context.Context, inputDtoPath path.ServiceStackId) (putServiceStackRevertChangesUserDataResponse PutServiceStackRevertChangesUserDataResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/revert-changes-user-data"
+func (h Handler) PutServiceStackDebug(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PutServiceStackDebug) (putServiceStackDebugResponse PutServiceStackDebugResponse, err error) {
+	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/debug"
 
-	var response PutServiceStackRevertChangesUserDataResponse
+	var response PutServiceStackDebugResponse
 	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,
 		u,
-		struct{}{},
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

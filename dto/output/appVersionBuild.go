@@ -22,6 +22,5 @@ type AppVersionBuild struct {
 	ContainerCreationStart    types.DateTimeNull                     `json:"containerCreationStart"`
 	StartDate                 types.DateTimeNull                     `json:"startDate"`
 	EndDate                   types.DateTimeNull                     `json:"endDate"`
-	CacheUsed                 types.Bool                             `json:"cacheUsed"`
-	HasCurrentCache           types.Bool                             `json:"hasCurrentCache"`
+	CacheSnapshotId           uuid.BuildCacheSnapshotIdNull          `json:"cacheSnapshotId"`
 }

@@ -11,4 +11,5 @@ type GithubUrl struct {
 	Action      types.String
 	HaRecipe    types.StringNull
 	NonHaRecipe types.StringNull
+	Email       types.StringNull
 }

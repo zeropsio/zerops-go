@@ -16,7 +16,7 @@ import (
 )
 
 type PutUserDataEnvFileResponse struct {
-	success            output.UserDataList
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PutUserDataEnvFileResponse) OutputInterface() (output interface{}, err e
 	return r.success, r.err
 }
 
-func (r PutUserDataEnvFileResponse) Output() (output output.UserDataList, err error) {
+func (r PutUserDataEnvFileResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

@@ -29,7 +29,7 @@ type EsServiceStack struct {
 	Ports                              EsServiceStackPorts                `json:"ports"`
 	RequestedPorts                     RequestedPortsJsonObject           `json:"requestedPorts"`
 	IsSystem                           types.Bool                         `json:"isSystem"`
-	Mode                               enum.ServiceStackModeEnum          `json:"mode"`
+	Mode                               *enum.ServiceStackModeEnum         `json:"mode"`
 	SubdomainAccess                    types.Bool                         `json:"subdomainAccess"`
 	VersionNumber                      types.EmptyString                  `json:"versionNumber"`
 	ReloadAvailable                    types.Bool                         `json:"reloadAvailable"`
@@ -46,7 +46,9 @@ type EsServiceStack struct {
 	ActivePublicPortRoutingCount       types.IntNull                      `json:"activePublicPortRoutingCount"`
 	StartOnProjectStart                types.Bool                         `json:"startOnProjectStart"`
 	GithubIntegration                  *GithubIntegration                 `json:"githubIntegration"`
+	GitlabIntegration                  *GitlabIntegration                 `json:"gitlabIntegration"`
 	CustomAutoscaling                  *CustomAutoscaling                 `json:"customAutoscaling"`
+	BuildCache                         *BuildCache                        `json:"buildCache"`
 }
 
 type EsServiceStackPorts []ServicePort

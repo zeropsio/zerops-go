@@ -22,7 +22,5 @@ type EsUserData struct {
 	Type             enum.UserDataTypeEnum `json:"type"`
 	Created          types.DateTime        `json:"created"`
 	LastUpdate       types.DateTime        `json:"lastUpdate"`
-	IsSynced         types.Bool            `json:"isSynced"`
-	DeleteOnSync     types.Bool            `json:"deleteOnSync"`
 	ServiceStackName types.String          `json:"serviceStackName"`
 }

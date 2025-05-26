@@ -20,5 +20,7 @@ type Env struct {
 	ProjectId  uuid.ProjectId   `json:"projectId"`
 	ClientId   uuid.ClientId    `json:"clientId"`
 	Created    types.DateTime   `json:"created"`
+	Editable   types.Bool       `json:"editable"`
+	Sensitive  types.Bool       `json:"sensitive"`
 	LastUpdate types.DateTime   `json:"lastUpdate"`
 }

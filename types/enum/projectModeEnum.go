@@ -61,12 +61,14 @@ func ProjectModeEnumAll() []ProjectModeEnum {
 
 func ProjectModeEnumAllPublic() []ProjectModeEnum {
 	return []ProjectModeEnum{
-		ProjectModeEnumLegacy, ProjectModeEnumLight, ProjectModeEnumSerious,
+		ProjectModeEnumLight, ProjectModeEnumSerious,
 	}
 }
 
 func ProjectModeEnumAllPrivate() []ProjectModeEnum {
-	return []ProjectModeEnum{}
+	return []ProjectModeEnum{
+		ProjectModeEnumLegacy,
+	}
 }
 
 func ProjectModeEnumDefault() ProjectModeEnum {

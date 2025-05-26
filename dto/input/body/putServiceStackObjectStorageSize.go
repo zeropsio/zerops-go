@@ -17,6 +17,7 @@ type PutServiceStackObjectStorageSize struct {
 	DiskGBytes types.Int        `json:"diskGBytes"`
 	Policy     types.StringNull `json:"policy"`
 	RawPolicy  types.TextNull   `json:"rawPolicy"`
+	CdnEnabled types.BoolNull   `json:"cdnEnabled"`
 }
 
 func (dto PutServiceStackObjectStorageSize) GetDiskGBytes() types.Int {
@@ -28,12 +29,16 @@ func (dto PutServiceStackObjectStorageSize) GetPolicy() types.StringNull {
 func (dto PutServiceStackObjectStorageSize) GetRawPolicy() types.TextNull {
 	return dto.RawPolicy
 }
+func (dto PutServiceStackObjectStorageSize) GetCdnEnabled() types.BoolNull {
+	return dto.CdnEnabled
+}
 
 func (dto *PutServiceStackObjectStorageSize) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		DiskGBytes *types.Int
 		Policy     types.StringNull
 		RawPolicy  types.TextNull
+		CdnEnabled types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -49,6 +54,7 @@ func (dto *PutServiceStackObjectStorageSize) UnmarshalJSON(b []byte) error {
 	dto.DiskGBytes = *aux.DiskGBytes
 	dto.Policy = aux.Policy
 	dto.RawPolicy = aux.RawPolicy
+	dto.CdnEnabled = aux.CdnEnabled
 
 	return nil
 }

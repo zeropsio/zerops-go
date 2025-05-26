@@ -17,7 +17,7 @@ import (
 )
 
 type PutServiceStackBackupConfigResponse struct {
-	success            output.Process
+	success            output.ProcessNil
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutServiceStackBackupConfigResponse) OutputInterface() (output interface
 	return r.success, r.err
 }
 
-func (r PutServiceStackBackupConfigResponse) Output() (output output.Process, err error) {
+func (r PutServiceStackBackupConfigResponse) Output() (output output.ProcessNil, err error) {
 	return r.success, r.err
 }
 

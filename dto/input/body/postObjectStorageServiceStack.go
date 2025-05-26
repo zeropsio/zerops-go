@@ -20,6 +20,7 @@ type PostObjectStorageServiceStack struct {
 	DiskGBytes types.Int        `json:"diskGBytes"`
 	Policy     types.StringNull `json:"policy"`
 	RawPolicy  types.TextNull   `json:"rawPolicy"`
+	CdnEnabled types.BoolNull   `json:"cdnEnabled"`
 }
 
 func (dto PostObjectStorageServiceStack) GetProjectId() uuid.ProjectId {
@@ -37,6 +38,9 @@ func (dto PostObjectStorageServiceStack) GetPolicy() types.StringNull {
 func (dto PostObjectStorageServiceStack) GetRawPolicy() types.TextNull {
 	return dto.RawPolicy
 }
+func (dto PostObjectStorageServiceStack) GetCdnEnabled() types.BoolNull {
+	return dto.CdnEnabled
+}
 
 func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -45,6 +49,7 @@ func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 		DiskGBytes *types.Int
 		Policy     types.StringNull
 		RawPolicy  types.TextNull
+		CdnEnabled types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -68,6 +73,7 @@ func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	dto.DiskGBytes = *aux.DiskGBytes
 	dto.Policy = aux.Policy
 	dto.RawPolicy = aux.RawPolicy
+	dto.CdnEnabled = aux.CdnEnabled
 
 	return nil
 }

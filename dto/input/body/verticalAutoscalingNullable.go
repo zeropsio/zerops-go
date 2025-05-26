@@ -20,6 +20,7 @@ type VerticalAutoscalingNullable struct {
 	MinFreeResource   *ScalingMinFreeResourceNullable      `json:"minFreeResource"`
 	CpuMode           *enum.VerticalAutoscalingCpuModeEnum `json:"cpuMode"`
 	StartCpuCoreCount types.IntNull                        `json:"startCpuCoreCount"`
+	SwapEnabled       types.BoolNull                       `json:"swapEnabled"`
 }
 
 func (dto VerticalAutoscalingNullable) GetMaxResource() *ScalingResourceNullable {
@@ -37,6 +38,9 @@ func (dto VerticalAutoscalingNullable) GetCpuMode() *enum.VerticalAutoscalingCpu
 func (dto VerticalAutoscalingNullable) GetStartCpuCoreCount() types.IntNull {
 	return dto.StartCpuCoreCount
 }
+func (dto VerticalAutoscalingNullable) GetSwapEnabled() types.BoolNull {
+	return dto.SwapEnabled
+}
 
 func (dto *VerticalAutoscalingNullable) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -45,6 +49,7 @@ func (dto *VerticalAutoscalingNullable) UnmarshalJSON(b []byte) error {
 		MinFreeResource   *ScalingMinFreeResourceNullable
 		CpuMode           *enum.VerticalAutoscalingCpuModeEnum
 		StartCpuCoreCount types.IntNull
+		SwapEnabled       types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -60,6 +65,7 @@ func (dto *VerticalAutoscalingNullable) UnmarshalJSON(b []byte) error {
 	dto.MinFreeResource = aux.MinFreeResource
 	dto.CpuMode = aux.CpuMode
 	dto.StartCpuCoreCount = aux.StartCpuCoreCount
+	dto.SwapEnabled = aux.SwapEnabled
 
 	return nil
 }

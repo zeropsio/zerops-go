@@ -22,6 +22,8 @@ type PostProject struct {
 	Mode           *enum.ProjectModeEnum   `json:"mode"`
 	TagList        types.StringArray       `json:"tagList"`
 	EnvVariables   PostProjectEnvVariables `json:"envVariables"`
+	EnvIsolation   types.StringNull        `json:"envIsolation"`
+	SshIsolation   types.StringNull        `json:"sshIsolation"`
 	MaxCreditLimit types.DecimalNull       `json:"maxCreditLimit"`
 }
 
@@ -42,6 +44,12 @@ func (dto PostProject) GetTagList() types.StringArray {
 }
 func (dto PostProject) GetEnvVariables() PostProjectEnvVariables {
 	return dto.EnvVariables
+}
+func (dto PostProject) GetEnvIsolation() types.StringNull {
+	return dto.EnvIsolation
+}
+func (dto PostProject) GetSshIsolation() types.StringNull {
+	return dto.SshIsolation
 }
 func (dto PostProject) GetMaxCreditLimit() types.DecimalNull {
 	return dto.MaxCreditLimit
@@ -64,6 +72,8 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 		Mode           *enum.ProjectModeEnum
 		TagList        *types.StringArray
 		EnvVariables   *PostProjectEnvVariables
+		EnvIsolation   types.StringNull
+		SshIsolation   types.StringNull
 		MaxCreditLimit types.DecimalNull
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -92,6 +102,8 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	dto.Mode = aux.Mode
 	dto.TagList = *aux.TagList
 	dto.EnvVariables = *aux.EnvVariables
+	dto.EnvIsolation = aux.EnvIsolation
+	dto.SshIsolation = aux.SshIsolation
 	dto.MaxCreditLimit = aux.MaxCreditLimit
 
 	return nil

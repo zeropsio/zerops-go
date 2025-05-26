@@ -15,12 +15,16 @@ var _ json.Unmarshaler = (*PublicHttpRoutingPut)(nil)
 
 type PublicHttpRoutingPut struct {
 	SslEnabled types.Bool                    `json:"sslEnabled"`
+	CdnEnabled types.BoolNull                `json:"cdnEnabled"`
 	Domains    types.StringArray             `json:"domains"`
 	Locations  PublicHttpRoutingPutLocations `json:"locations"`
 }
 
 func (dto PublicHttpRoutingPut) GetSslEnabled() types.Bool {
 	return dto.SslEnabled
+}
+func (dto PublicHttpRoutingPut) GetCdnEnabled() types.BoolNull {
+	return dto.CdnEnabled
 }
 func (dto PublicHttpRoutingPut) GetDomains() types.StringArray {
 	return dto.Domains
@@ -41,6 +45,7 @@ func (dto PublicHttpRoutingPutLocations) MarshalJSON() ([]byte, error) {
 func (dto *PublicHttpRoutingPut) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		SslEnabled *types.Bool
+		CdnEnabled types.BoolNull
 		Domains    *types.StringArray
 		Locations  *PublicHttpRoutingPutLocations
 	}{}
@@ -62,6 +67,7 @@ func (dto *PublicHttpRoutingPut) UnmarshalJSON(b []byte) error {
 		return errorList.GetError()
 	}
 	dto.SslEnabled = *aux.SslEnabled
+	dto.CdnEnabled = aux.CdnEnabled
 	dto.Domains = *aux.Domains
 	dto.Locations = *aux.Locations
 

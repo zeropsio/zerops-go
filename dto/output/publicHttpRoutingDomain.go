@@ -15,4 +15,5 @@ type PublicHttpRoutingDomain struct {
 	DomainName     types.String                                   `json:"domainName"`
 	DnsCheckStatus enum.PublicHttpRoutingDomainDnsCheckStatusEnum `json:"dnsCheckStatus"`
 	SslStatus      enum.PublicHttpRoutingDomainSslStatusEnum      `json:"sslStatus"`
+	CdnStatus      enum.PublicHttpRoutingDomainCdnStatusEnum      `json:"cdnStatus"`
 }

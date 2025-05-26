@@ -24,12 +24,12 @@ type Invoice struct {
 	Number          types.String           `json:"number"`
 	BillingInfo     types.JsonRawMessage   `json:"billingInfo"`
 	Supplier        types.JsonRawMessage   `json:"supplier"`
-	VatRate         types.Decimal          `json:"vatRate"`
-	Amount          types.Decimal          `json:"amount"`
-	AmountVat       types.Decimal          `json:"amountVat"`
-	AmountVatCzk    types.Decimal          `json:"amountVatCzk"`
-	CurrencyRateCzk types.Decimal          `json:"currencyRateCzk"`
-	Total           types.Decimal          `json:"total"`
+	VatRate         types.Float            `json:"vatRate"`
+	Amount          types.Float            `json:"amount"`
+	AmountVat       types.Float            `json:"amountVat"`
+	AmountVatCzk    types.Float            `json:"amountVatCzk"`
+	CurrencyRateCzk types.Float            `json:"currencyRateCzk"`
+	Total           types.Float            `json:"total"`
 	DueDate         types.DateTime         `json:"dueDate"`
 	PaidDate        types.DateTimeNull     `json:"paidDate"`
 }

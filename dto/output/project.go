@@ -24,7 +24,9 @@ type Project struct {
 	LastUpdate          types.DateTime         `json:"lastUpdate"`
 	RecipeSource        types.TextNull         `json:"recipeSource"`
 	PublicIpV4          types.StringNull       `json:"publicIpV4"`
+	PublicIpV4Shared    types.Bool             `json:"publicIpV4Shared"`
 	PublicIpV6          types.StringNull       `json:"publicIpV6"`
+	PublicZone          types.String           `json:"publicZone"`
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`

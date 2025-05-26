@@ -26,4 +26,5 @@ type ServiceStackLight struct {
 	GitlabIntegration         *GitlabIntegration                 `json:"gitlabIntegration"`
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
 	BuildCache                *BuildCache                        `json:"buildCache"`
+	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
 }

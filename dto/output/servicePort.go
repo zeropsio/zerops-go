@@ -16,6 +16,8 @@ type ServicePort struct {
 	Protocol    enum.ServicePortProtocolEnum `json:"protocol"`
 	Port        types.Int                    `json:"port"`
 	Description types.EmptyString            `json:"description"`
+	PortRouting types.BoolNull               `json:"portRouting"`
+	HttpRouting types.BoolNull               `json:"httpRouting"`
 	Scheme      enum.ServicePortSchemeEnum   `json:"scheme"`
 	ServiceId   uuid.ServiceIdNull           `json:"serviceId"`
 }

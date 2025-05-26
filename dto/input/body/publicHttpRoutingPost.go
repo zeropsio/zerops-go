@@ -17,6 +17,7 @@ var _ json.Unmarshaler = (*PublicHttpRoutingPost)(nil)
 type PublicHttpRoutingPost struct {
 	ProjectId  uuid.ProjectId                 `json:"projectId"`
 	SslEnabled types.Bool                     `json:"sslEnabled"`
+	CdnEnabled types.BoolNull                 `json:"cdnEnabled"`
 	Domains    types.StringArray              `json:"domains"`
 	Locations  PublicHttpRoutingPostLocations `json:"locations"`
 }
@@ -26,6 +27,9 @@ func (dto PublicHttpRoutingPost) GetProjectId() uuid.ProjectId {
 }
 func (dto PublicHttpRoutingPost) GetSslEnabled() types.Bool {
 	return dto.SslEnabled
+}
+func (dto PublicHttpRoutingPost) GetCdnEnabled() types.BoolNull {
+	return dto.CdnEnabled
 }
 func (dto PublicHttpRoutingPost) GetDomains() types.StringArray {
 	return dto.Domains
@@ -47,6 +51,7 @@ func (dto *PublicHttpRoutingPost) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ProjectId  *uuid.ProjectId
 		SslEnabled *types.Bool
+		CdnEnabled types.BoolNull
 		Domains    *types.StringArray
 		Locations  *PublicHttpRoutingPostLocations
 	}{}
@@ -72,6 +77,7 @@ func (dto *PublicHttpRoutingPost) UnmarshalJSON(b []byte) error {
 	}
 	dto.ProjectId = *aux.ProjectId
 	dto.SslEnabled = *aux.SslEnabled
+	dto.CdnEnabled = aux.CdnEnabled
 	dto.Domains = *aux.Domains
 	dto.Locations = *aux.Locations
 

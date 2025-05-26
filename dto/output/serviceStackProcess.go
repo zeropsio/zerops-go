@@ -27,6 +27,7 @@ type ServiceStackProcess struct {
 	GitlabIntegration         *GitlabIntegration                 `json:"gitlabIntegration"`
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
 	BuildCache                *BuildCache                        `json:"buildCache"`
+	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
 	Ports                     ServiceStackProcessPorts           `json:"ports"`
 	RequestedPorts            RequestedPortsJsonObject           `json:"requestedPorts"`
 	Created                   types.DateTime                     `json:"created"`

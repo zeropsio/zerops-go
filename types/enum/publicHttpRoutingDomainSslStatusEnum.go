@@ -6,8 +6,8 @@ type PublicHttpRoutingDomainSslStatusEnum string
 
 const (
 	PublicHttpRoutingDomainSslStatusEnumInactive           = PublicHttpRoutingDomainSslStatusEnum("INACTIVE")
-	PublicHttpRoutingDomainSslStatusEnumBeingInstalled     = PublicHttpRoutingDomainSslStatusEnum("BEING_INSTALLED")
 	PublicHttpRoutingDomainSslStatusEnumWaitingForDns      = PublicHttpRoutingDomainSslStatusEnum("WAITING_FOR_DNS")
+	PublicHttpRoutingDomainSslStatusEnumBeingInstalled     = PublicHttpRoutingDomainSslStatusEnum("BEING_INSTALLED")
 	PublicHttpRoutingDomainSslStatusEnumActive             = PublicHttpRoutingDomainSslStatusEnum("ACTIVE")
 	PublicHttpRoutingDomainSslStatusEnumInstallationFailed = PublicHttpRoutingDomainSslStatusEnum("INSTALLATION_FAILED")
 )
@@ -51,19 +51,19 @@ func (enum PublicHttpRoutingDomainSslStatusEnum) Is(values ...PublicHttpRoutingD
 
 func PublicHttpRoutingDomainSslStatusEnumAllStrings() []string {
 	return []string{
-		string(PublicHttpRoutingDomainSslStatusEnumInactive), string(PublicHttpRoutingDomainSslStatusEnumBeingInstalled), string(PublicHttpRoutingDomainSslStatusEnumWaitingForDns), string(PublicHttpRoutingDomainSslStatusEnumActive), string(PublicHttpRoutingDomainSslStatusEnumInstallationFailed),
+		string(PublicHttpRoutingDomainSslStatusEnumInactive), string(PublicHttpRoutingDomainSslStatusEnumWaitingForDns), string(PublicHttpRoutingDomainSslStatusEnumBeingInstalled), string(PublicHttpRoutingDomainSslStatusEnumActive), string(PublicHttpRoutingDomainSslStatusEnumInstallationFailed),
 	}
 }
 
 func PublicHttpRoutingDomainSslStatusEnumAll() []PublicHttpRoutingDomainSslStatusEnum {
 	return []PublicHttpRoutingDomainSslStatusEnum{
-		PublicHttpRoutingDomainSslStatusEnumInactive, PublicHttpRoutingDomainSslStatusEnumBeingInstalled, PublicHttpRoutingDomainSslStatusEnumWaitingForDns, PublicHttpRoutingDomainSslStatusEnumActive, PublicHttpRoutingDomainSslStatusEnumInstallationFailed,
+		PublicHttpRoutingDomainSslStatusEnumInactive, PublicHttpRoutingDomainSslStatusEnumWaitingForDns, PublicHttpRoutingDomainSslStatusEnumBeingInstalled, PublicHttpRoutingDomainSslStatusEnumActive, PublicHttpRoutingDomainSslStatusEnumInstallationFailed,
 	}
 }
 
 func PublicHttpRoutingDomainSslStatusEnumAllPublic() []PublicHttpRoutingDomainSslStatusEnum {
 	return []PublicHttpRoutingDomainSslStatusEnum{
-		PublicHttpRoutingDomainSslStatusEnumInactive, PublicHttpRoutingDomainSslStatusEnumBeingInstalled, PublicHttpRoutingDomainSslStatusEnumWaitingForDns, PublicHttpRoutingDomainSslStatusEnumActive, PublicHttpRoutingDomainSslStatusEnumInstallationFailed,
+		PublicHttpRoutingDomainSslStatusEnumInactive, PublicHttpRoutingDomainSslStatusEnumWaitingForDns, PublicHttpRoutingDomainSslStatusEnumBeingInstalled, PublicHttpRoutingDomainSslStatusEnumActive, PublicHttpRoutingDomainSslStatusEnumInstallationFailed,
 	}
 }
 
@@ -79,12 +79,12 @@ func (enum PublicHttpRoutingDomainSslStatusEnum) IsInactive() bool {
 	return enum.Is(PublicHttpRoutingDomainSslStatusEnumInactive)
 }
 
-func (enum PublicHttpRoutingDomainSslStatusEnum) IsBeingInstalled() bool {
-	return enum.Is(PublicHttpRoutingDomainSslStatusEnumBeingInstalled)
-}
-
 func (enum PublicHttpRoutingDomainSslStatusEnum) IsWaitingForDns() bool {
 	return enum.Is(PublicHttpRoutingDomainSslStatusEnumWaitingForDns)
+}
+
+func (enum PublicHttpRoutingDomainSslStatusEnum) IsBeingInstalled() bool {
+	return enum.Is(PublicHttpRoutingDomainSslStatusEnumBeingInstalled)
 }
 
 func (enum PublicHttpRoutingDomainSslStatusEnum) IsActive() bool {

@@ -24,6 +24,7 @@ type EsPublicHttpRouting struct {
 	IsSynced     types.Bool                   `json:"isSynced"`
 	DeleteOnSync types.Bool                   `json:"deleteOnSync"`
 	IsEditable   types.Bool                   `json:"isEditable"`
+	CdnEnabled   types.Bool                   `json:"cdnEnabled"`
 }
 
 type EsPublicHttpRoutingDomains []PublicHttpRoutingDomain

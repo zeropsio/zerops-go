@@ -10,6 +10,7 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
@@ -41,7 +42,7 @@ func (r PostServiceStackBackupResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostServiceStackBackup(ctx context.Context, inputDtoPath path.ServiceStackId) (postServiceStackBackupResponse PostServiceStackBackupResponse, err error) {
+func (h Handler) PostServiceStackBackup(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PostServiceStackBackup) (postServiceStackBackupResponse PostServiceStackBackupResponse, err error) {
 	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/backup"
 
 	var response PostServiceStackBackupResponse
@@ -49,7 +50,7 @@ func (h Handler) PostServiceStackBackup(ctx context.Context, inputDtoPath path.S
 		ctx,
 		h.environment,
 		u,
-		struct{}{},
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

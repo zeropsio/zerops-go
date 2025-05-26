@@ -22,6 +22,6 @@ type BillingInfo struct {
 	InvoiceAddressCountryId stringId.CountryId          `json:"invoiceAddressCountryId"`
 	VatCountryId            stringId.CountryId          `json:"vatCountryId"`
 	VatMode                 enum.BillingInfoVatModeEnum `json:"vatMode"`
-	VatRate                 types.Decimal               `json:"vatRate"`
+	VatRate                 types.Float                 `json:"vatRate"`
 	VatVerified             types.Bool                  `json:"vatVerified"`
 }

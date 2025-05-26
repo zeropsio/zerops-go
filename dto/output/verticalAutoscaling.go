@@ -17,4 +17,5 @@ type VerticalAutoscaling struct {
 	MinFreeResource   ScalingMinFreeResource              `json:"minFreeResource"`
 	CpuMode           enum.VerticalAutoscalingCpuModeEnum `json:"cpuMode"`
 	StartCpuCoreCount types.Int                           `json:"startCpuCoreCount"`
+	SwapEnabled       types.Bool                          `json:"swapEnabled"`
 }

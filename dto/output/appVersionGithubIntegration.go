@@ -19,4 +19,5 @@ type AppVersionGithubIntegration struct {
 	Commit             types.String                                  `json:"commit"`
 	RepositoryFullName types.String                                  `json:"repositoryFullName"`
 	TagName            types.StringNull                              `json:"tagName"`
+	ZeropsYamlSetup    types.StringNull                              `json:"zeropsYamlSetup"`
 }

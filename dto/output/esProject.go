@@ -17,6 +17,7 @@ type EsProject struct {
 	Id                  uuid.ProjectId         `json:"id"`
 	ClientId            uuid.ClientId          `json:"clientId"`
 	Name                types.String           `json:"name"`
+	Mode                enum.ProjectModeEnum   `json:"mode"`
 	Description         types.TextNull         `json:"description"`
 	TagList             types.StringArray      `json:"tagList"`
 	Status              enum.ProjectStatusEnum `json:"status"`
@@ -24,6 +25,8 @@ type EsProject struct {
 	LastUpdate          types.DateTime         `json:"lastUpdate"`
 	PublicIpV4          types.StringNull       `json:"publicIpV4"`
 	PublicIpV6          types.StringNull       `json:"publicIpV6"`
+	PublicIpV4Shared    types.Bool             `json:"publicIpV4Shared"`
+	PublicZone          types.String           `json:"publicZone"`
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`

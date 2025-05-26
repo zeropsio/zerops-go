@@ -17,11 +17,11 @@ type EsTransactionDebitGroupItem struct {
 	StackId       types.String   `json:"stackId"`
 	ProjectName   types.String   `json:"projectName"`
 	StackName     types.String   `json:"stackName"`
-	VCpu          types.Decimal  `json:"vCpu"`
-	Cpu           types.Decimal  `json:"cpu"`
-	Ram           types.Decimal  `json:"ram"`
-	Disc          types.Decimal  `json:"disc"`
-	Ceph_active   types.Decimal  `json:"ceph_active"`
-	Ceph_inactive types.Decimal  `json:"ceph_inactive"`
-	SumTotalPrice types.Decimal  `json:"sumTotalPrice"`
+	VCpu          types.Float    `json:"vCpu"`
+	Cpu           types.Float    `json:"cpu"`
+	Ram           types.Float    `json:"ram"`
+	Disc          types.Float    `json:"disc"`
+	CephActive    types.Float    `json:"cephActive"`
+	CephInactive  types.Float    `json:"cephInactive"`
+	SumTotalPrice types.Float    `json:"sumTotalPrice"`
 }

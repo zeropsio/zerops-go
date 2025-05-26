@@ -17,4 +17,5 @@ type VerticalAutoscalingNullable struct {
 	MinFreeResource   *ScalingMinFreeResourceNullable      `json:"minFreeResource"`
 	CpuMode           *enum.VerticalAutoscalingCpuModeEnum `json:"cpuMode"`
 	StartCpuCoreCount types.IntNull                        `json:"startCpuCoreCount"`
+	SwapEnabled       types.BoolNull                       `json:"swapEnabled"`
 }

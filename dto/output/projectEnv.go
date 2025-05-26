@@ -21,4 +21,6 @@ type ProjectEnv struct {
 	Key        types.String     `json:"key"`
 	Content    types.Text       `json:"content"`
 	Type       enum.EnvTypeEnum `json:"type"`
+	Sensitive  types.Bool       `json:"sensitive"`
+	Editable   types.Bool       `json:"editable"`
 }

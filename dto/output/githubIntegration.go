@@ -20,4 +20,5 @@ type GithubIntegration struct {
 	IsActive              types.Bool                          `json:"isActive"`
 	RepositoryFullName    types.String                        `json:"repositoryFullName"`
 	WebhookId             types.IntNull                       `json:"webhookId"`
+	ZeropsYamlSetup       types.StringNull                    `json:"zeropsYamlSetup"`
 }

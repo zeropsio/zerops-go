@@ -6,6 +6,7 @@ type ClientStatusEnum string
 
 const (
 	ClientStatusEnumActive = ClientStatusEnum("ACTIVE")
+	ClientStatusEnumBanned = ClientStatusEnum("BANNED")
 )
 
 func NewClientStatusEnumFromString(value string) (out ClientStatusEnum, err error) {
@@ -47,19 +48,19 @@ func (enum ClientStatusEnum) Is(values ...ClientStatusEnum) bool {
 
 func ClientStatusEnumAllStrings() []string {
 	return []string{
-		string(ClientStatusEnumActive),
+		string(ClientStatusEnumActive), string(ClientStatusEnumBanned),
 	}
 }
 
 func ClientStatusEnumAll() []ClientStatusEnum {
 	return []ClientStatusEnum{
-		ClientStatusEnumActive,
+		ClientStatusEnumActive, ClientStatusEnumBanned,
 	}
 }
 
 func ClientStatusEnumAllPublic() []ClientStatusEnum {
 	return []ClientStatusEnum{
-		ClientStatusEnumActive,
+		ClientStatusEnumActive, ClientStatusEnumBanned,
 	}
 }
 
@@ -73,4 +74,8 @@ func ClientStatusEnumDefault() ClientStatusEnum {
 
 func (enum ClientStatusEnum) IsActive() bool {
 	return enum.Is(ClientStatusEnumActive)
+}
+
+func (enum ClientStatusEnum) IsBanned() bool {
+	return enum.Is(ClientStatusEnumBanned)
 }

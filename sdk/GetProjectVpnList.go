@@ -7,13 +7,20 @@ import (
 	"errors"
 	"net/http"
 
+	"net/url"
+	"strconv"
+	"strings"
+
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
+
+var _ strconv.NumError
 
 type GetProjectVpnListResponse struct {
 	success            output.ProjectVpnList
@@ -41,8 +48,17 @@ func (r GetProjectVpnListResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectVpnList(ctx context.Context, inputDtoPath path.ProjectId) (getProjectVpnListResponse GetProjectVpnListResponse, err error) {
+func (h Handler) GetProjectVpnList(ctx context.Context, inputDtoPath path.ProjectId, inputDtoQuery query.GetProjectVpn) (getProjectVpnListResponse GetProjectVpnListResponse, err error) {
 	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/vpn/list"
+
+	var queryParams []string
+	if param, ok := inputDtoQuery.InstanceId.Get(); ok {
+		queryParams = append(queryParams, "instanceId="+url.QueryEscape(param.Native()))
+	}
+
+	if len(queryParams) > 0 {
+		u += "?" + strings.Join(queryParams, "&")
+	}
 
 	var response GetProjectVpnListResponse
 	sdkResponse := sdkBase.Get(

@@ -16,15 +16,17 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostProject)(nil)
 
 type PostProject struct {
-	ClientId       uuid.ClientId           `json:"clientId"`
-	Name           types.String            `json:"name"`
-	Description    types.TextNull          `json:"description"`
-	Mode           *enum.ProjectModeEnum   `json:"mode"`
-	TagList        types.StringArray       `json:"tagList"`
-	EnvVariables   PostProjectEnvVariables `json:"envVariables"`
-	EnvIsolation   types.StringNull        `json:"envIsolation"`
-	SshIsolation   types.StringNull        `json:"sshIsolation"`
-	MaxCreditLimit types.DecimalNull       `json:"maxCreditLimit"`
+	ClientId         uuid.ClientId           `json:"clientId"`
+	Name             types.String            `json:"name"`
+	Description      types.TextNull          `json:"description"`
+	Mode             *enum.ProjectModeEnum   `json:"mode"`
+	TagList          types.StringArray       `json:"tagList"`
+	EnvVariables     PostProjectEnvVariables `json:"envVariables"`
+	PublicIpV4Shared types.Bool              `json:"publicIpV4Shared"`
+	EnvIsolation     types.StringNull        `json:"envIsolation"`
+	SshIsolation     types.StringNull        `json:"sshIsolation"`
+	MaxCreditLimit   types.DecimalNull       `json:"maxCreditLimit"`
+	Location         types.StringNull        `json:"location"`
 }
 
 func (dto PostProject) GetClientId() uuid.ClientId {
@@ -45,6 +47,9 @@ func (dto PostProject) GetTagList() types.StringArray {
 func (dto PostProject) GetEnvVariables() PostProjectEnvVariables {
 	return dto.EnvVariables
 }
+func (dto PostProject) GetPublicIpV4Shared() types.Bool {
+	return dto.PublicIpV4Shared
+}
 func (dto PostProject) GetEnvIsolation() types.StringNull {
 	return dto.EnvIsolation
 }
@@ -53,6 +58,9 @@ func (dto PostProject) GetSshIsolation() types.StringNull {
 }
 func (dto PostProject) GetMaxCreditLimit() types.DecimalNull {
 	return dto.MaxCreditLimit
+}
+func (dto PostProject) GetLocation() types.StringNull {
+	return dto.Location
 }
 
 type PostProjectEnvVariables []ProjectEnvPut
@@ -66,15 +74,17 @@ func (dto PostProjectEnvVariables) MarshalJSON() ([]byte, error) {
 
 func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId       *uuid.ClientId
-		Name           *types.String
-		Description    types.TextNull
-		Mode           *enum.ProjectModeEnum
-		TagList        *types.StringArray
-		EnvVariables   *PostProjectEnvVariables
-		EnvIsolation   types.StringNull
-		SshIsolation   types.StringNull
-		MaxCreditLimit types.DecimalNull
+		ClientId         *uuid.ClientId
+		Name             *types.String
+		Description      types.TextNull
+		Mode             *enum.ProjectModeEnum
+		TagList          *types.StringArray
+		EnvVariables     *PostProjectEnvVariables
+		PublicIpV4Shared *types.Bool
+		EnvIsolation     types.StringNull
+		SshIsolation     types.StringNull
+		MaxCreditLimit   types.DecimalNull
+		Location         types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -93,6 +103,9 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	if aux.EnvVariables == nil {
 		errorList = errorList.With(validator.NewError("envVariables", "field is required"))
 	}
+	if aux.PublicIpV4Shared == nil {
+		errorList = errorList.With(validator.NewError("publicIpV4Shared", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
@@ -102,9 +115,11 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	dto.Mode = aux.Mode
 	dto.TagList = *aux.TagList
 	dto.EnvVariables = *aux.EnvVariables
+	dto.PublicIpV4Shared = *aux.PublicIpV4Shared
 	dto.EnvIsolation = aux.EnvIsolation
 	dto.SshIsolation = aux.SshIsolation
 	dto.MaxCreditLimit = aux.MaxCreditLimit
+	dto.Location = aux.Location
 
 	return nil
 }

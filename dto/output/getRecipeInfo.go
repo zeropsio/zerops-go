@@ -13,8 +13,18 @@ var _ strconv.NumError
 
 type GetRecipeInfo struct {
 	Url              types.String                  `json:"url"`
+	ReadmeMd         GetRecipeInfoReadmeMd         `json:"readmeMd"`
 	ZeropsYaml       GetRecipeInfoZeropsYaml       `json:"zeropsYaml"`
 	ZeropsImportYaml GetRecipeInfoZeropsImportYaml `json:"zeropsImportYaml"`
+}
+
+type GetRecipeInfoReadmeMd []GetRecipeInfoItem
+
+func (dto GetRecipeInfoReadmeMd) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]GetRecipeInfoItem(dto))
 }
 
 type GetRecipeInfoZeropsYaml []GetRecipeInfoItem

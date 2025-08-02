@@ -12,67 +12,67 @@ import (
 )
 
 var _ strconv.NumError
-var _ json.Unmarshaler = (*EsTransactionDebitGroupBy)(nil)
+var _ json.Unmarshaler = (*EsGroupBySearch)(nil)
 
-type EsTransactionDebitGroupBy struct {
-	Search           EsTransactionDebitGroupBySearch    `json:"search"`
-	From             types.DateTime                     `json:"from"`
-	Till             types.DateTime                     `json:"till"`
-	TimeZone         types.String                       `json:"timeZone"`
-	SubscriptionName types.StringNull                   `json:"subscriptionName"`
-	ReceiverId       types.StringNull                   `json:"receiverId"`
-	GroupBy          enum.EsTransactionDebitGroupByEnum `json:"groupBy"`
-	TimeGroupBy      types.String                       `json:"timeGroupBy"`
+type EsGroupBySearch struct {
+	Search           EsGroupBySearchSearch           `json:"search"`
+	From             types.DateTime                  `json:"from"`
+	Till             types.DateTime                  `json:"till"`
+	TimeZone         types.String                    `json:"timeZone"`
+	SubscriptionName types.StringNull                `json:"subscriptionName"`
+	ReceiverId       types.StringNull                `json:"receiverId"`
+	GroupBy          enum.EsGroupBySearchGroupByEnum `json:"groupBy"`
+	TimeGroupBy      types.String                    `json:"timeGroupBy"`
 }
 
-func (dto EsTransactionDebitGroupBy) GetSearch() EsTransactionDebitGroupBySearch {
+func (dto EsGroupBySearch) GetSearch() EsGroupBySearchSearch {
 	return dto.Search
 }
-func (dto EsTransactionDebitGroupBy) GetFrom() types.DateTime {
+func (dto EsGroupBySearch) GetFrom() types.DateTime {
 	return dto.From
 }
-func (dto EsTransactionDebitGroupBy) GetTill() types.DateTime {
+func (dto EsGroupBySearch) GetTill() types.DateTime {
 	return dto.Till
 }
-func (dto EsTransactionDebitGroupBy) GetTimeZone() types.String {
+func (dto EsGroupBySearch) GetTimeZone() types.String {
 	return dto.TimeZone
 }
-func (dto EsTransactionDebitGroupBy) GetSubscriptionName() types.StringNull {
+func (dto EsGroupBySearch) GetSubscriptionName() types.StringNull {
 	return dto.SubscriptionName
 }
-func (dto EsTransactionDebitGroupBy) GetReceiverId() types.StringNull {
+func (dto EsGroupBySearch) GetReceiverId() types.StringNull {
 	return dto.ReceiverId
 }
-func (dto EsTransactionDebitGroupBy) GetGroupBy() enum.EsTransactionDebitGroupByEnum {
+func (dto EsGroupBySearch) GetGroupBy() enum.EsGroupBySearchGroupByEnum {
 	return dto.GroupBy
 }
-func (dto EsTransactionDebitGroupBy) GetTimeGroupBy() types.String {
+func (dto EsGroupBySearch) GetTimeGroupBy() types.String {
 	return dto.TimeGroupBy
 }
 
-type EsTransactionDebitGroupBySearch []EsSearchItem
+type EsGroupBySearchSearch []EsSearchItem
 
-func (dto EsTransactionDebitGroupBySearch) MarshalJSON() ([]byte, error) {
+func (dto EsGroupBySearchSearch) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
 	return json.Marshal([]EsSearchItem(dto))
 }
 
-func (dto *EsTransactionDebitGroupBy) UnmarshalJSON(b []byte) error {
+func (dto *EsGroupBySearch) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Search           *EsTransactionDebitGroupBySearch
+		Search           *EsGroupBySearchSearch
 		From             *types.DateTime
 		Till             *types.DateTime
 		TimeZone         *types.String
 		SubscriptionName types.StringNull
 		ReceiverId       types.StringNull
-		GroupBy          *enum.EsTransactionDebitGroupByEnum
+		GroupBy          *enum.EsGroupBySearchGroupByEnum
 		TimeGroupBy      *types.String
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
-		return validator.JsonValidation("EsTransactionDebitGroupBy", err)
+		return validator.JsonValidation("EsGroupBySearch", err)
 	}
 	var errorList validator.ErrorList
 	if aux.Search == nil {

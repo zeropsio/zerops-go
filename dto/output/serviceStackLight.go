@@ -27,4 +27,5 @@ type ServiceStackLight struct {
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
 	BuildCache                *BuildCache                        `json:"buildCache"`
 	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
+	NestId                    stringId.NestId                    `json:"nestId"`
 }

@@ -22,6 +22,8 @@ const (
 	FileSizeLimitExceeded                                    ErrorCode = "fileSizeLimitExceeded"
 	AdditionalVerificationFailed                             ErrorCode = "additionalVerificationFailed"
 	AtLeastOneManager                                        ErrorCode = "atLeastOneManager"
+	CloudflareCaptchaVerificationFailed                      ErrorCode = "cloudflareCaptchaVerificationFailed"
+	PublicIpv4Assigned                                       ErrorCode = "publicIpv4Assigned"
 	ActiveUserMustBeConnectedToAtLeastOneClient              ErrorCode = "activeUserMustBeConnectedToAtLeastOneClient"
 	InvalidCredentials                                       ErrorCode = "invalidCredentials"
 	PasswordTooShort                                         ErrorCode = "passwordTooShort"
@@ -375,4 +377,9 @@ const (
 	CdnActiveBucketNotFound                                  ErrorCode = "cdnActiveBucketNotFound"
 	CdnInvalidPurgePath                                      ErrorCode = "cdnInvalidPurgePath"
 	CommonCreditForbidden                                    ErrorCode = "commonCreditForbidden"
+	ModeUpgradeNotSupported                                  ErrorCode = "modeUpgradeNotSupported"
+	BanningVerifiedClientNotAllowed                          ErrorCode = "banningVerifiedClientNotAllowed"
+	LocationInstanceNotFound                                 ErrorCode = "locationInstanceNotFound"
+	LocationNotFound                                         ErrorCode = "locationNotFound"
+	RoutingAllowedOnlyOnPrimaryInstance                      ErrorCode = "routingAllowedOnlyOnPrimaryInstance"
 )

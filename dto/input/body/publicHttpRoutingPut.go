@@ -33,13 +33,13 @@ func (dto PublicHttpRoutingPut) GetLocations() PublicHttpRoutingPutLocations {
 	return dto.Locations
 }
 
-type PublicHttpRoutingPutLocations []PublicHttpRoutingLocationPut
+type PublicHttpRoutingPutLocations []PublicHttpRoutingLocation
 
 func (dto PublicHttpRoutingPutLocations) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]PublicHttpRoutingLocationPut(dto))
+	return json.Marshal([]PublicHttpRoutingLocation(dto))
 }
 
 func (dto *PublicHttpRoutingPut) UnmarshalJSON(b []byte) error {

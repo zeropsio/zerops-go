@@ -7,13 +7,20 @@ import (
 	"errors"
 	"net/http"
 
+	"net/url"
+	"strconv"
+	"strings"
+
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
+
+var _ strconv.NumError
 
 type GetProjectLogResponse struct {
 	success            output.ProjectLog
@@ -41,8 +48,17 @@ func (r GetProjectLogResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectLog(ctx context.Context, inputDtoPath path.ProjectId) (getProjectLogResponse GetProjectLogResponse, err error) {
+func (h Handler) GetProjectLog(ctx context.Context, inputDtoPath path.ProjectId, inputDtoQuery query.GetProjectLog) (getProjectLogResponse GetProjectLogResponse, err error) {
 	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/log"
+
+	var queryParams []string
+	if param, ok := inputDtoQuery.InstanceId.Get(); ok {
+		queryParams = append(queryParams, "instanceId="+url.QueryEscape(param.Native()))
+	}
+
+	if len(queryParams) > 0 {
+		u += "?" + strings.Join(queryParams, "&")
+	}
 
 	var response GetProjectLogResponse
 	sdkResponse := sdkBase.Get(

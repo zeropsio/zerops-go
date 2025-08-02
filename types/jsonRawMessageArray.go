@@ -7,28 +7,28 @@ import (
 	"errors"
 )
 
-type JsonRawMessageArray []byte
+type JsonRawMessageArray []json.RawMessage
 
-func NewJsonRawMessageArray(value string) JsonRawMessageArray {
+func NewJsonRawMessageArray(value []json.RawMessage) JsonRawMessageArray {
 	return JsonRawMessageArray(value)
 }
 
-func (parameter JsonRawMessageArray) Native() []byte {
-	return parameter
+func (parameter JsonRawMessageArray) Native() []json.RawMessage {
+	return []json.RawMessage(parameter)
 }
 
 func (parameter JsonRawMessageArray) MarshalJSON() ([]byte, error) {
 	if parameter == nil {
-		return []byte("null"), nil
+		return nil, errors.New("value can't be nil")
 	}
-	return parameter, nil
+	return json.Marshal([]json.RawMessage(parameter))
 }
 
 func (parameter *JsonRawMessageArray) UnmarshalJSON(data []byte) error {
 	var arr []json.RawMessage
 	err := json.Unmarshal(data, &arr)
 	if err != nil {
-		return errors.Wrap(err)
+		return err
 	}
 	if arr == nil {
 		arr = make([]json.RawMessage, 0)

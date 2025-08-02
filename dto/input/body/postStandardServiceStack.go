@@ -30,6 +30,8 @@ type PostStandardServiceStack struct {
 	SshIsolation          types.StringNull                 `json:"sshIsolation"`
 	EnableSubdomainAccess types.BoolNull                   `json:"enableSubdomainAccess"`
 	CdnEnabled            types.BoolNull                   `json:"cdnEnabled"`
+	Os                    types.StringNull                 `json:"os"`
+	Location              types.StringNull                 `json:"location"`
 }
 
 func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
@@ -74,6 +76,12 @@ func (dto PostStandardServiceStack) GetEnableSubdomainAccess() types.BoolNull {
 func (dto PostStandardServiceStack) GetCdnEnabled() types.BoolNull {
 	return dto.CdnEnabled
 }
+func (dto PostStandardServiceStack) GetOs() types.StringNull {
+	return dto.Os
+}
+func (dto PostStandardServiceStack) GetLocation() types.StringNull {
+	return dto.Location
+}
 
 type PostStandardServiceStackUserData []UserDataPut
 
@@ -100,6 +108,8 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 		SshIsolation          types.StringNull
 		EnableSubdomainAccess types.BoolNull
 		CdnEnabled            types.BoolNull
+		Os                    types.StringNull
+		Location              types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -132,6 +142,8 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	dto.SshIsolation = aux.SshIsolation
 	dto.EnableSubdomainAccess = aux.EnableSubdomainAccess
 	dto.CdnEnabled = aux.CdnEnabled
+	dto.Os = aux.Os
+	dto.Location = aux.Location
 
 	return nil
 }

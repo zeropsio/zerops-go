@@ -33,11 +33,11 @@ type EsProject struct {
 	EnvList             EsProjectEnvList       `json:"envList"`
 }
 
-type EsProjectEnvList []Env
+type EsProjectEnvList []ProjectEnv
 
 func (dto EsProjectEnvList) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]Env(dto))
+	return json.Marshal([]ProjectEnv(dto))
 }

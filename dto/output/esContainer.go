@@ -16,6 +16,7 @@ type EsContainer struct {
 	Id                      uuid.ContainerId         `json:"id"`
 	ClientId                uuid.ClientId            `json:"clientId"`
 	ProjectId               uuid.ProjectId           `json:"projectId"`
+	InstanceId              uuid.InstanceId          `json:"instanceId"`
 	ServiceStackId          uuid.ServiceStackId      `json:"serviceStackId"`
 	ServiceId               uuid.ServiceId           `json:"serviceId"`
 	Status                  enum.ContainerStatusEnum `json:"status"`

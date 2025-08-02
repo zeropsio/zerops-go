@@ -21,6 +21,7 @@ type UserRegistration struct {
 	AccountName types.String        `json:"accountName"`
 	Name        types.String        `json:"name"`
 	PromoCode   types.StringNull    `json:"promoCode"`
+	Token       types.TextNull      `json:"token"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -41,6 +42,9 @@ func (dto UserRegistration) GetName() types.String {
 func (dto UserRegistration) GetPromoCode() types.StringNull {
 	return dto.PromoCode
 }
+func (dto UserRegistration) GetToken() types.TextNull {
+	return dto.Token
+}
 
 func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -50,6 +54,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 		AccountName *types.String
 		Name        *types.String
 		PromoCode   types.StringNull
+		Token       types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -80,6 +85,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	dto.AccountName = *aux.AccountName
 	dto.Name = *aux.Name
 	dto.PromoCode = aux.PromoCode
+	dto.Token = aux.Token
 
 	return nil
 }

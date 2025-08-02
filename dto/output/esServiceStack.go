@@ -16,8 +16,9 @@ var _ strconv.NumError
 
 type EsServiceStack struct {
 	Id                                 uuid.ServiceStackId                `json:"id"`
-	ProjectId                          uuid.ProjectId                     `json:"projectId"`
 	ClientId                           uuid.ClientId                      `json:"clientId"`
+	ProjectId                          uuid.ProjectId                     `json:"projectId"`
+	InstanceId                         uuid.InstanceId                    `json:"instanceId"`
 	ServiceStackTypeId                 stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
 	ServiceStackTypeVersionId          stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"`
 	DriverId                           stringId.DriverIdNull              `json:"driverId"`

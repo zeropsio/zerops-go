@@ -12,8 +12,9 @@ import (
 var _ strconv.NumError
 
 type PublicHttpRoutingLocation struct {
-	Path             types.String             `json:"path"`
-	Port             types.Int                `json:"port"`
-	ServiceStackId   uuid.ServiceStackId      `json:"serviceStackId"`
-	ServiceStackInfo LocationServiceStackInfo `json:"serviceStackInfo"`
+	Path             types.String                     `json:"path"`
+	Port             types.Int                        `json:"port"`
+	Config           *PublicHttpRoutingLocationConfig `json:"config"`
+	ServiceStackId   uuid.ServiceStackId              `json:"serviceStackId"`
+	ServiceStackInfo LocationServiceStackInfo         `json:"serviceStackInfo"`
 }

@@ -12,33 +12,38 @@ import (
 )
 
 var _ strconv.NumError
-var _ json.Unmarshaler = (*PublicHttpRoutingLocationPost)(nil)
+var _ json.Unmarshaler = (*PublicHttpRoutingLocation)(nil)
 
-type PublicHttpRoutingLocationPost struct {
-	Path           types.String        `json:"path"`
-	Port           types.Int           `json:"port"`
-	ServiceStackId uuid.ServiceStackId `json:"serviceStackId"`
+type PublicHttpRoutingLocation struct {
+	Path           types.String                     `json:"path"`
+	Port           types.Int                        `json:"port"`
+	ServiceStackId uuid.ServiceStackId              `json:"serviceStackId"`
+	Config         *PublicHttpRoutingLocationConfig `json:"config"`
 }
 
-func (dto PublicHttpRoutingLocationPost) GetPath() types.String {
+func (dto PublicHttpRoutingLocation) GetPath() types.String {
 	return dto.Path
 }
-func (dto PublicHttpRoutingLocationPost) GetPort() types.Int {
+func (dto PublicHttpRoutingLocation) GetPort() types.Int {
 	return dto.Port
 }
-func (dto PublicHttpRoutingLocationPost) GetServiceStackId() uuid.ServiceStackId {
+func (dto PublicHttpRoutingLocation) GetServiceStackId() uuid.ServiceStackId {
 	return dto.ServiceStackId
 }
+func (dto PublicHttpRoutingLocation) GetConfig() *PublicHttpRoutingLocationConfig {
+	return dto.Config
+}
 
-func (dto *PublicHttpRoutingLocationPost) UnmarshalJSON(b []byte) error {
+func (dto *PublicHttpRoutingLocation) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Path           *types.String
 		Port           *types.Int
 		ServiceStackId *uuid.ServiceStackId
+		Config         *PublicHttpRoutingLocationConfig
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
-		return validator.JsonValidation("PublicHttpRoutingLocationPost", err)
+		return validator.JsonValidation("PublicHttpRoutingLocation", err)
 	}
 	var errorList validator.ErrorList
 	if aux.Path == nil {
@@ -56,6 +61,7 @@ func (dto *PublicHttpRoutingLocationPost) UnmarshalJSON(b []byte) error {
 	dto.Path = *aux.Path
 	dto.Port = *aux.Port
 	dto.ServiceStackId = *aux.ServiceStackId
+	dto.Config = aux.Config
 
 	return nil
 }

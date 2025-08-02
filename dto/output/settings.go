@@ -5,6 +5,8 @@ package output
 import (
 	"encoding/json"
 	"strconv"
+
+	"github.com/zeropsio/zerops-go/types"
 )
 
 var _ strconv.NumError
@@ -13,6 +15,7 @@ type Settings struct {
 	CurrencyList     SettingsCurrencyList     `json:"currencyList"`
 	LanguageList     SettingsLanguageList     `json:"languageList"`
 	ServiceStackList SettingsServiceStackList `json:"serviceStackList"`
+	LocationList     types.StringArray        `json:"locationList"`
 }
 
 type SettingsCurrencyList []Currency

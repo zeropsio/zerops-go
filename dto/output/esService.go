@@ -16,6 +16,7 @@ type EsService struct {
 	Id               uuid.ServiceId         `json:"id"`
 	ClientId         uuid.ClientId          `json:"clientId"`
 	ProjectId        uuid.ProjectId         `json:"projectId"`
+	InstanceId       uuid.InstanceId        `json:"instanceId"`
 	ServiceStackId   uuid.ServiceStackId    `json:"serviceStackId"`
 	Name             types.String           `json:"name"`
 	Status           enum.ServiceStatusEnum `json:"status"`

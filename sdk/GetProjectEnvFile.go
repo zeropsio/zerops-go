@@ -60,6 +60,10 @@ func (h Handler) GetProjectEnvFile(ctx context.Context, inputDtoPath path.Projec
 		param := inputDtoQuery.OverrideEnvIsolation.Native()
 		queryParams = append(queryParams, "overrideEnvIsolation="+url.QueryEscape(param))
 	}
+	{
+		param := inputDtoQuery.UserOnly.Native()
+		queryParams = append(queryParams, "userOnly="+url.QueryEscape(strconv.FormatBool(param)))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

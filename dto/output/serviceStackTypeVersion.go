@@ -27,4 +27,5 @@ type ServiceStackTypeVersion struct {
 	VersionNumber      types.EmptyString                      `json:"versionNumber"`
 	ExactVersionNumber types.EmptyString                      `json:"exactVersionNumber"`
 	Config             ServiceStackTypeVersionConfig          `json:"config"`
+	OsList             types.StringArray                      `json:"osList"`
 }

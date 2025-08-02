@@ -16,7 +16,7 @@ import (
 )
 
 type PostTransactionDebitGroupBySearchResponse struct {
-	success            output.EsTransactionDebitGroupByResponse
+	success            output.EsGroupBySearchResponse
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PostTransactionDebitGroupBySearchResponse) OutputInterface() (output int
 	return r.success, r.err
 }
 
-func (r PostTransactionDebitGroupBySearchResponse) Output() (output output.EsTransactionDebitGroupByResponse, err error) {
+func (r PostTransactionDebitGroupBySearchResponse) Output() (output output.EsGroupBySearchResponse, err error) {
 	return r.success, r.err
 }
 
@@ -41,7 +41,7 @@ func (r PostTransactionDebitGroupBySearchResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostTransactionDebitGroupBySearch(ctx context.Context, inputDtoBody body.EsTransactionDebitGroupBy) (postTransactionDebitGroupBySearchResponse PostTransactionDebitGroupBySearchResponse, err error) {
+func (h Handler) PostTransactionDebitGroupBySearch(ctx context.Context, inputDtoBody body.EsGroupBySearch) (postTransactionDebitGroupBySearchResponse PostTransactionDebitGroupBySearchResponse, err error) {
 	u := "/api/rest/public/transaction-debit/group-by-search"
 
 	var response PostTransactionDebitGroupBySearchResponse

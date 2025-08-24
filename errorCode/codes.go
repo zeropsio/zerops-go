@@ -372,6 +372,7 @@ const (
 	PromoCodeAlreadyApplied                                  ErrorCode = "promoCodeAlreadyApplied"
 	InvalidMonthFormat                                       ErrorCode = "invalidMonthFormat"
 	CreditExportMonthOutsideValidRange                       ErrorCode = "creditExportMonthOutsideValidRange"
+	CreditExportForLastMonthNotReadyYet                      ErrorCode = "creditExportForLastMonthNotReadyYet"
 	CdnSslEnabledRequired                                    ErrorCode = "cdnSslEnabledRequired"
 	CdnActiveDomainNotFound                                  ErrorCode = "cdnActiveDomainNotFound"
 	CdnActiveBucketNotFound                                  ErrorCode = "cdnActiveBucketNotFound"

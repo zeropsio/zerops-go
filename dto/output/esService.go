@@ -13,14 +13,14 @@ import (
 var _ strconv.NumError
 
 type EsService struct {
-	Id               uuid.ServiceId         `json:"id"`
-	ClientId         uuid.ClientId          `json:"clientId"`
-	ProjectId        uuid.ProjectId         `json:"projectId"`
-	InstanceId       uuid.InstanceId        `json:"instanceId"`
-	ServiceStackId   uuid.ServiceStackId    `json:"serviceStackId"`
-	Name             types.String           `json:"name"`
-	Status           enum.ServiceStatusEnum `json:"status"`
-	StackAccessPoint types.Bool             `json:"stackAccessPoint"`
-	Created          types.DateTime         `json:"created"`
-	LastUpdate       types.DateTime         `json:"lastUpdate"`
+	Id               uuid.ServiceId          `json:"id"`
+	ClientId         uuid.ClientId           `json:"clientId"`
+	ProjectId        uuid.ProjectId          `json:"projectId"`
+	InstanceId       uuid.InstanceId         `json:"instanceId"`
+	ServiceStackId   uuid.ServiceStackId     `json:"serviceStackId"`
+	Name             types.String            `json:"name"`
+	Status           *enum.ServiceStatusEnum `json:"status"`
+	StackAccessPoint types.Bool              `json:"stackAccessPoint"`
+	Created          types.DateTime          `json:"created"`
+	LastUpdate       types.DateTime          `json:"lastUpdate"`
 }

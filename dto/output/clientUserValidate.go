@@ -12,6 +12,6 @@ import (
 var _ strconv.NumError
 
 type ClientUserValidate struct {
-	Id       uuid.UserId  `json:"id"`
-	FullName types.String `json:"fullName"`
+	Id    uuid.UserId `json:"id"`
+	Email types.Email `json:"email"`
 }

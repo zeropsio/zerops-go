@@ -16,7 +16,7 @@ import (
 )
 
 type PostAuthRefreshResponse struct {
-	success            output.Auth
+	success            output.AuthFull
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PostAuthRefreshResponse) OutputInterface() (output interface{}, err erro
 	return r.success, r.err
 }
 
-func (r PostAuthRefreshResponse) Output() (output output.Auth, err error) {
+func (r PostAuthRefreshResponse) Output() (output output.AuthFull, err error) {
 	return r.success, r.err
 }
 

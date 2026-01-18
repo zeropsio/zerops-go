@@ -3,6 +3,7 @@
 package output
 
 import (
+	"encoding/json"
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
@@ -23,6 +24,7 @@ type Project struct {
 	Created             types.DateTime         `json:"created"`
 	LastUpdate          types.DateTime         `json:"lastUpdate"`
 	RecipeSource        types.TextNull         `json:"recipeSource"`
+	UserRoles           ProjectUserRoles       `json:"userRoles"`
 	PublicIpV4          types.StringNull       `json:"publicIpV4"`
 	PublicIpV4Shared    types.Bool             `json:"publicIpV4Shared"`
 	PublicIpV6          types.StringNull       `json:"publicIpV6"`
@@ -30,4 +32,13 @@ type Project struct {
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`
+}
+
+type ProjectUserRoles []ProjectUserRole
+
+func (dto ProjectUserRoles) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]ProjectUserRole(dto))
 }

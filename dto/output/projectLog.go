@@ -16,4 +16,5 @@ type ProjectLog struct {
 	Expiration  types.DateTime             `json:"expiration"`
 	Url         types.String               `json:"url"`
 	UrlInfo     types.String               `json:"urlInfo"`
+	UrlPlain    types.String               `json:"urlPlain"`
 }

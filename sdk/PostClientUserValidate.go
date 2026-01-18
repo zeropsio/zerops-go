@@ -11,6 +11,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
@@ -41,8 +42,8 @@ func (r PostClientUserValidateResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostClientUserValidate(ctx context.Context, inputDtoBody body.ClientUserValidate) (postClientUserValidateResponse PostClientUserValidateResponse, err error) {
-	u := "/api/rest/public/client-user/validate"
+func (h Handler) PostClientUserValidate(ctx context.Context, inputDtoPath path.ClientId, inputDtoBody body.ClientUserValidate) (postClientUserValidateResponse PostClientUserValidateResponse, err error) {
+	u := "/api/rest/public/client/" + inputDtoPath.Id.Native() + "/user/validate"
 
 	var response PostClientUserValidateResponse
 	sdkResponse := sdkBase.Post(

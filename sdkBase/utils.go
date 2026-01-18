@@ -25,6 +25,10 @@ func Post(ctx context.Context, e Environment, url string, in interface{}) *Respo
 	return MethodBody(ctx, e, http.MethodPost, url, in)
 }
 
+func Patch(ctx context.Context, e Environment, url string, in interface{}) *Response {
+	return MethodBody(ctx, e, http.MethodPatch, url, in)
+}
+
 func PostRaw(ctx context.Context, e Environment, url string, body io.Reader) *Response {
 	return Method(ctx, e, http.MethodPost, url, body)
 }

@@ -18,7 +18,7 @@ type Process struct {
 	ClientId        uuid.ClientId           `json:"clientId"`
 	ProjectId       uuid.ProjectId          `json:"projectId"`
 	ServiceStackId  uuid.ServiceStackIdNull `json:"serviceStackId"`
-	Project         ProjectLightJsonObject  `json:"project"`
+	Project         *ProjectLightJsonObject `json:"project"`
 	ServiceStacks   ProcessServiceStacks    `json:"serviceStacks"`
 	Status          enum.ProcessStatusEnum  `json:"status"`
 	Sequence        types.Int               `json:"sequence"`
@@ -31,6 +31,7 @@ type Process struct {
 	Finished        types.DateTimeNull      `json:"finished"`
 	CreatedBySystem types.Bool              `json:"createdBySystem"`
 	AppVersion      *AppVersionJsonObject   `json:"appVersion"`
+	PublicMeta      types.MapNull           `json:"publicMeta"`
 }
 
 type ProcessServiceStacks []ServiceStackLightJsonObject

@@ -10,12 +10,13 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
+	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
 type PostUserTokenResponse struct {
-	success            output.UserToken
+	success            output.UserTokenRaw
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -25,7 +26,7 @@ func (r PostUserTokenResponse) OutputInterface() (output interface{}, err error)
 	return r.success, r.err
 }
 
-func (r PostUserTokenResponse) Output() (output output.UserToken, err error) {
+func (r PostUserTokenResponse) Output() (output output.UserTokenRaw, err error) {
 	return r.success, r.err
 }
 
@@ -40,7 +41,7 @@ func (r PostUserTokenResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostUserToken(ctx context.Context) (postUserTokenResponse PostUserTokenResponse, err error) {
+func (h Handler) PostUserToken(ctx context.Context, inputDtoBody body.UserToken) (postUserTokenResponse PostUserTokenResponse, err error) {
 	u := "/api/rest/public/user-token"
 
 	var response PostUserTokenResponse
@@ -48,7 +49,7 @@ func (h Handler) PostUserToken(ctx context.Context) (postUserTokenResponse PostU
 		ctx,
 		h.environment,
 		u,
-		struct{}{},
+		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

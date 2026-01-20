@@ -9,6 +9,6 @@ import (
 var _ strconv.NumError
 
 type AuthLogin struct {
-	User User `json:"user"`
-	Auth Auth `json:"auth"`
+	User *User    `json:"user"`
+	Auth AuthFull `json:"auth"`
 }

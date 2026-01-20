@@ -14,13 +14,17 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PutProject)(nil)
 
 type PutProject struct {
-	Name             types.String      `json:"name"`
-	Description      types.TextNull    `json:"description"`
-	TagList          types.StringArray `json:"tagList"`
-	PublicIpV4Shared types.Bool        `json:"publicIpV4Shared"`
-	MaxCreditLimit   types.DecimalNull `json:"maxCreditLimit"`
+	UserRoles        *PutProjectUserRoles `json:"userRoles"`
+	Name             types.String         `json:"name"`
+	Description      types.TextNull       `json:"description"`
+	TagList          types.StringArray    `json:"tagList"`
+	PublicIpV4Shared types.Bool           `json:"publicIpV4Shared"`
+	MaxCreditLimit   types.DecimalNull    `json:"maxCreditLimit"`
 }
 
+func (dto PutProject) GetUserRoles() *PutProjectUserRoles {
+	return dto.UserRoles
+}
 func (dto PutProject) GetName() types.String {
 	return dto.Name
 }
@@ -39,6 +43,7 @@ func (dto PutProject) GetMaxCreditLimit() types.DecimalNull {
 
 func (dto *PutProject) UnmarshalJSON(b []byte) error {
 	var aux = struct {
+		UserRoles        *PutProjectUserRoles
 		Name             *types.String
 		Description      types.TextNull
 		TagList          *types.StringArray
@@ -62,6 +67,7 @@ func (dto *PutProject) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
+	dto.UserRoles = aux.UserRoles
 	dto.Name = *aux.Name
 	dto.Description = aux.Description
 	dto.TagList = *aux.TagList

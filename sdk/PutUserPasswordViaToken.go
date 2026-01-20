@@ -16,7 +16,7 @@ import (
 )
 
 type PutUserPasswordViaTokenResponse struct {
-	success            output.Auth
+	success            output.AuthFull
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PutUserPasswordViaTokenResponse) OutputInterface() (output interface{}, 
 	return r.success, r.err
 }
 
-func (r PutUserPasswordViaTokenResponse) Output() (output output.Auth, err error) {
+func (r PutUserPasswordViaTokenResponse) Output() (output output.AuthFull, err error) {
 	return r.success, r.err
 }
 

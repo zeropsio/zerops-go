@@ -28,14 +28,17 @@ type UserAuthorize struct {
 	Status             enum.UserStatusEnum         `json:"status"`
 	ClientUserList     UserAuthorizeClientUserList `json:"clientUserList"`
 	PasswordIsSet      types.Bool                  `json:"passwordIsSet"`
+	TotpIsSet          types.Bool                  `json:"totpIsSet"`
+	HasPasskey         types.Bool                  `json:"hasPasskey"`
+	HasU2F             types.Bool                  `json:"hasU2F"`
 	IntercomHash       types.String                `json:"intercomHash"`
 }
 
-type UserAuthorizeClientUserList []ClientUserExtra
+type UserAuthorizeClientUserList []ClientUserExtraWithClientLight
 
 func (dto UserAuthorizeClientUserList) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]ClientUserExtra(dto))
+	return json.Marshal([]ClientUserExtraWithClientLight(dto))
 }

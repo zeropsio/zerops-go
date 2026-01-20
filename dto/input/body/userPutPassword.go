@@ -14,38 +14,33 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserPutPassword)(nil)
 
 type UserPutPassword struct {
-	OldPassword types.String `json:"oldPassword"`
-	NewPassword types.String `json:"newPassword"`
+	OldPassword types.StringNull `json:"oldPassword"`
+	NewPassword types.StringNull `json:"newPassword"`
 }
 
-func (dto UserPutPassword) GetOldPassword() types.String {
+func (dto UserPutPassword) GetOldPassword() types.StringNull {
 	return dto.OldPassword
 }
-func (dto UserPutPassword) GetNewPassword() types.String {
+func (dto UserPutPassword) GetNewPassword() types.StringNull {
 	return dto.NewPassword
 }
 
 func (dto *UserPutPassword) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		OldPassword *types.String
-		NewPassword *types.String
+		OldPassword types.StringNull
+		NewPassword types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
 		return validator.JsonValidation("UserPutPassword", err)
 	}
 	var errorList validator.ErrorList
-	if aux.OldPassword == nil {
-		errorList = errorList.With(validator.NewError("oldPassword", "field is required"))
-	}
-	if aux.NewPassword == nil {
-		errorList = errorList.With(validator.NewError("newPassword", "field is required"))
-	}
+
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.OldPassword = *aux.OldPassword
-	dto.NewPassword = *aux.NewPassword
+	dto.OldPassword = aux.OldPassword
+	dto.NewPassword = aux.NewPassword
 
 	return nil
 }

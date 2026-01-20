@@ -7,7 +7,6 @@ type ClientUserStatusEnum string
 const (
 	ClientUserStatusEnumWaitingAuthorization = ClientUserStatusEnum("WAITING_AUTHORIZATION")
 	ClientUserStatusEnumActive               = ClientUserStatusEnum("ACTIVE")
-	ClientUserStatusEnumBeingDeleted         = ClientUserStatusEnum("BEING_DELETED")
 )
 
 func NewClientUserStatusEnumFromString(value string) (out ClientUserStatusEnum, err error) {
@@ -49,19 +48,19 @@ func (enum ClientUserStatusEnum) Is(values ...ClientUserStatusEnum) bool {
 
 func ClientUserStatusEnumAllStrings() []string {
 	return []string{
-		string(ClientUserStatusEnumWaitingAuthorization), string(ClientUserStatusEnumActive), string(ClientUserStatusEnumBeingDeleted),
+		string(ClientUserStatusEnumWaitingAuthorization), string(ClientUserStatusEnumActive),
 	}
 }
 
 func ClientUserStatusEnumAll() []ClientUserStatusEnum {
 	return []ClientUserStatusEnum{
-		ClientUserStatusEnumWaitingAuthorization, ClientUserStatusEnumActive, ClientUserStatusEnumBeingDeleted,
+		ClientUserStatusEnumWaitingAuthorization, ClientUserStatusEnumActive,
 	}
 }
 
 func ClientUserStatusEnumAllPublic() []ClientUserStatusEnum {
 	return []ClientUserStatusEnum{
-		ClientUserStatusEnumWaitingAuthorization, ClientUserStatusEnumActive, ClientUserStatusEnumBeingDeleted,
+		ClientUserStatusEnumWaitingAuthorization, ClientUserStatusEnumActive,
 	}
 }
 
@@ -79,8 +78,4 @@ func (enum ClientUserStatusEnum) IsWaitingAuthorization() bool {
 
 func (enum ClientUserStatusEnum) IsActive() bool {
 	return enum.Is(ClientUserStatusEnumActive)
-}
-
-func (enum ClientUserStatusEnum) IsBeingDeleted() bool {
-	return enum.Is(ClientUserStatusEnumBeingDeleted)
 }

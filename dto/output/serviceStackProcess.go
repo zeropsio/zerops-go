@@ -25,10 +25,12 @@ type ServiceStackProcess struct {
 	StartOnProjectStart       types.Bool                         `json:"startOnProjectStart"`
 	GithubIntegration         *GithubIntegration                 `json:"githubIntegration"`
 	GitlabIntegration         *GitlabIntegration                 `json:"gitlabIntegration"`
+	CurrentAutoscaling        *CustomAutoscaling                 `json:"currentAutoscaling"`
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
 	BuildCache                *BuildCache                        `json:"buildCache"`
 	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
 	NestId                    stringId.NestId                    `json:"nestId"`
+	RecipeSource              types.TextNull                     `json:"recipeSource"`
 	Ports                     ServiceStackProcessPorts           `json:"ports"`
 	RequestedPorts            RequestedPortsJsonObject           `json:"requestedPorts"`
 	Created                   types.DateTime                     `json:"created"`

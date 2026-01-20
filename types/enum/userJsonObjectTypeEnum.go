@@ -5,10 +5,11 @@ package enum
 type UserJsonObjectTypeEnum string
 
 const (
-	UserJsonObjectTypeEnumGithub = UserJsonObjectTypeEnum("GITHUB")
-	UserJsonObjectTypeEnumGitlab = UserJsonObjectTypeEnum("GITLAB")
-	UserJsonObjectTypeEnumUser   = UserJsonObjectTypeEnum("USER")
-	UserJsonObjectTypeEnumSystem = UserJsonObjectTypeEnum("SYSTEM")
+	UserJsonObjectTypeEnumGithub           = UserJsonObjectTypeEnum("GITHUB")
+	UserJsonObjectTypeEnumGitlab           = UserJsonObjectTypeEnum("GITLAB")
+	UserJsonObjectTypeEnumUser             = UserJsonObjectTypeEnum("USER")
+	UserJsonObjectTypeEnumSystem           = UserJsonObjectTypeEnum("SYSTEM")
+	UserJsonObjectTypeEnumIntegrationToken = UserJsonObjectTypeEnum("INTEGRATION_TOKEN")
 )
 
 func NewUserJsonObjectTypeEnumFromString(value string) (out UserJsonObjectTypeEnum, err error) {
@@ -50,19 +51,19 @@ func (enum UserJsonObjectTypeEnum) Is(values ...UserJsonObjectTypeEnum) bool {
 
 func UserJsonObjectTypeEnumAllStrings() []string {
 	return []string{
-		string(UserJsonObjectTypeEnumGithub), string(UserJsonObjectTypeEnumGitlab), string(UserJsonObjectTypeEnumUser), string(UserJsonObjectTypeEnumSystem),
+		string(UserJsonObjectTypeEnumGithub), string(UserJsonObjectTypeEnumGitlab), string(UserJsonObjectTypeEnumUser), string(UserJsonObjectTypeEnumSystem), string(UserJsonObjectTypeEnumIntegrationToken),
 	}
 }
 
 func UserJsonObjectTypeEnumAll() []UserJsonObjectTypeEnum {
 	return []UserJsonObjectTypeEnum{
-		UserJsonObjectTypeEnumGithub, UserJsonObjectTypeEnumGitlab, UserJsonObjectTypeEnumUser, UserJsonObjectTypeEnumSystem,
+		UserJsonObjectTypeEnumGithub, UserJsonObjectTypeEnumGitlab, UserJsonObjectTypeEnumUser, UserJsonObjectTypeEnumSystem, UserJsonObjectTypeEnumIntegrationToken,
 	}
 }
 
 func UserJsonObjectTypeEnumAllPublic() []UserJsonObjectTypeEnum {
 	return []UserJsonObjectTypeEnum{
-		UserJsonObjectTypeEnumGithub, UserJsonObjectTypeEnumGitlab, UserJsonObjectTypeEnumUser, UserJsonObjectTypeEnumSystem,
+		UserJsonObjectTypeEnumGithub, UserJsonObjectTypeEnumGitlab, UserJsonObjectTypeEnumUser, UserJsonObjectTypeEnumSystem, UserJsonObjectTypeEnumIntegrationToken,
 	}
 }
 
@@ -88,4 +89,8 @@ func (enum UserJsonObjectTypeEnum) IsUser() bool {
 
 func (enum UserJsonObjectTypeEnum) IsSystem() bool {
 	return enum.Is(UserJsonObjectTypeEnumSystem)
+}
+
+func (enum UserJsonObjectTypeEnum) IsIntegrationToken() bool {
+	return enum.Is(UserJsonObjectTypeEnumIntegrationToken)
 }

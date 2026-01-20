@@ -5,7 +5,11 @@ package enum
 type ClientUserRoleCodeEnum string
 
 const (
-	ClientUserRoleCodeEnumManager = ClientUserRoleCodeEnum("MANAGER")
+	ClientUserRoleCodeEnumOwner     = ClientUserRoleCodeEnum("OWNER")
+	ClientUserRoleCodeEnumAdmin     = ClientUserRoleCodeEnum("ADMIN")
+	ClientUserRoleCodeEnumBasicUser = ClientUserRoleCodeEnum("BASIC_USER")
+	ClientUserRoleCodeEnumReadOnly  = ClientUserRoleCodeEnum("READ_ONLY")
+	ClientUserRoleCodeEnumNoAccess  = ClientUserRoleCodeEnum("NO_ACCESS")
 )
 
 func NewClientUserRoleCodeEnumFromString(value string) (out ClientUserRoleCodeEnum, err error) {
@@ -47,19 +51,19 @@ func (enum ClientUserRoleCodeEnum) Is(values ...ClientUserRoleCodeEnum) bool {
 
 func ClientUserRoleCodeEnumAllStrings() []string {
 	return []string{
-		string(ClientUserRoleCodeEnumManager),
+		string(ClientUserRoleCodeEnumOwner), string(ClientUserRoleCodeEnumAdmin), string(ClientUserRoleCodeEnumBasicUser), string(ClientUserRoleCodeEnumReadOnly), string(ClientUserRoleCodeEnumNoAccess),
 	}
 }
 
 func ClientUserRoleCodeEnumAll() []ClientUserRoleCodeEnum {
 	return []ClientUserRoleCodeEnum{
-		ClientUserRoleCodeEnumManager,
+		ClientUserRoleCodeEnumOwner, ClientUserRoleCodeEnumAdmin, ClientUserRoleCodeEnumBasicUser, ClientUserRoleCodeEnumReadOnly, ClientUserRoleCodeEnumNoAccess,
 	}
 }
 
 func ClientUserRoleCodeEnumAllPublic() []ClientUserRoleCodeEnum {
 	return []ClientUserRoleCodeEnum{
-		ClientUserRoleCodeEnumManager,
+		ClientUserRoleCodeEnumOwner, ClientUserRoleCodeEnumAdmin, ClientUserRoleCodeEnumBasicUser, ClientUserRoleCodeEnumReadOnly, ClientUserRoleCodeEnumNoAccess,
 	}
 }
 
@@ -68,9 +72,25 @@ func ClientUserRoleCodeEnumAllPrivate() []ClientUserRoleCodeEnum {
 }
 
 func ClientUserRoleCodeEnumDefault() ClientUserRoleCodeEnum {
-	return ""
+	return ClientUserRoleCodeEnumBasicUser
 }
 
-func (enum ClientUserRoleCodeEnum) IsManager() bool {
-	return enum.Is(ClientUserRoleCodeEnumManager)
+func (enum ClientUserRoleCodeEnum) IsOwner() bool {
+	return enum.Is(ClientUserRoleCodeEnumOwner)
+}
+
+func (enum ClientUserRoleCodeEnum) IsAdmin() bool {
+	return enum.Is(ClientUserRoleCodeEnumAdmin)
+}
+
+func (enum ClientUserRoleCodeEnum) IsBasicUser() bool {
+	return enum.Is(ClientUserRoleCodeEnumBasicUser)
+}
+
+func (enum ClientUserRoleCodeEnum) IsReadOnly() bool {
+	return enum.Is(ClientUserRoleCodeEnumReadOnly)
+}
+
+func (enum ClientUserRoleCodeEnum) IsNoAccess() bool {
+	return enum.Is(ClientUserRoleCodeEnumNoAccess)
 }

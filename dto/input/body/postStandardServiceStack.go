@@ -8,7 +8,6 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
-	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -16,7 +15,6 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostStandardServiceStack)(nil)
 
 type PostStandardServiceStack struct {
-	ProjectId             uuid.ProjectId                   `json:"projectId"`
 	Name                  types.String                     `json:"name"`
 	CustomAutoscaling     *CustomAutoscaling               `json:"customAutoscaling"`
 	Mode                  *enum.ServiceStackModeEnum       `json:"mode"`
@@ -34,9 +32,6 @@ type PostStandardServiceStack struct {
 	Location              types.StringNull                 `json:"location"`
 }
 
-func (dto PostStandardServiceStack) GetProjectId() uuid.ProjectId {
-	return dto.ProjectId
-}
 func (dto PostStandardServiceStack) GetName() types.String {
 	return dto.Name
 }
@@ -94,7 +89,6 @@ func (dto PostStandardServiceStackUserData) MarshalJSON() ([]byte, error) {
 
 func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ProjectId             *uuid.ProjectId
 		Name                  *types.String
 		CustomAutoscaling     *CustomAutoscaling
 		Mode                  *enum.ServiceStackModeEnum
@@ -116,9 +110,6 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("PostStandardServiceStack", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ProjectId == nil {
-		errorList = errorList.With(validator.NewError("projectId", "field is required"))
-	}
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
@@ -128,7 +119,6 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ProjectId = *aux.ProjectId
 	dto.Name = *aux.Name
 	dto.CustomAutoscaling = aux.CustomAutoscaling
 	dto.Mode = aux.Mode

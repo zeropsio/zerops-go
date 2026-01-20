@@ -31,6 +31,7 @@ type EsProject struct {
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
 	AutoStartup         types.Bool             `json:"autoStartup"`
 	EnvList             EsProjectEnvList       `json:"envList"`
+	UserRoles           EsProjectUserRoles     `json:"userRoles"`
 }
 
 type EsProjectEnvList []ProjectEnv
@@ -40,4 +41,13 @@ func (dto EsProjectEnvList) MarshalJSON() ([]byte, error) {
 		return []byte("[]"), nil
 	}
 	return json.Marshal([]ProjectEnv(dto))
+}
+
+type EsProjectUserRoles []EsProjectUserRole
+
+func (dto EsProjectUserRoles) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]EsProjectUserRole(dto))
 }

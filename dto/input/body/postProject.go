@@ -8,7 +8,6 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
-	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -16,11 +15,11 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostProject)(nil)
 
 type PostProject struct {
-	ClientId         uuid.ClientId           `json:"clientId"`
 	Name             types.String            `json:"name"`
 	Description      types.TextNull          `json:"description"`
 	Mode             *enum.ProjectModeEnum   `json:"mode"`
 	TagList          types.StringArray       `json:"tagList"`
+	UserRoles        PostProjectUserRoles    `json:"userRoles"`
 	EnvVariables     PostProjectEnvVariables `json:"envVariables"`
 	PublicIpV4Shared types.Bool              `json:"publicIpV4Shared"`
 	EnvIsolation     types.StringNull        `json:"envIsolation"`
@@ -29,9 +28,6 @@ type PostProject struct {
 	Location         types.StringNull        `json:"location"`
 }
 
-func (dto PostProject) GetClientId() uuid.ClientId {
-	return dto.ClientId
-}
 func (dto PostProject) GetName() types.String {
 	return dto.Name
 }
@@ -43,6 +39,9 @@ func (dto PostProject) GetMode() *enum.ProjectModeEnum {
 }
 func (dto PostProject) GetTagList() types.StringArray {
 	return dto.TagList
+}
+func (dto PostProject) GetUserRoles() PostProjectUserRoles {
+	return dto.UserRoles
 }
 func (dto PostProject) GetEnvVariables() PostProjectEnvVariables {
 	return dto.EnvVariables
@@ -63,6 +62,15 @@ func (dto PostProject) GetLocation() types.StringNull {
 	return dto.Location
 }
 
+type PostProjectUserRoles []ProjectUserRole
+
+func (dto PostProjectUserRoles) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]ProjectUserRole(dto))
+}
+
 type PostProjectEnvVariables []ProjectEnvPut
 
 func (dto PostProjectEnvVariables) MarshalJSON() ([]byte, error) {
@@ -74,11 +82,11 @@ func (dto PostProjectEnvVariables) MarshalJSON() ([]byte, error) {
 
 func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId         *uuid.ClientId
 		Name             *types.String
 		Description      types.TextNull
 		Mode             *enum.ProjectModeEnum
 		TagList          *types.StringArray
+		UserRoles        *PostProjectUserRoles
 		EnvVariables     *PostProjectEnvVariables
 		PublicIpV4Shared *types.Bool
 		EnvIsolation     types.StringNull
@@ -91,14 +99,14 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("PostProject", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ClientId == nil {
-		errorList = errorList.With(validator.NewError("clientId", "field is required"))
-	}
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
 	if aux.TagList == nil {
 		errorList = errorList.With(validator.NewError("tagList", "field is required"))
+	}
+	if aux.UserRoles == nil {
+		errorList = errorList.With(validator.NewError("userRoles", "field is required"))
 	}
 	if aux.EnvVariables == nil {
 		errorList = errorList.With(validator.NewError("envVariables", "field is required"))
@@ -109,11 +117,11 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ClientId = *aux.ClientId
 	dto.Name = *aux.Name
 	dto.Description = aux.Description
 	dto.Mode = aux.Mode
 	dto.TagList = *aux.TagList
+	dto.UserRoles = *aux.UserRoles
 	dto.EnvVariables = *aux.EnvVariables
 	dto.PublicIpV4Shared = *aux.PublicIpV4Shared
 	dto.EnvIsolation = aux.EnvIsolation

@@ -11,6 +11,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
@@ -41,8 +42,8 @@ func (r PostProjectEnvResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostProjectEnv(ctx context.Context, inputDtoBody body.ProjectEnvPost) (postProjectEnvResponse PostProjectEnvResponse, err error) {
-	u := "/api/rest/public/project-env"
+func (h Handler) PostProjectEnv(ctx context.Context, inputDtoPath path.ProjectId, inputDtoBody body.ProjectEnvPost) (postProjectEnvResponse PostProjectEnvResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/env"
 
 	var response PostProjectEnvResponse
 	sdkResponse := sdkBase.Post(

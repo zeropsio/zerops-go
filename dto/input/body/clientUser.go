@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"strconv"
 
+	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
@@ -15,38 +16,65 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ClientUser)(nil)
 
 type ClientUser struct {
-	ClientId uuid.ClientId               `json:"clientId"`
-	RoleCode enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	UserId            uuid.UserId                 `json:"userId"`
+	RoleCode          enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	CanViewFinances   types.Bool                  `json:"canViewFinances"`
+	CanEditFinances   types.Bool                  `json:"canEditFinances"`
+	CanCreateProjects types.Bool                  `json:"canCreateProjects"`
 }
 
-func (dto ClientUser) GetClientId() uuid.ClientId {
-	return dto.ClientId
+func (dto ClientUser) GetUserId() uuid.UserId {
+	return dto.UserId
 }
 func (dto ClientUser) GetRoleCode() enum.ClientUserRoleCodeEnum {
 	return dto.RoleCode
 }
+func (dto ClientUser) GetCanViewFinances() types.Bool {
+	return dto.CanViewFinances
+}
+func (dto ClientUser) GetCanEditFinances() types.Bool {
+	return dto.CanEditFinances
+}
+func (dto ClientUser) GetCanCreateProjects() types.Bool {
+	return dto.CanCreateProjects
+}
 
 func (dto *ClientUser) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId *uuid.ClientId
-		RoleCode *enum.ClientUserRoleCodeEnum
+		UserId            *uuid.UserId
+		RoleCode          *enum.ClientUserRoleCodeEnum
+		CanViewFinances   *types.Bool
+		CanEditFinances   *types.Bool
+		CanCreateProjects *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
 		return validator.JsonValidation("ClientUser", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ClientId == nil {
-		errorList = errorList.With(validator.NewError("clientId", "field is required"))
+	if aux.UserId == nil {
+		errorList = errorList.With(validator.NewError("userId", "field is required"))
 	}
 	if aux.RoleCode == nil {
 		errorList = errorList.With(validator.NewError("roleCode", "field is required"))
 	}
+	if aux.CanViewFinances == nil {
+		errorList = errorList.With(validator.NewError("canViewFinances", "field is required"))
+	}
+	if aux.CanEditFinances == nil {
+		errorList = errorList.With(validator.NewError("canEditFinances", "field is required"))
+	}
+	if aux.CanCreateProjects == nil {
+		errorList = errorList.With(validator.NewError("canCreateProjects", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ClientId = *aux.ClientId
+	dto.UserId = *aux.UserId
 	dto.RoleCode = *aux.RoleCode
+	dto.CanViewFinances = *aux.CanViewFinances
+	dto.CanEditFinances = *aux.CanEditFinances
+	dto.CanCreateProjects = *aux.CanCreateProjects
 
 	return nil
 }

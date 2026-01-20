@@ -3,6 +3,7 @@
 package output
 
 import (
+	"encoding/json"
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
@@ -23,4 +24,14 @@ type ProjectLight struct {
 	Created      types.DateTime         `json:"created"`
 	LastUpdate   types.DateTime         `json:"lastUpdate"`
 	RecipeSource types.TextNull         `json:"recipeSource"`
+	UserRoles    ProjectLightUserRoles  `json:"userRoles"`
+}
+
+type ProjectLightUserRoles []ProjectUserRole
+
+func (dto ProjectLightUserRoles) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]ProjectUserRole(dto))
 }

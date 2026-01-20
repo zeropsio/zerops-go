@@ -5,8 +5,8 @@ package enum
 type UserStatusEnum string
 
 const (
-	UserStatusEnumActive  = UserStatusEnum("ACTIVE")
-	UserStatusEnumDeleted = UserStatusEnum("DELETED")
+	UserStatusEnumActive = UserStatusEnum("ACTIVE")
+	UserStatusEnumBanned = UserStatusEnum("BANNED")
 )
 
 func NewUserStatusEnumFromString(value string) (out UserStatusEnum, err error) {
@@ -48,19 +48,19 @@ func (enum UserStatusEnum) Is(values ...UserStatusEnum) bool {
 
 func UserStatusEnumAllStrings() []string {
 	return []string{
-		string(UserStatusEnumActive), string(UserStatusEnumDeleted),
+		string(UserStatusEnumActive), string(UserStatusEnumBanned),
 	}
 }
 
 func UserStatusEnumAll() []UserStatusEnum {
 	return []UserStatusEnum{
-		UserStatusEnumActive, UserStatusEnumDeleted,
+		UserStatusEnumActive, UserStatusEnumBanned,
 	}
 }
 
 func UserStatusEnumAllPublic() []UserStatusEnum {
 	return []UserStatusEnum{
-		UserStatusEnumActive, UserStatusEnumDeleted,
+		UserStatusEnumActive, UserStatusEnumBanned,
 	}
 }
 
@@ -76,6 +76,6 @@ func (enum UserStatusEnum) IsActive() bool {
 	return enum.Is(UserStatusEnumActive)
 }
 
-func (enum UserStatusEnum) IsDeleted() bool {
-	return enum.Is(UserStatusEnumDeleted)
+func (enum UserStatusEnum) IsBanned() bool {
+	return enum.Is(UserStatusEnumBanned)
 }

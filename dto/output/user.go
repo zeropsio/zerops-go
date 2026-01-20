@@ -29,11 +29,11 @@ type User struct {
 	ClientUserList     UserClientUserList  `json:"clientUserList"`
 }
 
-type UserClientUserList []ClientUserExtra
+type UserClientUserList []ClientUserExtraWithClientLight
 
 func (dto UserClientUserList) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]ClientUserExtra(dto))
+	return json.Marshal([]ClientUserExtraWithClientLight(dto))
 }

@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
-	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -15,16 +14,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PublicHttpRoutingPost)(nil)
 
 type PublicHttpRoutingPost struct {
-	ProjectId  uuid.ProjectId                 `json:"projectId"`
 	SslEnabled types.Bool                     `json:"sslEnabled"`
 	CdnEnabled types.BoolNull                 `json:"cdnEnabled"`
 	Domains    types.StringArray              `json:"domains"`
 	Locations  PublicHttpRoutingPostLocations `json:"locations"`
 }
 
-func (dto PublicHttpRoutingPost) GetProjectId() uuid.ProjectId {
-	return dto.ProjectId
-}
 func (dto PublicHttpRoutingPost) GetSslEnabled() types.Bool {
 	return dto.SslEnabled
 }
@@ -49,7 +44,6 @@ func (dto PublicHttpRoutingPostLocations) MarshalJSON() ([]byte, error) {
 
 func (dto *PublicHttpRoutingPost) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ProjectId  *uuid.ProjectId
 		SslEnabled *types.Bool
 		CdnEnabled types.BoolNull
 		Domains    *types.StringArray
@@ -60,9 +54,6 @@ func (dto *PublicHttpRoutingPost) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("PublicHttpRoutingPost", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ProjectId == nil {
-		errorList = errorList.With(validator.NewError("projectId", "field is required"))
-	}
 	if aux.SslEnabled == nil {
 		errorList = errorList.With(validator.NewError("sslEnabled", "field is required"))
 	}
@@ -75,7 +66,6 @@ func (dto *PublicHttpRoutingPost) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ProjectId = *aux.ProjectId
 	dto.SslEnabled = *aux.SslEnabled
 	dto.CdnEnabled = aux.CdnEnabled
 	dto.Domains = *aux.Domains

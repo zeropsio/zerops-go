@@ -42,7 +42,7 @@ func (r PutPublicPortRoutingResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutPublicPortRouting(ctx context.Context, inputDtoPath path.PublicPortRoutingId, inputDtoBody body.PublicPortRoutingPut) (putPublicPortRoutingResponse PutPublicPortRoutingResponse, err error) {
+func (h Handler) PutPublicPortRouting(ctx context.Context, inputDtoPath path.PublicPortRoutingId, inputDtoBody body.PublicPortRouting) (putPublicPortRoutingResponse PutPublicPortRoutingResponse, err error) {
 	u := "/api/rest/public/public-port-routing/" + inputDtoPath.Id.Native() + ""
 
 	var response PutPublicPortRoutingResponse

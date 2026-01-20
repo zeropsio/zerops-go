@@ -9,7 +9,6 @@ import (
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/stringId"
-	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -17,7 +16,6 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*User)(nil)
 
 type User struct {
-	ClientId           uuid.ClientId               `json:"clientId"`
 	Email              types.Email                 `json:"email"`
 	FirstName          types.String                `json:"firstName"`
 	LastName           types.EmptyString           `json:"lastName"`
@@ -25,11 +23,11 @@ type User struct {
 	CountryCallingCode types.IntNull               `json:"countryCallingCode"`
 	PhoneNumber        types.IntNull               `json:"phoneNumber"`
 	RoleCode           enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	CanViewFinances    types.Bool                  `json:"canViewFinances"`
+	CanEditFinances    types.Bool                  `json:"canEditFinances"`
+	CanCreateProjects  types.Bool                  `json:"canCreateProjects"`
 }
 
-func (dto User) GetClientId() uuid.ClientId {
-	return dto.ClientId
-}
 func (dto User) GetEmail() types.Email {
 	return dto.Email
 }
@@ -51,10 +49,18 @@ func (dto User) GetPhoneNumber() types.IntNull {
 func (dto User) GetRoleCode() enum.ClientUserRoleCodeEnum {
 	return dto.RoleCode
 }
+func (dto User) GetCanViewFinances() types.Bool {
+	return dto.CanViewFinances
+}
+func (dto User) GetCanEditFinances() types.Bool {
+	return dto.CanEditFinances
+}
+func (dto User) GetCanCreateProjects() types.Bool {
+	return dto.CanCreateProjects
+}
 
 func (dto *User) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId           *uuid.ClientId
 		Email              *types.Email
 		FirstName          *types.String
 		LastName           *types.EmptyString
@@ -62,15 +68,15 @@ func (dto *User) UnmarshalJSON(b []byte) error {
 		CountryCallingCode types.IntNull
 		PhoneNumber        types.IntNull
 		RoleCode           *enum.ClientUserRoleCodeEnum
+		CanViewFinances    *types.Bool
+		CanEditFinances    *types.Bool
+		CanCreateProjects  *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
 		return validator.JsonValidation("User", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ClientId == nil {
-		errorList = errorList.With(validator.NewError("clientId", "field is required"))
-	}
 	if aux.Email == nil {
 		errorList = errorList.With(validator.NewError("email", "field is required"))
 	}
@@ -86,10 +92,18 @@ func (dto *User) UnmarshalJSON(b []byte) error {
 	if aux.RoleCode == nil {
 		errorList = errorList.With(validator.NewError("roleCode", "field is required"))
 	}
+	if aux.CanViewFinances == nil {
+		errorList = errorList.With(validator.NewError("canViewFinances", "field is required"))
+	}
+	if aux.CanEditFinances == nil {
+		errorList = errorList.With(validator.NewError("canEditFinances", "field is required"))
+	}
+	if aux.CanCreateProjects == nil {
+		errorList = errorList.With(validator.NewError("canCreateProjects", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ClientId = *aux.ClientId
 	dto.Email = *aux.Email
 	dto.FirstName = *aux.FirstName
 	dto.LastName = *aux.LastName
@@ -97,6 +111,9 @@ func (dto *User) UnmarshalJSON(b []byte) error {
 	dto.CountryCallingCode = aux.CountryCallingCode
 	dto.PhoneNumber = aux.PhoneNumber
 	dto.RoleCode = *aux.RoleCode
+	dto.CanViewFinances = *aux.CanViewFinances
+	dto.CanEditFinances = *aux.CanEditFinances
+	dto.CanCreateProjects = *aux.CanCreateProjects
 
 	return nil
 }

@@ -16,7 +16,7 @@ import (
 )
 
 type DeleteClientUserResponse struct {
-	success            output.ClientUserExtra
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r DeleteClientUserResponse) OutputInterface() (output interface{}, err err
 	return r.success, r.err
 }
 
-func (r DeleteClientUserResponse) Output() (output output.ClientUserExtra, err error) {
+func (r DeleteClientUserResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
@@ -41,7 +41,7 @@ func (r DeleteClientUserResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) DeleteClientUser(ctx context.Context, inputDtoPath path.ClientUserId) (deleteClientUserResponse DeleteClientUserResponse, err error) {
+func (h Handler) DeleteClientUser(ctx context.Context, inputDtoPath path.ClientUserIdDelete) (deleteClientUserResponse DeleteClientUserResponse, err error) {
 	u := "/api/rest/public/client-user/" + inputDtoPath.Id.Native() + ""
 
 	var response DeleteClientUserResponse

@@ -15,16 +15,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*FirstClassRecipePrometheus)(nil)
 
 type FirstClassRecipePrometheus struct {
-	ClientId                    uuid.ClientId              `json:"clientId"`
 	PrometheusProjectId         uuid.ProjectIdNull         `json:"prometheusProjectId"`
 	ForwardMetricsFromProjectId uuid.ProjectId             `json:"forwardMetricsFromProjectId"`
 	GrafanaDatabaseMode         *enum.ServiceStackModeEnum `json:"grafanaDatabaseMode"`
 	ProjectCorePackage          *enum.ProjectModeEnum      `json:"projectCorePackage"`
 }
 
-func (dto FirstClassRecipePrometheus) GetClientId() uuid.ClientId {
-	return dto.ClientId
-}
 func (dto FirstClassRecipePrometheus) GetPrometheusProjectId() uuid.ProjectIdNull {
 	return dto.PrometheusProjectId
 }
@@ -40,7 +36,6 @@ func (dto FirstClassRecipePrometheus) GetProjectCorePackage() *enum.ProjectModeE
 
 func (dto *FirstClassRecipePrometheus) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId                    *uuid.ClientId
 		PrometheusProjectId         uuid.ProjectIdNull
 		ForwardMetricsFromProjectId *uuid.ProjectId
 		GrafanaDatabaseMode         *enum.ServiceStackModeEnum
@@ -51,16 +46,12 @@ func (dto *FirstClassRecipePrometheus) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("FirstClassRecipePrometheus", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ClientId == nil {
-		errorList = errorList.With(validator.NewError("clientId", "field is required"))
-	}
 	if aux.ForwardMetricsFromProjectId == nil {
 		errorList = errorList.With(validator.NewError("forwardMetricsFromProjectId", "field is required"))
 	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ClientId = *aux.ClientId
 	dto.PrometheusProjectId = aux.PrometheusProjectId
 	dto.ForwardMetricsFromProjectId = *aux.ForwardMetricsFromProjectId
 	dto.GrafanaDatabaseMode = aux.GrafanaDatabaseMode

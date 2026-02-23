@@ -9,6 +9,6 @@ import (
 var _ strconv.NumError
 
 type CustomAutoscaling struct {
-	VerticalAutoscalingNullable   *VerticalAutoscalingNullable   `json:"verticalAutoscalingNullable"`
-	HorizontalAutoscalingNullable *HorizontalAutoscalingNullable `json:"horizontalAutoscalingNullable"`
+	VerticalAutoscaling   *VerticalAutoscalingNullable   `json:"verticalAutoscaling"`
+	HorizontalAutoscaling *HorizontalAutoscalingNullable `json:"horizontalAutoscaling"`
 }

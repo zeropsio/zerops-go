@@ -10,46 +10,45 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutRecipeFirstClassPrometheusResponse struct {
-	success            output.FirstClassRecipe
+type GetUserTokenResponse struct {
+	success            output.UserToken
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutRecipeFirstClassPrometheusResponse) OutputInterface() (output interface{}, err error) {
+func (r GetUserTokenResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutRecipeFirstClassPrometheusResponse) Output() (output output.FirstClassRecipe, err error) {
+func (r GetUserTokenResponse) Output() (output output.UserToken, err error) {
 	return r.success, r.err
 }
 
-func (r PutRecipeFirstClassPrometheusResponse) Err() error {
+func (r GetUserTokenResponse) Err() error {
 	return r.err
 }
-func (r PutRecipeFirstClassPrometheusResponse) Headers() http.Header {
+func (r GetUserTokenResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutRecipeFirstClassPrometheusResponse) StatusCode() int {
+func (r GetUserTokenResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutRecipeFirstClassPrometheus(ctx context.Context, inputDtoBody body.FirstClassRecipePrometheus) (putRecipeFirstClassPrometheusResponse PutRecipeFirstClassPrometheusResponse, err error) {
-	u := "/api/rest/public/recipe/first-class/prometheus"
+func (h Handler) GetUserToken(ctx context.Context, inputDtoPath path.UserTokenId) (getUserTokenResponse GetUserTokenResponse, err error) {
+	u := "/api/rest/public/user-token/" + inputDtoPath.Id.Native() + ""
 
-	var response PutRecipeFirstClassPrometheusResponse
-	sdkResponse := sdkBase.Put(
+	var response GetUserTokenResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

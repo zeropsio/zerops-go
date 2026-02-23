@@ -11,40 +11,41 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutRecipeFirstClassElkResponse struct {
+type PutClientFirstClassRecipeElkResponse struct {
 	success            output.FirstClassRecipe
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutRecipeFirstClassElkResponse) OutputInterface() (output interface{}, err error) {
+func (r PutClientFirstClassRecipeElkResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutRecipeFirstClassElkResponse) Output() (output output.FirstClassRecipe, err error) {
+func (r PutClientFirstClassRecipeElkResponse) Output() (output output.FirstClassRecipe, err error) {
 	return r.success, r.err
 }
 
-func (r PutRecipeFirstClassElkResponse) Err() error {
+func (r PutClientFirstClassRecipeElkResponse) Err() error {
 	return r.err
 }
-func (r PutRecipeFirstClassElkResponse) Headers() http.Header {
+func (r PutClientFirstClassRecipeElkResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutRecipeFirstClassElkResponse) StatusCode() int {
+func (r PutClientFirstClassRecipeElkResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutRecipeFirstClassElk(ctx context.Context, inputDtoBody body.FirstClassRecipeElk) (putRecipeFirstClassElkResponse PutRecipeFirstClassElkResponse, err error) {
-	u := "/api/rest/public/recipe/first-class/elk"
+func (h Handler) PutClientFirstClassRecipeElk(ctx context.Context, inputDtoPath path.ClientId, inputDtoBody body.FirstClassRecipeElk) (putClientFirstClassRecipeElkResponse PutClientFirstClassRecipeElkResponse, err error) {
+	u := "/api/rest/public/client/" + inputDtoPath.Id.Native() + "/first-class-recipe/elk"
 
-	var response PutRecipeFirstClassElkResponse
+	var response PutClientFirstClassRecipeElkResponse
 	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,

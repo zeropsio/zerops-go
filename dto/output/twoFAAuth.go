@@ -20,6 +20,7 @@ type TwoFAAuth struct {
 	TwoFAVerified    types.BoolNull        `json:"twoFAVerified"`
 	SudoUntil        types.DateTimeNull    `json:"sudoUntil"`
 	UserId           uuid.AuthUserId       `json:"userId"`
+	ActualUserId     uuid.AuthActualUserId `json:"actualUserId"`
 	Author           Author                `json:"author"`
 	NewRecoveryToken types.StringNull      `json:"newRecoveryToken"`
 }

@@ -72,7 +72,7 @@ func ClientUserRoleCodeEnumAllPrivate() []ClientUserRoleCodeEnum {
 }
 
 func ClientUserRoleCodeEnumDefault() ClientUserRoleCodeEnum {
-	return ClientUserRoleCodeEnumBasicUser
+	return ClientUserRoleCodeEnumNoAccess
 }
 
 func (enum ClientUserRoleCodeEnum) IsOwner() bool {

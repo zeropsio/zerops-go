@@ -5,11 +5,11 @@ package enum
 type DomainSslStatusEnum string
 
 const (
-	DomainSslStatusEnumInactive           = DomainSslStatusEnum("INACTIVE")
-	DomainSslStatusEnumWaitingForDns      = DomainSslStatusEnum("WAITING_FOR_DNS")
-	DomainSslStatusEnumBeingInstalled     = DomainSslStatusEnum("BEING_INSTALLED")
-	DomainSslStatusEnumActive             = DomainSslStatusEnum("ACTIVE")
-	DomainSslStatusEnumInstallationFailed = DomainSslStatusEnum("INSTALLATION_FAILED")
+	DomainSslStatusEnumInactive       = DomainSslStatusEnum("INACTIVE")
+	DomainSslStatusEnumWaitingForDns  = DomainSslStatusEnum("WAITING_FOR_DNS")
+	DomainSslStatusEnumBeingInstalled = DomainSslStatusEnum("BEING_INSTALLED")
+	DomainSslStatusEnumBeingRenewed   = DomainSslStatusEnum("BEING_RENEWED")
+	DomainSslStatusEnumActive         = DomainSslStatusEnum("ACTIVE")
 )
 
 func NewDomainSslStatusEnumFromString(value string) (out DomainSslStatusEnum, err error) {
@@ -51,19 +51,19 @@ func (enum DomainSslStatusEnum) Is(values ...DomainSslStatusEnum) bool {
 
 func DomainSslStatusEnumAllStrings() []string {
 	return []string{
-		string(DomainSslStatusEnumInactive), string(DomainSslStatusEnumWaitingForDns), string(DomainSslStatusEnumBeingInstalled), string(DomainSslStatusEnumActive), string(DomainSslStatusEnumInstallationFailed),
+		string(DomainSslStatusEnumInactive), string(DomainSslStatusEnumWaitingForDns), string(DomainSslStatusEnumBeingInstalled), string(DomainSslStatusEnumBeingRenewed), string(DomainSslStatusEnumActive),
 	}
 }
 
 func DomainSslStatusEnumAll() []DomainSslStatusEnum {
 	return []DomainSslStatusEnum{
-		DomainSslStatusEnumInactive, DomainSslStatusEnumWaitingForDns, DomainSslStatusEnumBeingInstalled, DomainSslStatusEnumActive, DomainSslStatusEnumInstallationFailed,
+		DomainSslStatusEnumInactive, DomainSslStatusEnumWaitingForDns, DomainSslStatusEnumBeingInstalled, DomainSslStatusEnumBeingRenewed, DomainSslStatusEnumActive,
 	}
 }
 
 func DomainSslStatusEnumAllPublic() []DomainSslStatusEnum {
 	return []DomainSslStatusEnum{
-		DomainSslStatusEnumInactive, DomainSslStatusEnumWaitingForDns, DomainSslStatusEnumBeingInstalled, DomainSslStatusEnumActive, DomainSslStatusEnumInstallationFailed,
+		DomainSslStatusEnumInactive, DomainSslStatusEnumWaitingForDns, DomainSslStatusEnumBeingInstalled, DomainSslStatusEnumBeingRenewed, DomainSslStatusEnumActive,
 	}
 }
 
@@ -87,10 +87,10 @@ func (enum DomainSslStatusEnum) IsBeingInstalled() bool {
 	return enum.Is(DomainSslStatusEnumBeingInstalled)
 }
 
-func (enum DomainSslStatusEnum) IsActive() bool {
-	return enum.Is(DomainSslStatusEnumActive)
+func (enum DomainSslStatusEnum) IsBeingRenewed() bool {
+	return enum.Is(DomainSslStatusEnumBeingRenewed)
 }
 
-func (enum DomainSslStatusEnum) IsInstallationFailed() bool {
-	return enum.Is(DomainSslStatusEnumInstallationFailed)
+func (enum DomainSslStatusEnum) IsActive() bool {
+	return enum.Is(DomainSslStatusEnumActive)
 }

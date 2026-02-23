@@ -16,7 +16,6 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*FirstClassRecipeElk)(nil)
 
 type FirstClassRecipeElk struct {
-	ClientId                 uuid.ClientId              `json:"clientId"`
 	ElkProjectId             uuid.ProjectIdNull         `json:"elkProjectId"`
 	ForwardLogsFromProjectId uuid.ProjectIdNull         `json:"forwardLogsFromProjectId"`
 	ElasticsearchMode        *enum.ServiceStackModeEnum `json:"elasticsearchMode"`
@@ -25,9 +24,6 @@ type FirstClassRecipeElk struct {
 	IncludeApm               types.Bool                 `json:"includeApm"`
 }
 
-func (dto FirstClassRecipeElk) GetClientId() uuid.ClientId {
-	return dto.ClientId
-}
 func (dto FirstClassRecipeElk) GetElkProjectId() uuid.ProjectIdNull {
 	return dto.ElkProjectId
 }
@@ -49,7 +45,6 @@ func (dto FirstClassRecipeElk) GetIncludeApm() types.Bool {
 
 func (dto *FirstClassRecipeElk) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		ClientId                 *uuid.ClientId
 		ElkProjectId             uuid.ProjectIdNull
 		ForwardLogsFromProjectId uuid.ProjectIdNull
 		ElasticsearchMode        *enum.ServiceStackModeEnum
@@ -62,9 +57,6 @@ func (dto *FirstClassRecipeElk) UnmarshalJSON(b []byte) error {
 		return validator.JsonValidation("FirstClassRecipeElk", err)
 	}
 	var errorList validator.ErrorList
-	if aux.ClientId == nil {
-		errorList = errorList.With(validator.NewError("clientId", "field is required"))
-	}
 	if aux.IncludeLogstash == nil {
 		errorList = errorList.With(validator.NewError("includeLogstash", "field is required"))
 	}
@@ -74,7 +66,6 @@ func (dto *FirstClassRecipeElk) UnmarshalJSON(b []byte) error {
 	if errorList != nil {
 		return errorList.GetError()
 	}
-	dto.ClientId = *aux.ClientId
 	dto.ElkProjectId = aux.ElkProjectId
 	dto.ForwardLogsFromProjectId = aux.ForwardLogsFromProjectId
 	dto.ElasticsearchMode = aux.ElasticsearchMode

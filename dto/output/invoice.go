@@ -20,7 +20,7 @@ type Invoice struct {
 	PaymentId       uuid.CardPaymentIdNull `json:"paymentId"`
 	Created         types.DateTime         `json:"created"`
 	LastUpdate      types.DateTime         `json:"lastUpdate"`
-	Status          enum.InvoiceStatusEnum `json:"status"`
+	Type            enum.InvoiceTypeEnum   `json:"type"`
 	Number          types.String           `json:"number"`
 	BillingInfo     types.JsonRawMessage   `json:"billingInfo"`
 	Supplier        types.JsonRawMessage   `json:"supplier"`
@@ -32,4 +32,5 @@ type Invoice struct {
 	Total           types.Float            `json:"total"`
 	DueDate         types.DateTime         `json:"dueDate"`
 	PaidDate        types.DateTimeNull     `json:"paidDate"`
+	RefundedBy      types.StringNull       `json:"refundedBy"`
 }

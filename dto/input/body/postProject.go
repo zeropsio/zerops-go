@@ -8,6 +8,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -25,7 +26,7 @@ type PostProject struct {
 	EnvIsolation     types.StringNull        `json:"envIsolation"`
 	SshIsolation     types.StringNull        `json:"sshIsolation"`
 	MaxCreditLimit   types.DecimalNull       `json:"maxCreditLimit"`
-	Location         types.StringNull        `json:"location"`
+	Location         stringId.LocationIdNull `json:"location"`
 }
 
 func (dto PostProject) GetName() types.String {
@@ -58,7 +59,7 @@ func (dto PostProject) GetSshIsolation() types.StringNull {
 func (dto PostProject) GetMaxCreditLimit() types.DecimalNull {
 	return dto.MaxCreditLimit
 }
-func (dto PostProject) GetLocation() types.StringNull {
+func (dto PostProject) GetLocation() stringId.LocationIdNull {
 	return dto.Location
 }
 
@@ -92,7 +93,7 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 		EnvIsolation     types.StringNull
 		SshIsolation     types.StringNull
 		MaxCreditLimit   types.DecimalNull
-		Location         types.StringNull
+		Location         stringId.LocationIdNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {

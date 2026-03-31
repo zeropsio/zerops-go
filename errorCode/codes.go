@@ -332,6 +332,7 @@ const (
 	AddonNotFound                                            ErrorCode = "addonNotFound"
 	InvoiceNotFound                                          ErrorCode = "invoiceNotFound"
 	PriceListNotFound                                        ErrorCode = "priceListNotFound"
+	InvoiceAlreadyRefunded                                   ErrorCode = "invoiceAlreadyRefunded"
 	CostLimitTooSmall                                        ErrorCode = "costLimitTooSmall"
 	InvalidVpnPublicKey                                      ErrorCode = "invalidVpnPublicKey"
 	VpnPublicKeyNotFound                                     ErrorCode = "vpnPublicKeyNotFound"

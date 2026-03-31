@@ -30,4 +30,5 @@ type ServiceStackLight struct {
 	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
 	NestId                    stringId.NestId                    `json:"nestId"`
 	RecipeSource              types.TextNull                     `json:"recipeSource"`
+	RecipeSourceUrl           types.TextNull                     `json:"recipeSourceUrl"`
 }

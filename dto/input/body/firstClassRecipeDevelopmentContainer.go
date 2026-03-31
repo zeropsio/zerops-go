@@ -16,6 +16,7 @@ var _ json.Unmarshaler = (*FirstClassRecipeDevelopmentContainer)(nil)
 type FirstClassRecipeDevelopmentContainer struct {
 	ServiceImportYaml      types.Text     `json:"serviceImportYaml"`
 	RecipeSource           types.TextNull `json:"recipeSource"`
+	RecipeSourceUrl        types.TextNull `json:"recipeSourceUrl"`
 	CreateIntegrationToken types.BoolNull `json:"createIntegrationToken"`
 }
 
@@ -25,6 +26,9 @@ func (dto FirstClassRecipeDevelopmentContainer) GetServiceImportYaml() types.Tex
 func (dto FirstClassRecipeDevelopmentContainer) GetRecipeSource() types.TextNull {
 	return dto.RecipeSource
 }
+func (dto FirstClassRecipeDevelopmentContainer) GetRecipeSourceUrl() types.TextNull {
+	return dto.RecipeSourceUrl
+}
 func (dto FirstClassRecipeDevelopmentContainer) GetCreateIntegrationToken() types.BoolNull {
 	return dto.CreateIntegrationToken
 }
@@ -33,6 +37,7 @@ func (dto *FirstClassRecipeDevelopmentContainer) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ServiceImportYaml      *types.Text
 		RecipeSource           types.TextNull
+		RecipeSourceUrl        types.TextNull
 		CreateIntegrationToken types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -48,6 +53,7 @@ func (dto *FirstClassRecipeDevelopmentContainer) UnmarshalJSON(b []byte) error {
 	}
 	dto.ServiceImportYaml = *aux.ServiceImportYaml
 	dto.RecipeSource = aux.RecipeSource
+	dto.RecipeSourceUrl = aux.RecipeSourceUrl
 	dto.CreateIntegrationToken = aux.CreateIntegrationToken
 
 	return nil

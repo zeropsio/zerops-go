@@ -31,6 +31,7 @@ type ServiceStackProcess struct {
 	CdnEnabled                types.Bool                         `json:"cdnEnabled"`
 	NestId                    stringId.NestId                    `json:"nestId"`
 	RecipeSource              types.TextNull                     `json:"recipeSource"`
+	RecipeSourceUrl           types.TextNull                     `json:"recipeSourceUrl"`
 	Ports                     ServiceStackProcessPorts           `json:"ports"`
 	RequestedPorts            RequestedPortsJsonObject           `json:"requestedPorts"`
 	Created                   types.DateTime                     `json:"created"`

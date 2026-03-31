@@ -5,8 +5,6 @@ package output
 import (
 	"encoding/json"
 	"strconv"
-
-	"github.com/zeropsio/zerops-go/types"
 )
 
 var _ strconv.NumError
@@ -15,7 +13,7 @@ type Settings struct {
 	CurrencyList     SettingsCurrencyList     `json:"currencyList"`
 	LanguageList     SettingsLanguageList     `json:"languageList"`
 	ServiceStackList SettingsServiceStackList `json:"serviceStackList"`
-	LocationList     types.StringArray        `json:"locationList"`
+	LocationList     SettingsLocationList     `json:"locationList"`
 }
 
 type SettingsCurrencyList []Currency
@@ -43,4 +41,13 @@ func (dto SettingsServiceStackList) MarshalJSON() ([]byte, error) {
 		return []byte("[]"), nil
 	}
 	return json.Marshal([]ServiceStackType(dto))
+}
+
+type SettingsLocationList []Location
+
+func (dto SettingsLocationList) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]Location(dto))
 }

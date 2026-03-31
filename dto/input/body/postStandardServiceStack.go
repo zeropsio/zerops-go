@@ -8,6 +8,7 @@ import (
 
 	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
+	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -29,7 +30,7 @@ type PostStandardServiceStack struct {
 	EnableSubdomainAccess types.BoolNull                   `json:"enableSubdomainAccess"`
 	CdnEnabled            types.BoolNull                   `json:"cdnEnabled"`
 	Os                    types.StringNull                 `json:"os"`
-	Location              types.StringNull                 `json:"location"`
+	Location              stringId.LocationIdNull          `json:"location"`
 }
 
 func (dto PostStandardServiceStack) GetName() types.String {
@@ -74,7 +75,7 @@ func (dto PostStandardServiceStack) GetCdnEnabled() types.BoolNull {
 func (dto PostStandardServiceStack) GetOs() types.StringNull {
 	return dto.Os
 }
-func (dto PostStandardServiceStack) GetLocation() types.StringNull {
+func (dto PostStandardServiceStack) GetLocation() stringId.LocationIdNull {
 	return dto.Location
 }
 
@@ -103,7 +104,7 @@ func (dto *PostStandardServiceStack) UnmarshalJSON(b []byte) error {
 		EnableSubdomainAccess types.BoolNull
 		CdnEnabled            types.BoolNull
 		Os                    types.StringNull
-		Location              types.StringNull
+		Location              stringId.LocationIdNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {

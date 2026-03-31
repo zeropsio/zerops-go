@@ -14,8 +14,9 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ProjectImport)(nil)
 
 type ProjectImport struct {
-	Yaml         types.Text     `json:"yaml"`
-	RecipeSource types.TextNull `json:"recipeSource"`
+	Yaml            types.Text     `json:"yaml"`
+	RecipeSource    types.TextNull `json:"recipeSource"`
+	RecipeSourceUrl types.TextNull `json:"recipeSourceUrl"`
 }
 
 func (dto ProjectImport) GetYaml() types.Text {
@@ -24,11 +25,15 @@ func (dto ProjectImport) GetYaml() types.Text {
 func (dto ProjectImport) GetRecipeSource() types.TextNull {
 	return dto.RecipeSource
 }
+func (dto ProjectImport) GetRecipeSourceUrl() types.TextNull {
+	return dto.RecipeSourceUrl
+}
 
 func (dto *ProjectImport) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Yaml         *types.Text
-		RecipeSource types.TextNull
+		Yaml            *types.Text
+		RecipeSource    types.TextNull
+		RecipeSourceUrl types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -43,6 +48,7 @@ func (dto *ProjectImport) UnmarshalJSON(b []byte) error {
 	}
 	dto.Yaml = *aux.Yaml
 	dto.RecipeSource = aux.RecipeSource
+	dto.RecipeSourceUrl = aux.RecipeSourceUrl
 
 	return nil
 }

@@ -144,7 +144,6 @@ const (
 	ProcessIsAlreadyRunning                                  ErrorCode = "processIsAlreadyRunning"
 	UnableToCreateProcess                                    ErrorCode = "unableToCreateProcess"
 	CreateProcessQueuedProjectProcessCountExceeded           ErrorCode = "createProcessQueuedProjectProcessCountExceeded"
-	ManualRepairRequired                                     ErrorCode = "manualRepairRequired"
 	NothingToSync                                            ErrorCode = "nothingToSync"
 	IsNotPossibleToEditAnotherUser                           ErrorCode = "isNotPossibleToEditAnotherUser"
 	ActiveServiceStackExistsInProject                        ErrorCode = "activeServiceStackExistsInProject"

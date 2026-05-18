@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"strconv"
 
+	"github.com/zeropsio/zerops-go/types"
 	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
@@ -15,10 +16,10 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*FirstClassRecipePrometheus)(nil)
 
 type FirstClassRecipePrometheus struct {
-	PrometheusProjectId         uuid.ProjectIdNull         `json:"prometheusProjectId"`
-	ForwardMetricsFromProjectId uuid.ProjectId             `json:"forwardMetricsFromProjectId"`
-	GrafanaDatabaseMode         *enum.ServiceStackModeEnum `json:"grafanaDatabaseMode"`
-	ProjectCorePackage          *enum.ProjectModeEnum      `json:"projectCorePackage"`
+	PrometheusProjectId         uuid.ProjectIdNull    `json:"prometheusProjectId"`
+	ForwardMetricsFromProjectId uuid.ProjectId        `json:"forwardMetricsFromProjectId"`
+	GrafanaDatabaseMode         types.StringNull      `json:"grafanaDatabaseMode"`
+	ProjectCorePackage          *enum.ProjectModeEnum `json:"projectCorePackage"`
 }
 
 func (dto FirstClassRecipePrometheus) GetPrometheusProjectId() uuid.ProjectIdNull {
@@ -27,7 +28,7 @@ func (dto FirstClassRecipePrometheus) GetPrometheusProjectId() uuid.ProjectIdNul
 func (dto FirstClassRecipePrometheus) GetForwardMetricsFromProjectId() uuid.ProjectId {
 	return dto.ForwardMetricsFromProjectId
 }
-func (dto FirstClassRecipePrometheus) GetGrafanaDatabaseMode() *enum.ServiceStackModeEnum {
+func (dto FirstClassRecipePrometheus) GetGrafanaDatabaseMode() types.StringNull {
 	return dto.GrafanaDatabaseMode
 }
 func (dto FirstClassRecipePrometheus) GetProjectCorePackage() *enum.ProjectModeEnum {
@@ -38,7 +39,7 @@ func (dto *FirstClassRecipePrometheus) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		PrometheusProjectId         uuid.ProjectIdNull
 		ForwardMetricsFromProjectId *uuid.ProjectId
-		GrafanaDatabaseMode         *enum.ServiceStackModeEnum
+		GrafanaDatabaseMode         types.StringNull
 		ProjectCorePackage          *enum.ProjectModeEnum
 	}{}
 	err := json.Unmarshal(b, &aux)

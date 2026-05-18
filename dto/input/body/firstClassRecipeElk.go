@@ -16,12 +16,12 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*FirstClassRecipeElk)(nil)
 
 type FirstClassRecipeElk struct {
-	ElkProjectId             uuid.ProjectIdNull         `json:"elkProjectId"`
-	ForwardLogsFromProjectId uuid.ProjectIdNull         `json:"forwardLogsFromProjectId"`
-	ElasticsearchMode        *enum.ServiceStackModeEnum `json:"elasticsearchMode"`
-	ProjectCorePackage       *enum.ProjectModeEnum      `json:"projectCorePackage"`
-	IncludeLogstash          types.Bool                 `json:"includeLogstash"`
-	IncludeApm               types.Bool                 `json:"includeApm"`
+	ElkProjectId             uuid.ProjectIdNull    `json:"elkProjectId"`
+	ForwardLogsFromProjectId uuid.ProjectIdNull    `json:"forwardLogsFromProjectId"`
+	ElasticsearchMode        types.StringNull      `json:"elasticsearchMode"`
+	ProjectCorePackage       *enum.ProjectModeEnum `json:"projectCorePackage"`
+	IncludeLogstash          types.Bool            `json:"includeLogstash"`
+	IncludeApm               types.Bool            `json:"includeApm"`
 }
 
 func (dto FirstClassRecipeElk) GetElkProjectId() uuid.ProjectIdNull {
@@ -30,7 +30,7 @@ func (dto FirstClassRecipeElk) GetElkProjectId() uuid.ProjectIdNull {
 func (dto FirstClassRecipeElk) GetForwardLogsFromProjectId() uuid.ProjectIdNull {
 	return dto.ForwardLogsFromProjectId
 }
-func (dto FirstClassRecipeElk) GetElasticsearchMode() *enum.ServiceStackModeEnum {
+func (dto FirstClassRecipeElk) GetElasticsearchMode() types.StringNull {
 	return dto.ElasticsearchMode
 }
 func (dto FirstClassRecipeElk) GetProjectCorePackage() *enum.ProjectModeEnum {
@@ -47,7 +47,7 @@ func (dto *FirstClassRecipeElk) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		ElkProjectId             uuid.ProjectIdNull
 		ForwardLogsFromProjectId uuid.ProjectIdNull
-		ElasticsearchMode        *enum.ServiceStackModeEnum
+		ElasticsearchMode        types.StringNull
 		ProjectCorePackage       *enum.ProjectModeEnum
 		IncludeLogstash          *types.Bool
 		IncludeApm               *types.Bool

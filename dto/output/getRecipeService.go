@@ -21,7 +21,6 @@ type GetRecipeService struct {
 	TypeVersionName    types.String                       `json:"typeVersionName"`
 	ExactVersionNumber types.String                       `json:"exactVersionNumber"`
 	Category           enum.ServiceStackTypeCategoryEnum  `json:"category"`
-	Mode               enum.ServiceStackModeEnum          `json:"mode"`
 	GitRepo            types.StringNull                   `json:"gitRepo"`
 	Content            types.StringNull                   `json:"content"`
 	ZeropsYaml         types.StringNull                   `json:"zeropsYaml"`

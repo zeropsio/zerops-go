@@ -42,8 +42,8 @@ func (r PostProjectServiceStackResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostProjectServiceStack(ctx context.Context, inputDtoPath path.ServiceStackServiceStackTypeVersionId, inputDtoBody body.PostStandardServiceStack) (postProjectServiceStackResponse PostProjectServiceStackResponse, err error) {
-	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/service-stack/" + inputDtoPath.ServiceStackTypeVersionId.Native() + ""
+func (h Handler) PostProjectServiceStack(ctx context.Context, inputDtoPath path.ProjectId, inputDtoBody body.PostServiceStack) (postProjectServiceStackResponse PostProjectServiceStackResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/service-stack"
 
 	var response PostProjectServiceStackResponse
 	sdkResponse := sdkBase.Post(

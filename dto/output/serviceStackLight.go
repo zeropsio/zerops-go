@@ -20,10 +20,12 @@ type ServiceStackLight struct {
 	ServiceStackTypeInfo      ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
 	ServiceStackTypeId        stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
 	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"`
+	Base                      types.String                       `json:"base"`
 	IsSystem                  types.Bool                         `json:"isSystem"`
 	StartOnProjectStart       types.Bool                         `json:"startOnProjectStart"`
 	GithubIntegration         *GithubIntegration                 `json:"githubIntegration"`
 	GitlabIntegration         *GitlabIntegration                 `json:"gitlabIntegration"`
+	AutoscalingProfileId      types.StringNull                   `json:"autoscalingProfileId"`
 	CurrentAutoscaling        *CustomAutoscaling                 `json:"currentAutoscaling"`
 	CustomAutoscaling         *CustomAutoscaling                 `json:"customAutoscaling"`
 	BuildCache                *BuildCache                        `json:"buildCache"`

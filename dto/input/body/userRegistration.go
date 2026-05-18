@@ -21,6 +21,7 @@ type UserRegistration struct {
 	AccountName types.String        `json:"accountName"`
 	Name        types.String        `json:"name"`
 	PromoCode   types.StringNull    `json:"promoCode"`
+	Reference   types.StringNull    `json:"reference"`
 	Token       types.TextNull      `json:"token"`
 	Passkey     types.BoolNull      `json:"passkey"`
 }
@@ -43,6 +44,9 @@ func (dto UserRegistration) GetName() types.String {
 func (dto UserRegistration) GetPromoCode() types.StringNull {
 	return dto.PromoCode
 }
+func (dto UserRegistration) GetReference() types.StringNull {
+	return dto.Reference
+}
 func (dto UserRegistration) GetToken() types.TextNull {
 	return dto.Token
 }
@@ -58,6 +62,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 		AccountName *types.String
 		Name        *types.String
 		PromoCode   types.StringNull
+		Reference   types.StringNull
 		Token       types.TextNull
 		Passkey     types.BoolNull
 	}{}
@@ -87,6 +92,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	dto.AccountName = *aux.AccountName
 	dto.Name = *aux.Name
 	dto.PromoCode = aux.PromoCode
+	dto.Reference = aux.Reference
 	dto.Token = aux.Token
 	dto.Passkey = aux.Passkey
 

@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
-	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/types/uuid"
 	"github.com/zeropsio/zerops-go/validator"
 )
@@ -17,7 +16,8 @@ var _ json.Unmarshaler = (*PutStandardServiceStackTriggerPipeline)(nil)
 
 type PutStandardServiceStackTriggerPipeline struct {
 	CustomAutoscaling     *CustomAutoscaling                             `json:"customAutoscaling"`
-	Mode                  *enum.ServiceStackModeEnum                     `json:"mode"`
+	AutoscalingProfileId  types.StringNull                               `json:"autoscalingProfileId"`
+	Mode                  types.StringNull                               `json:"mode"`
 	AppVersionId          uuid.AppVersionIdNull                          `json:"appVersionId"`
 	UserData              PutStandardServiceStackTriggerPipelineUserData `json:"userData"`
 	UserDataEnvFile       types.TextNull                                 `json:"userDataEnvFile"`
@@ -31,7 +31,10 @@ type PutStandardServiceStackTriggerPipeline struct {
 func (dto PutStandardServiceStackTriggerPipeline) GetCustomAutoscaling() *CustomAutoscaling {
 	return dto.CustomAutoscaling
 }
-func (dto PutStandardServiceStackTriggerPipeline) GetMode() *enum.ServiceStackModeEnum {
+func (dto PutStandardServiceStackTriggerPipeline) GetAutoscalingProfileId() types.StringNull {
+	return dto.AutoscalingProfileId
+}
+func (dto PutStandardServiceStackTriggerPipeline) GetMode() types.StringNull {
 	return dto.Mode
 }
 func (dto PutStandardServiceStackTriggerPipeline) GetAppVersionId() uuid.AppVersionIdNull {
@@ -71,7 +74,8 @@ func (dto PutStandardServiceStackTriggerPipelineUserData) MarshalJSON() ([]byte,
 func (dto *PutStandardServiceStackTriggerPipeline) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		CustomAutoscaling     *CustomAutoscaling
-		Mode                  *enum.ServiceStackModeEnum
+		AutoscalingProfileId  types.StringNull
+		Mode                  types.StringNull
 		AppVersionId          uuid.AppVersionIdNull
 		UserData              *PutStandardServiceStackTriggerPipelineUserData
 		UserDataEnvFile       types.TextNull
@@ -93,6 +97,7 @@ func (dto *PutStandardServiceStackTriggerPipeline) UnmarshalJSON(b []byte) error
 		return errorList.GetError()
 	}
 	dto.CustomAutoscaling = aux.CustomAutoscaling
+	dto.AutoscalingProfileId = aux.AutoscalingProfileId
 	dto.Mode = aux.Mode
 	dto.AppVersionId = aux.AppVersionId
 	dto.UserData = *aux.UserData

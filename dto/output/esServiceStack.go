@@ -30,7 +30,7 @@ type EsServiceStack struct {
 	Ports                              EsServiceStackPorts                `json:"ports"`
 	RequestedPorts                     RequestedPortsJsonObject           `json:"requestedPorts"`
 	IsSystem                           types.Bool                         `json:"isSystem"`
-	Mode                               *enum.ServiceStackModeEnum         `json:"mode"`
+	Mode                               types.StringNull                   `json:"mode"`
 	SubdomainAccess                    types.Bool                         `json:"subdomainAccess"`
 	VersionNumber                      types.EmptyString                  `json:"versionNumber"`
 	ReloadAvailable                    types.Bool                         `json:"reloadAvailable"`

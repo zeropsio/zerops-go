@@ -69,7 +69,7 @@ func VerticalAutoscalingCpuModeEnumAllPrivate() []VerticalAutoscalingCpuModeEnum
 }
 
 func VerticalAutoscalingCpuModeEnumDefault() VerticalAutoscalingCpuModeEnum {
-	return VerticalAutoscalingCpuModeEnumShared
+	return ""
 }
 
 func (enum VerticalAutoscalingCpuModeEnum) IsDedicated() bool {

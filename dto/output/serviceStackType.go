@@ -20,14 +20,24 @@ type ServiceStackType struct {
 	Created                     types.DateTime                              `json:"created"`
 	LastUpdate                  types.DateTime                              `json:"lastUpdate"`
 	Category                    enum.ServiceStackTypeCategoryEnum           `json:"category"`
+	Subcategory                 types.String                                `json:"subcategory"`
+	DocsUrl                     types.String                                `json:"docsUrl"`
+	IsBuild                     types.Bool                                  `json:"isBuild"`
+	IsRuntime                   types.Bool                                  `json:"isRuntime"`
+	IsManaged                   types.Bool                                  `json:"isManaged"`
+	HasBackup                   types.Bool                                  `json:"hasBackup"`
+	HasAccessDetails            types.Bool                                  `json:"hasAccessDetails"`
+	HasConfiguration            types.Bool                                  `json:"hasConfiguration"`
+	OsList                      types.StringArray                           `json:"osList"`
+	ModeList                    types.StringArray                           `json:"modeList"`
 	ServiceStackTypeVersionList ServiceStackTypeServiceStackTypeVersionList `json:"serviceStackTypeVersionList"`
 }
 
-type ServiceStackTypeServiceStackTypeVersionList []ServiceStackTypeVersion
+type ServiceStackTypeServiceStackTypeVersionList []ServiceStackTypeVersionLight
 
 func (dto ServiceStackTypeServiceStackTypeVersionList) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]ServiceStackTypeVersion(dto))
+	return json.Marshal([]ServiceStackTypeVersionLight(dto))
 }

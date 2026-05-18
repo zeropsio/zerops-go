@@ -12,6 +12,7 @@ import (
 var _ strconv.NumError
 
 type ProjectUserRole struct {
-	Id       uuid.ClientUserId           `json:"id"`
-	RoleCode enum.ClientUserRoleCodeEnum `json:"roleCode"`
+	Id           uuid.ClientUserProjectId    `json:"id"`
+	ClientUserId uuid.ClientUserId           `json:"clientUserId"`
+	RoleCode     enum.ClientUserRoleCodeEnum `json:"roleCode"`
 }

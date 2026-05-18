@@ -14,16 +14,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*PostClient)(nil)
 
 type PostClient struct {
-	AccountName types.String `json:"accountName"`
+	AccountName types.String     `json:"accountName"`
+	Reference   types.StringNull `json:"reference"`
 }
 
 func (dto PostClient) GetAccountName() types.String {
 	return dto.AccountName
 }
+func (dto PostClient) GetReference() types.StringNull {
+	return dto.Reference
+}
 
 func (dto *PostClient) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		AccountName *types.String
+		Reference   types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -37,6 +42,7 @@ func (dto *PostClient) UnmarshalJSON(b []byte) error {
 		return errorList.GetError()
 	}
 	dto.AccountName = *aux.AccountName
+	dto.Reference = aux.Reference
 
 	return nil
 }

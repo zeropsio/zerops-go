@@ -17,4 +17,5 @@ type ProjectLog struct {
 	Url         types.String               `json:"url"`
 	UrlInfo     types.String               `json:"urlInfo"`
 	UrlPlain    types.String               `json:"urlPlain"`
+	UrlUi       types.String               `json:"urlUi"`
 }

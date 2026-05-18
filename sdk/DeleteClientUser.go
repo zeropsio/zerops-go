@@ -7,13 +7,20 @@ import (
 	"errors"
 	"net/http"
 
+	"net/url"
+	"strconv"
+	"strings"
+
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
+
+var _ strconv.NumError
 
 type DeleteClientUserResponse struct {
 	success            output.Success
@@ -41,8 +48,18 @@ func (r DeleteClientUserResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) DeleteClientUser(ctx context.Context, inputDtoPath path.ClientUserIdDelete) (deleteClientUserResponse DeleteClientUserResponse, err error) {
+func (h Handler) DeleteClientUser(ctx context.Context, inputDtoPath path.ClientUserId, inputDtoQuery query.ClientUserIdDelete) (deleteClientUserResponse DeleteClientUserResponse, err error) {
 	u := "/api/rest/public/client-user/" + inputDtoPath.Id.Native() + ""
+
+	var queryParams []string
+	{
+		param := inputDtoQuery.Force.Native()
+		queryParams = append(queryParams, "force="+url.QueryEscape(strconv.FormatBool(param)))
+	}
+
+	if len(queryParams) > 0 {
+		u += "?" + strings.Join(queryParams, "&")
+	}
 
 	var response DeleteClientUserResponse
 	sdkResponse := sdkBase.Delete(

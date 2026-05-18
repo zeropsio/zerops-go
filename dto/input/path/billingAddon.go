@@ -8,5 +8,5 @@ import (
 
 type BillingAddon struct {
 	ClientId uuid.ClientId
-	Id       uuid.GenericId
+	Id       uuid.GenericUuidId
 }

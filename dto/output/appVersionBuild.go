@@ -13,14 +13,15 @@ import (
 var _ strconv.NumError
 
 type AppVersionBuild struct {
-	ServiceStackId            uuid.ServiceStackIdNull                `json:"serviceStackId"`
-	ServiceStackName          types.StringNull                       `json:"serviceStackName"`
-	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionIdNull `json:"serviceStackTypeVersionId"`
-	PipelineStart             types.DateTimeNull                     `json:"pipelineStart"`
-	PipelineFinish            types.DateTimeNull                     `json:"pipelineFinish"`
-	PipelineFailed            types.DateTimeNull                     `json:"pipelineFailed"`
-	ContainerCreationStart    types.DateTimeNull                     `json:"containerCreationStart"`
-	StartDate                 types.DateTimeNull                     `json:"startDate"`
-	EndDate                   types.DateTimeNull                     `json:"endDate"`
-	CacheSnapshotId           uuid.BuildCacheSnapshotIdNull          `json:"cacheSnapshotId"`
+	ServiceStackId              uuid.ServiceStackIdNull                `json:"serviceStackId"`
+	ServiceStackName            types.StringNull                       `json:"serviceStackName"`
+	ServiceStackTypeVersionId   stringId.ServiceStackTypeVersionIdNull `json:"serviceStackTypeVersionId"`
+	ServiceStackTypeVersionName types.StringNull                       `json:"serviceStackTypeVersionName"`
+	PipelineStart               types.DateTimeNull                     `json:"pipelineStart"`
+	PipelineFinish              types.DateTimeNull                     `json:"pipelineFinish"`
+	PipelineFailed              types.DateTimeNull                     `json:"pipelineFailed"`
+	ContainerCreationStart      types.DateTimeNull                     `json:"containerCreationStart"`
+	StartDate                   types.DateTimeNull                     `json:"startDate"`
+	EndDate                     types.DateTimeNull                     `json:"endDate"`
+	CacheSnapshotId             uuid.BuildCacheSnapshotIdNull          `json:"cacheSnapshotId"`
 }

@@ -19,7 +19,7 @@ type ServiceStackLight struct {
 	Name                      types.String                       `json:"name"`
 	ServiceStackTypeInfo      ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
 	ServiceStackTypeId        stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
-	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"`
+	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"` // Deprecated
 	Base                      types.String                       `json:"base"`
 	IsSystem                  types.Bool                         `json:"isSystem"`
 	StartOnProjectStart       types.Bool                         `json:"startOnProjectStart"`

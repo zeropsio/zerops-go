@@ -20,7 +20,7 @@ type EsServiceStack struct {
 	ProjectId                          uuid.ProjectId                     `json:"projectId"`
 	InstanceId                         uuid.InstanceId                    `json:"instanceId"`
 	ServiceStackTypeId                 stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
-	ServiceStackTypeVersionId          stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"`
+	ServiceStackTypeVersionId          stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"` // Deprecated
 	DriverId                           stringId.DriverIdNull              `json:"driverId"`
 	ServiceStackTypeInfo               ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
 	Status                             enum.ServiceStackStatusEnum        `json:"status"`
@@ -30,7 +30,7 @@ type EsServiceStack struct {
 	Ports                              EsServiceStackPorts                `json:"ports"`
 	RequestedPorts                     RequestedPortsJsonObject           `json:"requestedPorts"`
 	IsSystem                           types.Bool                         `json:"isSystem"`
-	Mode                               types.StringNull                   `json:"mode"`
+	Mode                               types.StringNull                   `json:"mode"` // Deprecated
 	SubdomainAccess                    types.Bool                         `json:"subdomainAccess"`
 	VersionNumber                      types.EmptyString                  `json:"versionNumber"`
 	ReloadAvailable                    types.Bool                         `json:"reloadAvailable"`

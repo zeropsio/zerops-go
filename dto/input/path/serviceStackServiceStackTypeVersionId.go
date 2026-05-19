@@ -9,5 +9,5 @@ import (
 
 type ServiceStackServiceStackTypeVersionId struct {
 	Id                        uuid.ProjectId
-	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionId
+	ServiceStackTypeVersionId stringId.ServiceStackTypeVersionId // Deprecated
 }

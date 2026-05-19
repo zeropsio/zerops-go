@@ -20,7 +20,7 @@ type ServiceStack struct {
 	Name                        types.String                       `json:"name"`
 	ServiceStackTypeInfo        ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
 	ServiceStackTypeId          stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
-	ServiceStackTypeVersionId   stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"`
+	ServiceStackTypeVersionId   stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"` // Deprecated
 	Base                        types.String                       `json:"base"`
 	IsSystem                    types.Bool                         `json:"isSystem"`
 	StartOnProjectStart         types.Bool                         `json:"startOnProjectStart"`
@@ -38,7 +38,7 @@ type ServiceStack struct {
 	RequestedPorts              RequestedPortsJsonObject           `json:"requestedPorts"`
 	Created                     types.DateTime                     `json:"created"`
 	LastUpdate                  types.DateTime                     `json:"lastUpdate"`
-	Mode                        types.StringNull                   `json:"mode"`
+	Mode                        types.StringNull                   `json:"mode"` // Deprecated
 	CustomPortsEnabled          types.Bool                         `json:"customPortsEnabled"`
 	SubdomainAccess             types.Bool                         `json:"subdomainAccess"`
 	ReloadAvailable             types.Bool                         `json:"reloadAvailable"`

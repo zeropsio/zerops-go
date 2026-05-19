@@ -17,7 +17,7 @@ var _ json.Unmarshaler = (*PutStandardServiceStackTriggerPipeline)(nil)
 type PutStandardServiceStackTriggerPipeline struct {
 	CustomAutoscaling     *CustomAutoscaling                             `json:"customAutoscaling"`
 	AutoscalingProfileId  types.StringNull                               `json:"autoscalingProfileId"`
-	Mode                  types.StringNull                               `json:"mode"`
+	Mode                  types.StringNull                               `json:"mode"` // Deprecated
 	AppVersionId          uuid.AppVersionIdNull                          `json:"appVersionId"`
 	UserData              PutStandardServiceStackTriggerPipelineUserData `json:"userData"`
 	UserDataEnvFile       types.TextNull                                 `json:"userDataEnvFile"`

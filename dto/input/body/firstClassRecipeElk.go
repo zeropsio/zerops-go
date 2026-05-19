@@ -18,7 +18,7 @@ var _ json.Unmarshaler = (*FirstClassRecipeElk)(nil)
 type FirstClassRecipeElk struct {
 	ElkProjectId             uuid.ProjectIdNull    `json:"elkProjectId"`
 	ForwardLogsFromProjectId uuid.ProjectIdNull    `json:"forwardLogsFromProjectId"`
-	ElasticsearchMode        types.StringNull      `json:"elasticsearchMode"`
+	ElasticsearchMode        types.StringNull      `json:"elasticsearchMode"` // Deprecated
 	ProjectCorePackage       *enum.ProjectModeEnum `json:"projectCorePackage"`
 	IncludeLogstash          types.Bool            `json:"includeLogstash"`
 	IncludeApm               types.Bool            `json:"includeApm"`

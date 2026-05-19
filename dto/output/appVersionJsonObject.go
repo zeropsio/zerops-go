@@ -18,7 +18,7 @@ type AppVersionJsonObject struct {
 	ProjectId            uuid.ProjectIdNull           `json:"projectId"`
 	Status               *enum.AppVersionStatusEnum   `json:"status"`
 	Source               enum.AppVersionSourceEnum    `json:"source"`
-	Os                   types.StringNull             `json:"os"`
+	Os                   types.StringNull             `json:"os"` // Deprecated
 	Base                 types.StringNull             `json:"base"`
 	Sequence             types.Int                    `json:"sequence"`
 	Name                 types.StringNull             `json:"name"`

@@ -18,7 +18,7 @@ var _ json.Unmarshaler = (*FirstClassRecipePrometheus)(nil)
 type FirstClassRecipePrometheus struct {
 	PrometheusProjectId         uuid.ProjectIdNull    `json:"prometheusProjectId"`
 	ForwardMetricsFromProjectId uuid.ProjectId        `json:"forwardMetricsFromProjectId"`
-	GrafanaDatabaseMode         types.StringNull      `json:"grafanaDatabaseMode"`
+	GrafanaDatabaseMode         types.StringNull      `json:"grafanaDatabaseMode"` // Deprecated
 	ProjectCorePackage          *enum.ProjectModeEnum `json:"projectCorePackage"`
 }
 

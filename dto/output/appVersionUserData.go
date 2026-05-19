@@ -14,5 +14,5 @@ var _ strconv.NumError
 type AppVersionUserData struct {
 	Key     types.String          `json:"key"`
 	Content types.Text            `json:"content"`
-	Type    enum.UserDataTypeEnum `json:"type"`
+	Type    enum.UserDataTypeEnum `json:"type"` // Deprecated
 }

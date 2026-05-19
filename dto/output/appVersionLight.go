@@ -15,7 +15,7 @@ var _ strconv.NumError
 type AppVersionLight struct {
 	Id         uuid.AppVersionId         `json:"id"`
 	Status     enum.AppVersionStatusEnum `json:"status"`
-	Os         types.StringNull          `json:"os"`
+	Os         types.StringNull          `json:"os"` // Deprecated
 	Base       types.StringNull          `json:"base"`
 	Created    types.DateTime            `json:"created"`
 	LastUpdate types.DateTime            `json:"lastUpdate"`

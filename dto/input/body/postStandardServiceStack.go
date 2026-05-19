@@ -30,7 +30,7 @@ type PostStandardServiceStack struct {
 	EnableSubdomainAccess       types.BoolNull                   `json:"enableSubdomainAccess"`
 	CdnEnabled                  types.BoolNull                   `json:"cdnEnabled"`
 	Location                    stringId.LocationIdNull          `json:"location"`
-	Mode                        types.StringNull                 `json:"mode"`
+	Mode                        types.StringNull                 `json:"mode"` // Deprecated
 	Os                          types.StringNull                 `json:"os"`
 }
 

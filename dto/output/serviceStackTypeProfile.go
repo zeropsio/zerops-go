@@ -16,6 +16,6 @@ type ServiceStackTypeProfile struct {
 	Description       types.String      `json:"description"`
 	IsDefault         types.Bool        `json:"isDefault"`
 	CustomAutoscaling CustomAutoscaling `json:"customAutoscaling"`
-	Overrides         types.ObjectMap   `json:"overrides"`
+	Overrides         types.MapNull   `json:"overrides"`
 	Order             types.Int         `json:"order"`
 }

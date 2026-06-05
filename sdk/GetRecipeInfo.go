@@ -22,7 +22,7 @@ import (
 var _ strconv.NumError
 
 type GetRecipeInfoResponse struct {
-	success            output.GetRecipeInfo
+	success            output.GetRecipeData
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -32,7 +32,7 @@ func (r GetRecipeInfoResponse) OutputInterface() (output interface{}, err error)
 	return r.success, r.err
 }
 
-func (r GetRecipeInfoResponse) Output() (output output.GetRecipeInfo, err error) {
+func (r GetRecipeInfoResponse) Output() (output output.GetRecipeData, err error) {
 	return r.success, r.err
 }
 
@@ -54,6 +54,9 @@ func (h Handler) GetRecipeInfo(ctx context.Context, inputDtoQuery query.GetRecip
 	{
 		param := inputDtoQuery.Url.Native()
 		queryParams = append(queryParams, "url="+url.QueryEscape(param))
+	}
+	if param, ok := inputDtoQuery.Invalidate.Get(); ok {
+		queryParams = append(queryParams, "invalidate="+url.QueryEscape(param.Native()))
 	}
 
 	if len(queryParams) > 0 {

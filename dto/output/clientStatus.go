@@ -14,4 +14,5 @@ type ClientStatus struct {
 	Credit      types.Float      `json:"credit"`
 	PromoCredit types.Float      `json:"promoCredit"`
 	ClientInfo  ClientInfoObject `json:"clientInfo"`
+	AutoTopUp   *AutoTopUp       `json:"autoTopUp"`
 }

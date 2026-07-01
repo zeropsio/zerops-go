@@ -7,63 +7,44 @@ import (
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/query"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-var _ strconv.NumError
-
-type GetRecipeInfoResponse struct {
-	success            output.GetRecipeData
+type GetUserVerifyEmailResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetRecipeInfoResponse) OutputInterface() (output interface{}, err error) {
+func (r GetUserVerifyEmailResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetRecipeInfoResponse) Output() (output output.GetRecipeData, err error) {
+func (r GetUserVerifyEmailResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r GetRecipeInfoResponse) Err() error {
+func (r GetUserVerifyEmailResponse) Err() error {
 	return r.err
 }
-func (r GetRecipeInfoResponse) Headers() http.Header {
+func (r GetUserVerifyEmailResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetRecipeInfoResponse) StatusCode() int {
+func (r GetUserVerifyEmailResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetRecipeInfo(ctx context.Context, inputDtoQuery query.GetRecipeInfo) (getRecipeInfoResponse GetRecipeInfoResponse, err error) {
-	u := "/api/rest/public/recipe/info"
+func (h Handler) GetUserVerifyEmail(ctx context.Context, inputDtoPath path.GenericUuid) (getUserVerifyEmailResponse GetUserVerifyEmailResponse, err error) {
+	u := "/api/rest/public/user/verify-email/" + inputDtoPath.Id.Native() + ""
 
-	var queryParams []string
-	{
-		param := inputDtoQuery.Url.Native()
-		queryParams = append(queryParams, "url="+url.QueryEscape(param))
-	}
-	if param, ok := inputDtoQuery.Invalidate.Get(); ok {
-		queryParams = append(queryParams, "invalidate="+url.QueryEscape(param.Native()))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
-
-	var response GetRecipeInfoResponse
+	var response GetUserVerifyEmailResponse
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

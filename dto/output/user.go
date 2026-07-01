@@ -16,6 +16,7 @@ var _ strconv.NumError
 type User struct {
 	Id                 uuid.UserId         `json:"id"`
 	Email              types.Email         `json:"email"`
+	EmailVerified      types.Bool          `json:"emailVerified"`
 	FullName           types.String        `json:"fullName"`
 	FirstName          types.String        `json:"firstName"`
 	LastName           types.EmptyString   `json:"lastName"`

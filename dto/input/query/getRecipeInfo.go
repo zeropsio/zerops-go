@@ -7,5 +7,6 @@ import (
 )
 
 type GetRecipeInfo struct {
-	Url types.String
+	Url        types.String
+	Invalidate types.StringNull
 }

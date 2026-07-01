@@ -7,67 +7,49 @@ import (
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/query"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-var _ strconv.NumError
-
-type GetRecipeInfoResponse struct {
-	success            output.GetRecipeData
+type PutUserSendVerificationEmailResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetRecipeInfoResponse) OutputInterface() (output interface{}, err error) {
+func (r PutUserSendVerificationEmailResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetRecipeInfoResponse) Output() (output output.GetRecipeData, err error) {
+func (r PutUserSendVerificationEmailResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r GetRecipeInfoResponse) Err() error {
+func (r PutUserSendVerificationEmailResponse) Err() error {
 	return r.err
 }
-func (r GetRecipeInfoResponse) Headers() http.Header {
+func (r PutUserSendVerificationEmailResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetRecipeInfoResponse) StatusCode() int {
+func (r PutUserSendVerificationEmailResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetRecipeInfo(ctx context.Context, inputDtoQuery query.GetRecipeInfo) (getRecipeInfoResponse GetRecipeInfoResponse, err error) {
-	u := "/api/rest/public/recipe/info"
+func (h Handler) PutUserSendVerificationEmail(ctx context.Context, inputDtoPath path.UserId) (putUserSendVerificationEmailResponse PutUserSendVerificationEmailResponse, err error) {
+	u := "/api/rest/public/user/" + inputDtoPath.Id.Native() + "/send-verification-email"
 
-	var queryParams []string
-	{
-		param := inputDtoQuery.Url.Native()
-		queryParams = append(queryParams, "url="+url.QueryEscape(param))
-	}
-	if param, ok := inputDtoQuery.Invalidate.Get(); ok {
-		queryParams = append(queryParams, "invalidate="+url.QueryEscape(param.Native()))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
-
-	var response GetRecipeInfoResponse
-	sdkResponse := sdkBase.Get(
+	var response PutUserSendVerificationEmailResponse
+	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,
 		u,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

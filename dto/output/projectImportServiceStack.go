@@ -15,7 +15,6 @@ var _ strconv.NumError
 type ProjectImportServiceStack struct {
 	Id        uuid.ServiceStackId                `json:"id"`
 	Name      types.String                       `json:"name"`
-	Error     *ErrorObject                       `json:"error"`
 	Processes ProjectImportServiceStackProcesses `json:"processes"`
 }
 

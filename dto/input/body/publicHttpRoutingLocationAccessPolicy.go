@@ -18,6 +18,8 @@ type PublicHttpRoutingLocationAccessPolicy struct {
 	Enabled       types.Bool                                                  `json:"enabled"`
 	DefaultPolicy enum.PublicHttpRoutingLocationAccessPolicyDefaultPolicyEnum `json:"defaultPolicy"`
 	Cidr          types.StringArray                                           `json:"cidr"`
+	SetRealIpFrom types.StringArrayNull                                       `json:"setRealIpFrom"`
+	RealIpHeader  types.StringNull                                            `json:"realIpHeader"`
 }
 
 func (dto PublicHttpRoutingLocationAccessPolicy) GetEnabled() types.Bool {
@@ -29,12 +31,20 @@ func (dto PublicHttpRoutingLocationAccessPolicy) GetDefaultPolicy() enum.PublicH
 func (dto PublicHttpRoutingLocationAccessPolicy) GetCidr() types.StringArray {
 	return dto.Cidr
 }
+func (dto PublicHttpRoutingLocationAccessPolicy) GetSetRealIpFrom() types.StringArrayNull {
+	return dto.SetRealIpFrom
+}
+func (dto PublicHttpRoutingLocationAccessPolicy) GetRealIpHeader() types.StringNull {
+	return dto.RealIpHeader
+}
 
 func (dto *PublicHttpRoutingLocationAccessPolicy) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Enabled       *types.Bool
 		DefaultPolicy *enum.PublicHttpRoutingLocationAccessPolicyDefaultPolicyEnum
 		Cidr          *types.StringArray
+		SetRealIpFrom types.StringArrayNull
+		RealIpHeader  types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -56,6 +66,8 @@ func (dto *PublicHttpRoutingLocationAccessPolicy) UnmarshalJSON(b []byte) error 
 	dto.Enabled = *aux.Enabled
 	dto.DefaultPolicy = *aux.DefaultPolicy
 	dto.Cidr = *aux.Cidr
+	dto.SetRealIpFrom = aux.SetRealIpFrom
+	dto.RealIpHeader = aux.RealIpHeader
 
 	return nil
 }

@@ -24,6 +24,7 @@ const (
 	ApplicationTokenNotFound                                 ErrorCode = "applicationTokenNotFound"
 	NotAllowedForApplicationToken                            ErrorCode = "notAllowedForApplicationToken"
 	NotAllowedForIntegrationToken                            ErrorCode = "notAllowedForIntegrationToken"
+	NotAllowedForIntegrationTokenWithoutDelegation           ErrorCode = "notAllowedForIntegrationTokenWithoutDelegation"
 	DeleteExistingApplicationTokens                          ErrorCode = "deleteExistingApplicationTokens"
 	IntegrationTokenRoleConflict                             ErrorCode = "integrationTokenRoleConflict"
 	DuplicateProjectRole                                     ErrorCode = "duplicateProjectRole"

@@ -10,6 +10,7 @@ const (
 	ServiceStackTypeCategoryEnumStandard       = ServiceStackTypeCategoryEnum("STANDARD")
 	ServiceStackTypeCategoryEnumUser           = ServiceStackTypeCategoryEnum("USER")
 	ServiceStackTypeCategoryEnumSharedStorage  = ServiceStackTypeCategoryEnum("SHARED_STORAGE")
+	ServiceStackTypeCategoryEnumLocalStorage   = ServiceStackTypeCategoryEnum("LOCAL_STORAGE")
 	ServiceStackTypeCategoryEnumObjectStorage  = ServiceStackTypeCategoryEnum("OBJECT_STORAGE")
 	ServiceStackTypeCategoryEnumBuild          = ServiceStackTypeCategoryEnum("BUILD")
 	ServiceStackTypeCategoryEnumInternal       = ServiceStackTypeCategoryEnum("INTERNAL")
@@ -55,19 +56,19 @@ func (enum ServiceStackTypeCategoryEnum) Is(values ...ServiceStackTypeCategoryEn
 
 func ServiceStackTypeCategoryEnumAllStrings() []string {
 	return []string{
-		string(ServiceStackTypeCategoryEnumCore), string(ServiceStackTypeCategoryEnumHttpL7Balancer), string(ServiceStackTypeCategoryEnumStandard), string(ServiceStackTypeCategoryEnumUser), string(ServiceStackTypeCategoryEnumSharedStorage), string(ServiceStackTypeCategoryEnumObjectStorage), string(ServiceStackTypeCategoryEnumBuild), string(ServiceStackTypeCategoryEnumInternal), string(ServiceStackTypeCategoryEnumPrepareRuntime),
+		string(ServiceStackTypeCategoryEnumCore), string(ServiceStackTypeCategoryEnumHttpL7Balancer), string(ServiceStackTypeCategoryEnumStandard), string(ServiceStackTypeCategoryEnumUser), string(ServiceStackTypeCategoryEnumSharedStorage), string(ServiceStackTypeCategoryEnumLocalStorage), string(ServiceStackTypeCategoryEnumObjectStorage), string(ServiceStackTypeCategoryEnumBuild), string(ServiceStackTypeCategoryEnumInternal), string(ServiceStackTypeCategoryEnumPrepareRuntime),
 	}
 }
 
 func ServiceStackTypeCategoryEnumAll() []ServiceStackTypeCategoryEnum {
 	return []ServiceStackTypeCategoryEnum{
-		ServiceStackTypeCategoryEnumCore, ServiceStackTypeCategoryEnumHttpL7Balancer, ServiceStackTypeCategoryEnumStandard, ServiceStackTypeCategoryEnumUser, ServiceStackTypeCategoryEnumSharedStorage, ServiceStackTypeCategoryEnumObjectStorage, ServiceStackTypeCategoryEnumBuild, ServiceStackTypeCategoryEnumInternal, ServiceStackTypeCategoryEnumPrepareRuntime,
+		ServiceStackTypeCategoryEnumCore, ServiceStackTypeCategoryEnumHttpL7Balancer, ServiceStackTypeCategoryEnumStandard, ServiceStackTypeCategoryEnumUser, ServiceStackTypeCategoryEnumSharedStorage, ServiceStackTypeCategoryEnumLocalStorage, ServiceStackTypeCategoryEnumObjectStorage, ServiceStackTypeCategoryEnumBuild, ServiceStackTypeCategoryEnumInternal, ServiceStackTypeCategoryEnumPrepareRuntime,
 	}
 }
 
 func ServiceStackTypeCategoryEnumAllPublic() []ServiceStackTypeCategoryEnum {
 	return []ServiceStackTypeCategoryEnum{
-		ServiceStackTypeCategoryEnumCore, ServiceStackTypeCategoryEnumHttpL7Balancer, ServiceStackTypeCategoryEnumStandard, ServiceStackTypeCategoryEnumUser, ServiceStackTypeCategoryEnumSharedStorage, ServiceStackTypeCategoryEnumObjectStorage, ServiceStackTypeCategoryEnumBuild, ServiceStackTypeCategoryEnumInternal, ServiceStackTypeCategoryEnumPrepareRuntime,
+		ServiceStackTypeCategoryEnumCore, ServiceStackTypeCategoryEnumHttpL7Balancer, ServiceStackTypeCategoryEnumStandard, ServiceStackTypeCategoryEnumUser, ServiceStackTypeCategoryEnumSharedStorage, ServiceStackTypeCategoryEnumLocalStorage, ServiceStackTypeCategoryEnumObjectStorage, ServiceStackTypeCategoryEnumBuild, ServiceStackTypeCategoryEnumInternal, ServiceStackTypeCategoryEnumPrepareRuntime,
 	}
 }
 
@@ -97,6 +98,10 @@ func (enum ServiceStackTypeCategoryEnum) IsUser() bool {
 
 func (enum ServiceStackTypeCategoryEnum) IsSharedStorage() bool {
 	return enum.Is(ServiceStackTypeCategoryEnumSharedStorage)
+}
+
+func (enum ServiceStackTypeCategoryEnum) IsLocalStorage() bool {
+	return enum.Is(ServiceStackTypeCategoryEnumLocalStorage)
 }
 
 func (enum ServiceStackTypeCategoryEnum) IsObjectStorage() bool {

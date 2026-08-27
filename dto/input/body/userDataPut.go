@@ -14,8 +14,9 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserDataPut)(nil)
 
 type UserDataPut struct {
-	Key     types.String `json:"key"`
-	Content types.Text   `json:"content"`
+	Key       types.String `json:"key"`
+	Content   types.Text   `json:"content"`
+	Sensitive types.Bool   `json:"sensitive"`
 }
 
 func (dto UserDataPut) GetKey() types.String {
@@ -24,11 +25,15 @@ func (dto UserDataPut) GetKey() types.String {
 func (dto UserDataPut) GetContent() types.Text {
 	return dto.Content
 }
+func (dto UserDataPut) GetSensitive() types.Bool {
+	return dto.Sensitive
+}
 
 func (dto *UserDataPut) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Key     *types.String
-		Content *types.Text
+		Key       *types.String
+		Content   *types.Text
+		Sensitive *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -41,11 +46,15 @@ func (dto *UserDataPut) UnmarshalJSON(b []byte) error {
 	if aux.Content == nil {
 		errorList = errorList.With(validator.NewError("content", "field is required"))
 	}
+	if aux.Sensitive == nil {
+		errorList = errorList.With(validator.NewError("sensitive", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
 	dto.Key = *aux.Key
 	dto.Content = *aux.Content
+	dto.Sensitive = *aux.Sensitive
 
 	return nil
 }

@@ -7,61 +7,44 @@ import (
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
-	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-var _ strconv.NumError
-
-type GetServiceStackExportResponse struct {
-	success            output.ProjectExport
+type GetUserDataRevealResponse struct {
+	success            output.UserDataReveal
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackExportResponse) OutputInterface() (output interface{}, err error) {
+func (r GetUserDataRevealResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackExportResponse) Output() (output output.ProjectExport, err error) {
+func (r GetUserDataRevealResponse) Output() (output output.UserDataReveal, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackExportResponse) Err() error {
+func (r GetUserDataRevealResponse) Err() error {
 	return r.err
 }
-func (r GetServiceStackExportResponse) Headers() http.Header {
+func (r GetUserDataRevealResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackExportResponse) StatusCode() int {
+func (r GetUserDataRevealResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackExport(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoQuery query.GetServiceStackExport) (getServiceStackExportResponse GetServiceStackExportResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/export"
+func (h Handler) GetUserDataReveal(ctx context.Context, inputDtoPath path.UserDataId) (getUserDataRevealResponse GetUserDataRevealResponse, err error) {
+	u := "/api/rest/public/user-data/" + inputDtoPath.Id.Native() + "/reveal"
 
-	var queryParams []string
-	{
-		param := inputDtoQuery.Reveal.Native()
-		queryParams = append(queryParams, "reveal="+url.QueryEscape(strconv.FormatBool(param)))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
-
-	var response GetServiceStackExportResponse
+	var response GetUserDataRevealResponse
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

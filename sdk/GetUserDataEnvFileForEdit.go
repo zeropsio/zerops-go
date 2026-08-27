@@ -22,58 +22,46 @@ import (
 
 var _ strconv.NumError
 
-type GetProjectEnvFileResponse struct {
+type GetUserDataEnvFileForEditResponse struct {
 	success            output.EnvFile
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetProjectEnvFileResponse) OutputInterface() (output interface{}, err error) {
+func (r GetUserDataEnvFileForEditResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectEnvFileResponse) Output() (output output.EnvFile, err error) {
+func (r GetUserDataEnvFileForEditResponse) Output() (output output.EnvFile, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectEnvFileResponse) Err() error {
+func (r GetUserDataEnvFileForEditResponse) Err() error {
 	return r.err
 }
-func (r GetProjectEnvFileResponse) Headers() http.Header {
+func (r GetUserDataEnvFileForEditResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetProjectEnvFileResponse) StatusCode() int {
+func (r GetUserDataEnvFileForEditResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectEnvFile(ctx context.Context, inputDtoPath path.ProjectId, inputDtoQuery query.GetProjectEnvFile) (getProjectEnvFileResponse GetProjectEnvFileResponse, err error) {
-	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/env-file"
+func (h Handler) GetUserDataEnvFileForEdit(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoQuery query.GetUserDataEnvFileForEdit) (getUserDataEnvFileForEditResponse GetUserDataEnvFileForEditResponse, err error) {
+	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/user-data/env-file"
 
 	var queryParams []string
 	{
-		param := inputDtoQuery.Name.Native()
-		queryParams = append(queryParams, "name="+url.QueryEscape(param))
-	}
-	{
-		param := inputDtoQuery.OverrideEnvIsolation.Native()
-		queryParams = append(queryParams, "overrideEnvIsolation="+url.QueryEscape(param))
-	}
-	{
-		param := inputDtoQuery.UserOnly.Native()
-		queryParams = append(queryParams, "userOnly="+url.QueryEscape(strconv.FormatBool(param)))
-	}
-	{
-		param := inputDtoQuery.Reveal.Native()
-		queryParams = append(queryParams, "reveal="+url.QueryEscape(strconv.FormatBool(param)))
+		param := inputDtoQuery.Sensitive.Native()
+		queryParams = append(queryParams, "sensitive="+url.QueryEscape(strconv.FormatBool(param)))
 	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")
 	}
 
-	var response GetProjectEnvFileResponse
+	var response GetUserDataEnvFileForEditResponse
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

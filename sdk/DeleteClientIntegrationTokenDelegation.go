@@ -7,65 +7,49 @@ import (
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
-	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-var _ strconv.NumError
-
-type GetServiceStackExportResponse struct {
-	success            output.ProjectExport
+type DeleteClientIntegrationTokenDelegationResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetServiceStackExportResponse) OutputInterface() (output interface{}, err error) {
+func (r DeleteClientIntegrationTokenDelegationResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackExportResponse) Output() (output output.ProjectExport, err error) {
+func (r DeleteClientIntegrationTokenDelegationResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r GetServiceStackExportResponse) Err() error {
+func (r DeleteClientIntegrationTokenDelegationResponse) Err() error {
 	return r.err
 }
-func (r GetServiceStackExportResponse) Headers() http.Header {
+func (r DeleteClientIntegrationTokenDelegationResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetServiceStackExportResponse) StatusCode() int {
+func (r DeleteClientIntegrationTokenDelegationResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetServiceStackExport(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoQuery query.GetServiceStackExport) (getServiceStackExportResponse GetServiceStackExportResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/export"
+func (h Handler) DeleteClientIntegrationTokenDelegation(ctx context.Context, inputDtoPath path.IntegrationTokenDelegationId) (deleteClientIntegrationTokenDelegationResponse DeleteClientIntegrationTokenDelegationResponse, err error) {
+	u := "/api/rest/public/client/" + inputDtoPath.Id.Native() + "/integration-token/" + inputDtoPath.TokenId.Native() + "/delegation/" + inputDtoPath.DelegationId.Native() + ""
 
-	var queryParams []string
-	{
-		param := inputDtoQuery.Reveal.Native()
-		queryParams = append(queryParams, "reveal="+url.QueryEscape(strconv.FormatBool(param)))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
-
-	var response GetServiceStackExportResponse
-	sdkResponse := sdkBase.Get(
+	var response DeleteClientIntegrationTokenDelegationResponse
+	sdkResponse := sdkBase.Delete(
 		ctx,
 		h.environment,
 		u,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

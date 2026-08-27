@@ -14,6 +14,7 @@ const (
 	ServiceCategoryEnumMessageBroker       = ServiceCategoryEnum("MESSAGE_BROKER")
 	ServiceCategoryEnumUserApplication     = ServiceCategoryEnum("USER_APPLICATION")
 	ServiceCategoryEnumSharedStorage       = ServiceCategoryEnum("SHARED_STORAGE")
+	ServiceCategoryEnumLocalStorage        = ServiceCategoryEnum("LOCAL_STORAGE")
 	ServiceCategoryEnumSystem              = ServiceCategoryEnum("SYSTEM")
 	ServiceCategoryEnumBuild               = ServiceCategoryEnum("BUILD")
 	ServiceCategoryEnumPrepareRuntime      = ServiceCategoryEnum("PREPARE_RUNTIME")
@@ -59,19 +60,19 @@ func (enum ServiceCategoryEnum) Is(values ...ServiceCategoryEnum) bool {
 
 func ServiceCategoryEnumAllStrings() []string {
 	return []string{
-		string(ServiceCategoryEnumEmpty), string(ServiceCategoryEnumMaster), string(ServiceCategoryEnumLogger), string(ServiceCategoryEnumHttpL7Balancer), string(ServiceCategoryEnumApplicationBalancer), string(ServiceCategoryEnumDatabase), string(ServiceCategoryEnumMessageBroker), string(ServiceCategoryEnumUserApplication), string(ServiceCategoryEnumSharedStorage), string(ServiceCategoryEnumSystem), string(ServiceCategoryEnumBuild), string(ServiceCategoryEnumPrepareRuntime), string(ServiceCategoryEnumMetric),
+		string(ServiceCategoryEnumEmpty), string(ServiceCategoryEnumMaster), string(ServiceCategoryEnumLogger), string(ServiceCategoryEnumHttpL7Balancer), string(ServiceCategoryEnumApplicationBalancer), string(ServiceCategoryEnumDatabase), string(ServiceCategoryEnumMessageBroker), string(ServiceCategoryEnumUserApplication), string(ServiceCategoryEnumSharedStorage), string(ServiceCategoryEnumLocalStorage), string(ServiceCategoryEnumSystem), string(ServiceCategoryEnumBuild), string(ServiceCategoryEnumPrepareRuntime), string(ServiceCategoryEnumMetric),
 	}
 }
 
 func ServiceCategoryEnumAll() []ServiceCategoryEnum {
 	return []ServiceCategoryEnum{
-		ServiceCategoryEnumEmpty, ServiceCategoryEnumMaster, ServiceCategoryEnumLogger, ServiceCategoryEnumHttpL7Balancer, ServiceCategoryEnumApplicationBalancer, ServiceCategoryEnumDatabase, ServiceCategoryEnumMessageBroker, ServiceCategoryEnumUserApplication, ServiceCategoryEnumSharedStorage, ServiceCategoryEnumSystem, ServiceCategoryEnumBuild, ServiceCategoryEnumPrepareRuntime, ServiceCategoryEnumMetric,
+		ServiceCategoryEnumEmpty, ServiceCategoryEnumMaster, ServiceCategoryEnumLogger, ServiceCategoryEnumHttpL7Balancer, ServiceCategoryEnumApplicationBalancer, ServiceCategoryEnumDatabase, ServiceCategoryEnumMessageBroker, ServiceCategoryEnumUserApplication, ServiceCategoryEnumSharedStorage, ServiceCategoryEnumLocalStorage, ServiceCategoryEnumSystem, ServiceCategoryEnumBuild, ServiceCategoryEnumPrepareRuntime, ServiceCategoryEnumMetric,
 	}
 }
 
 func ServiceCategoryEnumAllPublic() []ServiceCategoryEnum {
 	return []ServiceCategoryEnum{
-		ServiceCategoryEnumEmpty, ServiceCategoryEnumMaster, ServiceCategoryEnumLogger, ServiceCategoryEnumHttpL7Balancer, ServiceCategoryEnumApplicationBalancer, ServiceCategoryEnumDatabase, ServiceCategoryEnumMessageBroker, ServiceCategoryEnumUserApplication, ServiceCategoryEnumSharedStorage, ServiceCategoryEnumSystem, ServiceCategoryEnumBuild, ServiceCategoryEnumPrepareRuntime, ServiceCategoryEnumMetric,
+		ServiceCategoryEnumEmpty, ServiceCategoryEnumMaster, ServiceCategoryEnumLogger, ServiceCategoryEnumHttpL7Balancer, ServiceCategoryEnumApplicationBalancer, ServiceCategoryEnumDatabase, ServiceCategoryEnumMessageBroker, ServiceCategoryEnumUserApplication, ServiceCategoryEnumSharedStorage, ServiceCategoryEnumLocalStorage, ServiceCategoryEnumSystem, ServiceCategoryEnumBuild, ServiceCategoryEnumPrepareRuntime, ServiceCategoryEnumMetric,
 	}
 }
 
@@ -117,6 +118,10 @@ func (enum ServiceCategoryEnum) IsUserApplication() bool {
 
 func (enum ServiceCategoryEnum) IsSharedStorage() bool {
 	return enum.Is(ServiceCategoryEnumSharedStorage)
+}
+
+func (enum ServiceCategoryEnum) IsLocalStorage() bool {
+	return enum.Is(ServiceCategoryEnumLocalStorage)
 }
 
 func (enum ServiceCategoryEnum) IsSystem() bool {

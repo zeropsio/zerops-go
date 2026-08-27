@@ -15,4 +15,6 @@ type PublicHttpRoutingLocationAccessPolicy struct {
 	Enabled       types.Bool                                                  `json:"enabled"`
 	DefaultPolicy enum.PublicHttpRoutingLocationAccessPolicyDefaultPolicyEnum `json:"defaultPolicy"`
 	Cidr          types.StringArray                                           `json:"cidr"`
+	SetRealIpFrom types.StringArrayNull                                       `json:"setRealIpFrom"`
+	RealIpHeader  types.StringNull                                            `json:"realIpHeader"`
 }

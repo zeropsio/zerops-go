@@ -10,47 +10,45 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackConnectSharedStorageResponse struct {
-	success            output.Process
+type GetProjectEnvRevealResponse struct {
+	success            output.ProjectEnvReveal
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackConnectSharedStorageResponse) OutputInterface() (output interface{}, err error) {
+func (r GetProjectEnvRevealResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackConnectSharedStorageResponse) Output() (output output.Process, err error) {
+func (r GetProjectEnvRevealResponse) Output() (output output.ProjectEnvReveal, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackConnectSharedStorageResponse) Err() error {
+func (r GetProjectEnvRevealResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackConnectSharedStorageResponse) Headers() http.Header {
+func (r GetProjectEnvRevealResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackConnectSharedStorageResponse) StatusCode() int {
+func (r GetProjectEnvRevealResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackConnectSharedStorage(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PutSharedStorageAction) (putServiceStackConnectSharedStorageResponse PutServiceStackConnectSharedStorageResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/connect-shared-storage"
+func (h Handler) GetProjectEnvReveal(ctx context.Context, inputDtoPath path.ProjectEnvId) (getProjectEnvRevealResponse GetProjectEnvRevealResponse, err error) {
+	u := "/api/rest/public/project-env/" + inputDtoPath.Id.Native() + "/reveal"
 
-	var response PutServiceStackConnectSharedStorageResponse
-	sdkResponse := sdkBase.Put(
+	var response GetProjectEnvRevealResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

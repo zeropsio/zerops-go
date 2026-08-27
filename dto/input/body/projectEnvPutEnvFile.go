@@ -14,16 +14,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*ProjectEnvPutEnvFile)(nil)
 
 type ProjectEnvPutEnvFile struct {
-	EnvFile types.Text `json:"envFile"`
+	EnvFile   types.Text `json:"envFile"`
+	Sensitive types.Bool `json:"sensitive"`
 }
 
 func (dto ProjectEnvPutEnvFile) GetEnvFile() types.Text {
 	return dto.EnvFile
 }
+func (dto ProjectEnvPutEnvFile) GetSensitive() types.Bool {
+	return dto.Sensitive
+}
 
 func (dto *ProjectEnvPutEnvFile) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		EnvFile *types.Text
+		EnvFile   *types.Text
+		Sensitive *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -33,10 +38,14 @@ func (dto *ProjectEnvPutEnvFile) UnmarshalJSON(b []byte) error {
 	if aux.EnvFile == nil {
 		errorList = errorList.With(validator.NewError("envFile", "field is required"))
 	}
+	if aux.Sensitive == nil {
+		errorList = errorList.With(validator.NewError("sensitive", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
 	dto.EnvFile = *aux.EnvFile
+	dto.Sensitive = *aux.Sensitive
 
 	return nil
 }

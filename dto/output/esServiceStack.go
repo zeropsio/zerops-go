@@ -36,7 +36,6 @@ type EsServiceStack struct {
 	ReloadAvailable                    types.Bool                         `json:"reloadAvailable"`
 	Project                            ProjectLight                       `json:"project"`
 	UserData                           EsServiceStackUserData             `json:"userData"`
-	ConnectedStacks                    EsServiceStackConnectedStacks      `json:"connectedStacks"`
 	ActiveAppVersion                   *AppVersionLight                   `json:"activeAppVersion"`
 	HasUnsyncedUserDataRecord          types.Bool                         `json:"hasUnsyncedUserDataRecord"`
 	HasUnsyncedPublicHttpRoutingRecord types.Bool                         `json:"hasUnsyncedPublicHttpRoutingRecord"`
@@ -69,13 +68,4 @@ func (dto EsServiceStackUserData) MarshalJSON() ([]byte, error) {
 		return []byte("[]"), nil
 	}
 	return json.Marshal([]UserDataLight(dto))
-}
-
-type EsServiceStackConnectedStacks []ServiceStackConnectedServiceStack
-
-func (dto EsServiceStackConnectedStacks) MarshalJSON() ([]byte, error) {
-	if dto == nil {
-		return []byte("[]"), nil
-	}
-	return json.Marshal([]ServiceStackConnectedServiceStack(dto))
 }

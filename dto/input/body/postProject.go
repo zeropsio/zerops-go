@@ -22,6 +22,7 @@ type PostProject struct {
 	TagList          types.StringArray       `json:"tagList"`
 	UserRoles        PostProjectUserRoles    `json:"userRoles"`
 	EnvVariables     PostProjectEnvVariables `json:"envVariables"`
+	EnvSecrets       PostProjectEnvSecrets   `json:"envSecrets"`
 	PublicIpV4Shared types.Bool              `json:"publicIpV4Shared"`
 	EnvIsolation     types.StringNull        `json:"envIsolation"`
 	SshIsolation     types.StringNull        `json:"sshIsolation"`
@@ -46,6 +47,9 @@ func (dto PostProject) GetUserRoles() PostProjectUserRoles {
 }
 func (dto PostProject) GetEnvVariables() PostProjectEnvVariables {
 	return dto.EnvVariables
+}
+func (dto PostProject) GetEnvSecrets() PostProjectEnvSecrets {
+	return dto.EnvSecrets
 }
 func (dto PostProject) GetPublicIpV4Shared() types.Bool {
 	return dto.PublicIpV4Shared
@@ -72,13 +76,22 @@ func (dto PostProjectUserRoles) MarshalJSON() ([]byte, error) {
 	return json.Marshal([]ProjectUserRole(dto))
 }
 
-type PostProjectEnvVariables []ProjectEnvPut
+type PostProjectEnvVariables []ProjectEnvItem
 
 func (dto PostProjectEnvVariables) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}
-	return json.Marshal([]ProjectEnvPut(dto))
+	return json.Marshal([]ProjectEnvItem(dto))
+}
+
+type PostProjectEnvSecrets []ProjectEnvItem
+
+func (dto PostProjectEnvSecrets) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]ProjectEnvItem(dto))
 }
 
 func (dto *PostProject) UnmarshalJSON(b []byte) error {
@@ -89,6 +102,7 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 		TagList          *types.StringArray
 		UserRoles        *PostProjectUserRoles
 		EnvVariables     *PostProjectEnvVariables
+		EnvSecrets       *PostProjectEnvSecrets
 		PublicIpV4Shared *types.Bool
 		EnvIsolation     types.StringNull
 		SshIsolation     types.StringNull
@@ -112,6 +126,9 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	if aux.EnvVariables == nil {
 		errorList = errorList.With(validator.NewError("envVariables", "field is required"))
 	}
+	if aux.EnvSecrets == nil {
+		errorList = errorList.With(validator.NewError("envSecrets", "field is required"))
+	}
 	if aux.PublicIpV4Shared == nil {
 		errorList = errorList.With(validator.NewError("publicIpV4Shared", "field is required"))
 	}
@@ -124,6 +141,7 @@ func (dto *PostProject) UnmarshalJSON(b []byte) error {
 	dto.TagList = *aux.TagList
 	dto.UserRoles = *aux.UserRoles
 	dto.EnvVariables = *aux.EnvVariables
+	dto.EnvSecrets = *aux.EnvSecrets
 	dto.PublicIpV4Shared = *aux.PublicIpV4Shared
 	dto.EnvIsolation = aux.EnvIsolation
 	dto.SshIsolation = aux.SshIsolation

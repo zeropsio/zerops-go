@@ -58,6 +58,10 @@ func (h Handler) GetServiceStackContainer(ctx context.Context, inputDtoPath path
 	if param, ok := inputDtoQuery.Offset.Get(); ok {
 		queryParams = append(queryParams, "offset="+url.QueryEscape(strconv.Itoa(param.Native())))
 	}
+	{
+		param := inputDtoQuery.SortDir.Native()
+		queryParams = append(queryParams, "sortDir="+url.QueryEscape(param))
+	}
 	if param, ok := inputDtoQuery.Statuses.Get(); ok {
 		queryParams = append(queryParams, "statuses="+url.QueryEscape(strings.Join(param.Native(), ",")))
 	}

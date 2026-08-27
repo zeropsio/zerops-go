@@ -12,7 +12,10 @@ import (
 var _ strconv.NumError
 
 type AppVersionUserData struct {
-	Key     types.String          `json:"key"`
-	Content types.Text            `json:"content"`
-	Type    enum.UserDataTypeEnum `json:"type"` // Deprecated
+	Key       types.String          `json:"key"`
+	Content   types.Text            `json:"content"`
+	Type      enum.UserDataTypeEnum `json:"type"`
+	Sensitive types.Bool            `json:"sensitive"`
+	Internal  types.Bool            `json:"internal"`
+	Editable  types.Bool            `json:"editable"`
 }

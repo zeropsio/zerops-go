@@ -23,4 +23,6 @@ type UserDataLight struct {
 	Created        types.DateTime        `json:"created"`
 	LastUpdate     types.DateTime        `json:"lastUpdate"`
 	Sensitive      types.Bool            `json:"sensitive"`
+	Internal       types.Bool            `json:"internal"`
+	Editable       types.Bool            `json:"editable"`
 }

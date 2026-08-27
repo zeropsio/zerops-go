@@ -15,15 +15,16 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserRegistration)(nil)
 
 type UserRegistration struct {
-	Email       types.Email         `json:"email"`
-	Password    types.StringNull    `json:"password"`
-	LanguageId  stringId.LanguageId `json:"languageId"`
-	AccountName types.String        `json:"accountName"`
-	Name        types.String        `json:"name"`
-	PromoCode   types.StringNull    `json:"promoCode"`
-	Reference   types.StringNull    `json:"reference"`
-	Token       types.TextNull      `json:"token"`
-	Passkey     types.BoolNull      `json:"passkey"`
+	Email        types.Email         `json:"email"`
+	Password     types.StringNull    `json:"password"`
+	LanguageId   stringId.LanguageId `json:"languageId"`
+	AccountName  types.String        `json:"accountName"`
+	Name         types.String        `json:"name"`
+	PromoCode    types.StringNull    `json:"promoCode"`
+	Reference    types.StringNull    `json:"reference"`
+	Token        types.TextNull      `json:"token"`
+	Passkey      types.BoolNull      `json:"passkey"`
+	ClaimZcpPool types.BoolNull      `json:"claimZcpPool"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -53,18 +54,22 @@ func (dto UserRegistration) GetToken() types.TextNull {
 func (dto UserRegistration) GetPasskey() types.BoolNull {
 	return dto.Passkey
 }
+func (dto UserRegistration) GetClaimZcpPool() types.BoolNull {
+	return dto.ClaimZcpPool
+}
 
 func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	var aux = struct {
-		Email       *types.Email
-		Password    types.StringNull
-		LanguageId  *stringId.LanguageId
-		AccountName *types.String
-		Name        *types.String
-		PromoCode   types.StringNull
-		Reference   types.StringNull
-		Token       types.TextNull
-		Passkey     types.BoolNull
+		Email        *types.Email
+		Password     types.StringNull
+		LanguageId   *stringId.LanguageId
+		AccountName  *types.String
+		Name         *types.String
+		PromoCode    types.StringNull
+		Reference    types.StringNull
+		Token        types.TextNull
+		Passkey      types.BoolNull
+		ClaimZcpPool types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -95,6 +100,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	dto.Reference = aux.Reference
 	dto.Token = aux.Token
 	dto.Passkey = aux.Passkey
+	dto.ClaimZcpPool = aux.ClaimZcpPool
 
 	return nil
 }

@@ -20,7 +20,9 @@ type PostServiceStack struct {
 	AutoscalingProfileId        types.StringNull         `json:"autoscalingProfileId"`
 	AutoscalingProfileOverrides types.JsonRawMessage     `json:"autoscalingProfileOverrides"`
 	UserData                    PostServiceStackUserData `json:"userData"`
-	UserDataEnvFile             types.TextNull           `json:"userDataEnvFile"`
+	UserDataEnvFile             types.TextNull           `json:"userDataEnvFile"` // Deprecated
+	EnvVarsFile                 types.TextNull           `json:"envVarsFile"`
+	EnvSecretsFile              types.TextNull           `json:"envSecretsFile"`
 	StartWithoutCode            types.BoolNull           `json:"startWithoutCode"`
 	BuildFromGit                types.StringNull         `json:"buildFromGit"`
 	ZeropsSetup                 types.StringNull         `json:"zeropsSetup"`
@@ -50,6 +52,12 @@ func (dto PostServiceStack) GetUserData() PostServiceStackUserData {
 }
 func (dto PostServiceStack) GetUserDataEnvFile() types.TextNull {
 	return dto.UserDataEnvFile
+}
+func (dto PostServiceStack) GetEnvVarsFile() types.TextNull {
+	return dto.EnvVarsFile
+}
+func (dto PostServiceStack) GetEnvSecretsFile() types.TextNull {
+	return dto.EnvSecretsFile
 }
 func (dto PostServiceStack) GetStartWithoutCode() types.BoolNull {
 	return dto.StartWithoutCode
@@ -99,6 +107,8 @@ func (dto *PostServiceStack) UnmarshalJSON(b []byte) error {
 		AutoscalingProfileOverrides types.JsonRawMessage
 		UserData                    *PostServiceStackUserData
 		UserDataEnvFile             types.TextNull
+		EnvVarsFile                 types.TextNull
+		EnvSecretsFile              types.TextNull
 		StartWithoutCode            types.BoolNull
 		BuildFromGit                types.StringNull
 		ZeropsSetup                 types.StringNull
@@ -133,6 +143,8 @@ func (dto *PostServiceStack) UnmarshalJSON(b []byte) error {
 	dto.AutoscalingProfileOverrides = aux.AutoscalingProfileOverrides
 	dto.UserData = *aux.UserData
 	dto.UserDataEnvFile = aux.UserDataEnvFile
+	dto.EnvVarsFile = aux.EnvVarsFile
+	dto.EnvSecretsFile = aux.EnvSecretsFile
 	dto.StartWithoutCode = aux.StartWithoutCode
 	dto.BuildFromGit = aux.BuildFromGit
 	dto.ZeropsSetup = aux.ZeropsSetup

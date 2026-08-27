@@ -11,4 +11,5 @@ type GetProjectEnvFile struct {
 	Name                 types.EmptyString
 	OverrideEnvIsolation enum.GetProjectEnvFileOverrideEnvIsolationEnum
 	UserOnly             types.Bool
+	Reveal               types.Bool
 }

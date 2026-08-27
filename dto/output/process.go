@@ -32,6 +32,7 @@ type Process struct {
 	CreatedBySystem types.Bool              `json:"createdBySystem"`
 	AppVersion      *AppVersionJsonObject   `json:"appVersion"`
 	PublicMeta      types.MapNull           `json:"publicMeta"`
+	Error           *ErrorObject            `json:"error"`
 }
 
 type ProcessServiceStacks []ServiceStackLightJsonObject

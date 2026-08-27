@@ -10,47 +10,45 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutServiceStackDisconnectSharedStorageResponse struct {
-	success            output.Process
+type GetClientIntegrationTokenDelegationListResponse struct {
+	success            output.ClientIntegrationTokenDelegationList
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutServiceStackDisconnectSharedStorageResponse) OutputInterface() (output interface{}, err error) {
+func (r GetClientIntegrationTokenDelegationListResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackDisconnectSharedStorageResponse) Output() (output output.Process, err error) {
+func (r GetClientIntegrationTokenDelegationListResponse) Output() (output output.ClientIntegrationTokenDelegationList, err error) {
 	return r.success, r.err
 }
 
-func (r PutServiceStackDisconnectSharedStorageResponse) Err() error {
+func (r GetClientIntegrationTokenDelegationListResponse) Err() error {
 	return r.err
 }
-func (r PutServiceStackDisconnectSharedStorageResponse) Headers() http.Header {
+func (r GetClientIntegrationTokenDelegationListResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutServiceStackDisconnectSharedStorageResponse) StatusCode() int {
+func (r GetClientIntegrationTokenDelegationListResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutServiceStackDisconnectSharedStorage(ctx context.Context, inputDtoPath path.ServiceStackId, inputDtoBody body.PutSharedStorageAction) (putServiceStackDisconnectSharedStorageResponse PutServiceStackDisconnectSharedStorageResponse, err error) {
-	u := "/api/rest/public/service-stack/" + inputDtoPath.Id.Native() + "/disconnect-shared-storage"
+func (h Handler) GetClientIntegrationTokenDelegationList(ctx context.Context, inputDtoPath path.IntegrationTokenId) (getClientIntegrationTokenDelegationListResponse GetClientIntegrationTokenDelegationListResponse, err error) {
+	u := "/api/rest/public/client/" + inputDtoPath.Id.Native() + "/integration-token/" + inputDtoPath.TokenId.Native() + "/delegation"
 
-	var response PutServiceStackDisconnectSharedStorageResponse
-	sdkResponse := sdkBase.Put(
+	var response GetClientIntegrationTokenDelegationListResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

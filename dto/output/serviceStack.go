@@ -45,7 +45,6 @@ type ServiceStack struct {
 	VersionNumber               types.EmptyString                  `json:"versionNumber"`
 	ProjectId                   uuid.ProjectId                     `json:"projectId"`
 	Project                     ProjectLight                       `json:"project"`
-	ConnectedStacks             ServiceStackConnectedStacks        `json:"connectedStacks"`
 	UserData                    ServiceStackUserData               `json:"userData"`
 	ActiveAppVersion            *GetAppVersion                     `json:"activeAppVersion"`
 	CoreService                 *ServiceStackLight                 `json:"coreService"`
@@ -59,15 +58,6 @@ func (dto ServiceStackPorts) MarshalJSON() ([]byte, error) {
 		return []byte("[]"), nil
 	}
 	return json.Marshal([]ServicePort(dto))
-}
-
-type ServiceStackConnectedStacks []ServiceStackConnectedServiceStack
-
-func (dto ServiceStackConnectedStacks) MarshalJSON() ([]byte, error) {
-	if dto == nil {
-		return []byte("[]"), nil
-	}
-	return json.Marshal([]ServiceStackConnectedServiceStack(dto))
 }
 
 type ServiceStackUserData []UserData

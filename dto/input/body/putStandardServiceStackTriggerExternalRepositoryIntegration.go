@@ -15,7 +15,9 @@ var _ json.Unmarshaler = (*PutStandardServiceStackTriggerExternalRepositoryInteg
 
 type PutStandardServiceStackTriggerExternalRepositoryIntegration struct {
 	UserData        PutStandardServiceStackTriggerExternalRepositoryIntegrationUserData `json:"userData"`
-	UserDataEnvFile types.TextNull                                                      `json:"userDataEnvFile"`
+	UserDataEnvFile types.TextNull                                                      `json:"userDataEnvFile"` // Deprecated
+	EnvVarsFile     types.TextNull                                                      `json:"envVarsFile"`
+	EnvSecretsFile  types.TextNull                                                      `json:"envSecretsFile"`
 }
 
 func (dto PutStandardServiceStackTriggerExternalRepositoryIntegration) GetUserData() PutStandardServiceStackTriggerExternalRepositoryIntegrationUserData {
@@ -23,6 +25,12 @@ func (dto PutStandardServiceStackTriggerExternalRepositoryIntegration) GetUserDa
 }
 func (dto PutStandardServiceStackTriggerExternalRepositoryIntegration) GetUserDataEnvFile() types.TextNull {
 	return dto.UserDataEnvFile
+}
+func (dto PutStandardServiceStackTriggerExternalRepositoryIntegration) GetEnvVarsFile() types.TextNull {
+	return dto.EnvVarsFile
+}
+func (dto PutStandardServiceStackTriggerExternalRepositoryIntegration) GetEnvSecretsFile() types.TextNull {
+	return dto.EnvSecretsFile
 }
 
 type PutStandardServiceStackTriggerExternalRepositoryIntegrationUserData []UserDataPut
@@ -38,6 +46,8 @@ func (dto *PutStandardServiceStackTriggerExternalRepositoryIntegration) Unmarsha
 	var aux = struct {
 		UserData        *PutStandardServiceStackTriggerExternalRepositoryIntegrationUserData
 		UserDataEnvFile types.TextNull
+		EnvVarsFile     types.TextNull
+		EnvSecretsFile  types.TextNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -52,6 +62,8 @@ func (dto *PutStandardServiceStackTriggerExternalRepositoryIntegration) Unmarsha
 	}
 	dto.UserData = *aux.UserData
 	dto.UserDataEnvFile = aux.UserDataEnvFile
+	dto.EnvVarsFile = aux.EnvVarsFile
+	dto.EnvSecretsFile = aux.EnvSecretsFile
 
 	return nil
 }

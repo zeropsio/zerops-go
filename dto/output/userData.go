@@ -22,5 +22,8 @@ type UserData struct {
 	Key              types.String          `json:"key"`
 	Content          types.Text            `json:"content"`
 	Type             enum.UserDataTypeEnum `json:"type"`
+	Sensitive        types.Bool            `json:"sensitive"`
+	Editable         types.Bool            `json:"editable"`
+	Internal         types.Bool            `json:"internal"`
 	ServiceStackName types.String          `json:"serviceStackName"`
 }

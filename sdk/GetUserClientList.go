@@ -7,49 +7,66 @@ import (
 	"errors"
 	"net/http"
 
+	"net/url"
+	"strconv"
+	"strings"
+
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostLanguageSearchResponse struct {
-	success            output.EsLanguageResponse
+var _ strconv.NumError
+
+type GetUserClientListResponse struct {
+	success            output.ClientUserExtraWithClientLightList
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostLanguageSearchResponse) OutputInterface() (output interface{}, err error) {
+func (r GetUserClientListResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostLanguageSearchResponse) Output() (output output.EsLanguageResponse, err error) {
+func (r GetUserClientListResponse) Output() (output output.ClientUserExtraWithClientLightList, err error) {
 	return r.success, r.err
 }
 
-func (r PostLanguageSearchResponse) Err() error {
+func (r GetUserClientListResponse) Err() error {
 	return r.err
 }
-func (r PostLanguageSearchResponse) Headers() http.Header {
+func (r GetUserClientListResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostLanguageSearchResponse) StatusCode() int {
+func (r GetUserClientListResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostLanguageSearch(ctx context.Context, inputDtoBody body.EsFilter) (postLanguageSearchResponse PostLanguageSearchResponse, err error) {
-	u := "/api/rest/public/language/search"
+func (h Handler) GetUserClientList(ctx context.Context, inputDtoQuery query.ListUserClients) (getUserClientListResponse GetUserClientListResponse, err error) {
+	u := "/api/rest/public/user/client-list"
 
-	var response PostLanguageSearchResponse
-	sdkResponse := sdkBase.Post(
+	var queryParams []string
+	if param, ok := inputDtoQuery.Limit.Get(); ok {
+		queryParams = append(queryParams, "limit="+url.QueryEscape(strconv.Itoa(param.Native())))
+	}
+	if param, ok := inputDtoQuery.Offset.Get(); ok {
+		queryParams = append(queryParams, "offset="+url.QueryEscape(strconv.Itoa(param.Native())))
+	}
+
+	if len(queryParams) > 0 {
+		u += "?" + strings.Join(queryParams, "&")
+	}
+
+	var response GetUserClientListResponse
+	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

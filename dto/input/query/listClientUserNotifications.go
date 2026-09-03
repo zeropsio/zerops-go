@@ -13,4 +13,5 @@ type ListClientUserNotifications struct {
 	ProjectId      uuid.ProjectIdNull
 	ServiceStackId uuid.ServiceStackIdNull
 	Types          types.StringArrayNull
+	Sort           types.StringArrayNull
 }

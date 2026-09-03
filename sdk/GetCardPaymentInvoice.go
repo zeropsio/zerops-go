@@ -7,20 +7,13 @@ import (
 	"errors"
 	"net/http"
 
-	"net/url"
-	"strconv"
-	"strings"
-
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
-	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
-
-var _ strconv.NumError
 
 type GetCardPaymentInvoiceResponse struct {
 	success            output.Invoice
@@ -48,18 +41,8 @@ func (r GetCardPaymentInvoiceResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetCardPaymentInvoice(ctx context.Context, inputDtoPath path.CardPaymentId, inputDtoQuery query.Invoice) (getCardPaymentInvoiceResponse GetCardPaymentInvoiceResponse, err error) {
+func (h Handler) GetCardPaymentInvoice(ctx context.Context, inputDtoPath path.CardPaymentId) (getCardPaymentInvoiceResponse GetCardPaymentInvoiceResponse, err error) {
 	u := "/api/rest/public/card-payment/" + inputDtoPath.Id.Native() + "/invoice"
-
-	var queryParams []string
-	{
-		param := inputDtoQuery.LanguageId.Native()
-		queryParams = append(queryParams, "languageId="+url.QueryEscape(param))
-	}
-
-	if len(queryParams) > 0 {
-		u += "?" + strings.Join(queryParams, "&")
-	}
 
 	var response GetCardPaymentInvoiceResponse
 	sdkResponse := sdkBase.Get(

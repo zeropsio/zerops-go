@@ -10,4 +10,5 @@ type ListClientCardPayments struct {
 	Limit    types.IntNull
 	Offset   types.IntNull
 	Statuses types.StringArrayNull
+	Sort     types.StringArrayNull
 }

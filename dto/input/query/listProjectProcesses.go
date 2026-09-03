@@ -11,4 +11,5 @@ type ListProjectProcesses struct {
 	Offset             types.IntNull
 	Statuses           types.StringArrayNull
 	ActionNameContains types.StringNull
+	Sort               types.StringArrayNull
 }

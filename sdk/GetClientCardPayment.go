@@ -61,6 +61,9 @@ func (h Handler) GetClientCardPayment(ctx context.Context, inputDtoPath path.Cli
 	if param, ok := inputDtoQuery.Statuses.Get(); ok {
 		queryParams = append(queryParams, "statuses="+url.QueryEscape(strings.Join(param.Native(), ",")))
 	}
+	if param, ok := inputDtoQuery.Sort.Get(); ok {
+		queryParams = append(queryParams, "sort="+url.QueryEscape(strings.Join(param.Native(), ",")))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

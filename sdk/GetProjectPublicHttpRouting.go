@@ -58,6 +58,9 @@ func (h Handler) GetProjectPublicHttpRouting(ctx context.Context, inputDtoPath p
 	if param, ok := inputDtoQuery.Offset.Get(); ok {
 		queryParams = append(queryParams, "offset="+url.QueryEscape(strconv.Itoa(param.Native())))
 	}
+	if param, ok := inputDtoQuery.Sort.Get(); ok {
+		queryParams = append(queryParams, "sort="+url.QueryEscape(strings.Join(param.Native(), ",")))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

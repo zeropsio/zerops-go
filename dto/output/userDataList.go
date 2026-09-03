@@ -12,8 +12,11 @@ import (
 var _ strconv.NumError
 
 type UserDataList struct {
-	List       UserDataListList `json:"list"`
-	TotalCount types.Int        `json:"totalCount"`
+	Count  types.Int        `json:"count"`
+	Total  types.Int        `json:"total"`
+	Limit  types.Int        `json:"limit"`
+	Offset types.Int        `json:"offset"`
+	List   UserDataListList `json:"list"`
 }
 
 type UserDataListList []UserData

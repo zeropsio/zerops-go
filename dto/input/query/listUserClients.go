@@ -6,8 +6,7 @@ import (
 	"github.com/zeropsio/zerops-go/types"
 )
 
-type ListServiceStackPublicPortRoutings struct {
+type ListUserClients struct {
 	Limit  types.IntNull
 	Offset types.IntNull
-	Sort   types.StringArrayNull
 }

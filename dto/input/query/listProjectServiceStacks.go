@@ -11,4 +11,6 @@ type ListProjectServiceStacks struct {
 	Offset       types.IntNull
 	Statuses     types.StringArrayNull
 	NameContains types.StringNull
+	IsSystem     types.BoolNull
+	Sort         types.StringArrayNull
 }

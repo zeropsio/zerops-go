@@ -9,4 +9,5 @@ import (
 type ListProjectPublicHttpRoutings struct {
 	Limit  types.IntNull
 	Offset types.IntNull
+	Sort   types.StringArrayNull
 }

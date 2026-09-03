@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
-	"github.com/zeropsio/zerops-go/types/stringId"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -15,16 +14,15 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserRegistration)(nil)
 
 type UserRegistration struct {
-	Email        types.Email         `json:"email"`
-	Password     types.StringNull    `json:"password"`
-	LanguageId   stringId.LanguageId `json:"languageId"`
-	AccountName  types.String        `json:"accountName"`
-	Name         types.String        `json:"name"`
-	PromoCode    types.StringNull    `json:"promoCode"`
-	Reference    types.StringNull    `json:"reference"`
-	Token        types.TextNull      `json:"token"`
-	Passkey      types.BoolNull      `json:"passkey"`
-	ClaimZcpPool types.BoolNull      `json:"claimZcpPool"`
+	Email        types.Email      `json:"email"`
+	Password     types.StringNull `json:"password"`
+	AccountName  types.String     `json:"accountName"`
+	Name         types.String     `json:"name"`
+	PromoCode    types.StringNull `json:"promoCode"`
+	Reference    types.StringNull `json:"reference"`
+	Token        types.TextNull   `json:"token"`
+	Passkey      types.BoolNull   `json:"passkey"`
+	ClaimZcpPool types.BoolNull   `json:"claimZcpPool"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -32,9 +30,6 @@ func (dto UserRegistration) GetEmail() types.Email {
 }
 func (dto UserRegistration) GetPassword() types.StringNull {
 	return dto.Password
-}
-func (dto UserRegistration) GetLanguageId() stringId.LanguageId {
-	return dto.LanguageId
 }
 func (dto UserRegistration) GetAccountName() types.String {
 	return dto.AccountName
@@ -62,7 +57,6 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Email        *types.Email
 		Password     types.StringNull
-		LanguageId   *stringId.LanguageId
 		AccountName  *types.String
 		Name         *types.String
 		PromoCode    types.StringNull
@@ -79,9 +73,6 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	if aux.Email == nil {
 		errorList = errorList.With(validator.NewError("email", "field is required"))
 	}
-	if aux.LanguageId == nil {
-		errorList = errorList.With(validator.NewError("languageId", "field is required"))
-	}
 	if aux.AccountName == nil {
 		errorList = errorList.With(validator.NewError("accountName", "field is required"))
 	}
@@ -93,7 +84,6 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	}
 	dto.Email = *aux.Email
 	dto.Password = aux.Password
-	dto.LanguageId = *aux.LanguageId
 	dto.AccountName = *aux.AccountName
 	dto.Name = *aux.Name
 	dto.PromoCode = aux.PromoCode

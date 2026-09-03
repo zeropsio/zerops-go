@@ -12,8 +12,11 @@ import (
 var _ strconv.NumError
 
 type ProjectList struct {
-	List       ProjectListList `json:"list"`
-	TotalCount types.Int       `json:"totalCount"`
+	Count  types.Int       `json:"count"`
+	Total  types.Int       `json:"total"`
+	Limit  types.Int       `json:"limit"`
+	Offset types.Int       `json:"offset"`
+	List   ProjectListList `json:"list"`
 }
 
 type ProjectListList []Project

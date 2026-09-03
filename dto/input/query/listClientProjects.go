@@ -11,4 +11,5 @@ type ListClientProjects struct {
 	Offset       types.IntNull
 	NameContains types.StringNull
 	Statuses     types.StringArrayNull
+	Sort         types.StringArrayNull
 }

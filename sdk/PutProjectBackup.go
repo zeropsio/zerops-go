@@ -11,41 +11,42 @@ import (
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostClientVersionSearchResponse struct {
-	success            output.EsCardPaymentResponse
+type PutProjectBackupResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostClientVersionSearchResponse) OutputInterface() (output interface{}, err error) {
+func (r PutProjectBackupResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostClientVersionSearchResponse) Output() (output output.EsCardPaymentResponse, err error) {
+func (r PutProjectBackupResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r PostClientVersionSearchResponse) Err() error {
+func (r PutProjectBackupResponse) Err() error {
 	return r.err
 }
-func (r PostClientVersionSearchResponse) Headers() http.Header {
+func (r PutProjectBackupResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostClientVersionSearchResponse) StatusCode() int {
+func (r PutProjectBackupResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostClientVersionSearch(ctx context.Context, inputDtoBody body.EsFilter) (postClientVersionSearchResponse PostClientVersionSearchResponse, err error) {
-	u := "/api/rest/public/client-version/search"
+func (h Handler) PutProjectBackup(ctx context.Context, inputDtoPath path.ProjectBackup, inputDtoBody body.PostServiceStackBackupModify) (putProjectBackupResponse PutProjectBackupResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/backup/" + inputDtoPath.ServiceStackId.Native() + "/" + inputDtoPath.Date.Native() + ""
 
-	var response PostClientVersionSearchResponse
-	sdkResponse := sdkBase.Post(
+	var response PutProjectBackupResponse
+	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,
 		u,

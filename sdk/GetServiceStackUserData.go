@@ -61,6 +61,9 @@ func (h Handler) GetServiceStackUserData(ctx context.Context, inputDtoPath path.
 	if param, ok := inputDtoQuery.KeyContains.Get(); ok {
 		queryParams = append(queryParams, "keyContains="+url.QueryEscape(param.Native()))
 	}
+	if param, ok := inputDtoQuery.Sort.Get(); ok {
+		queryParams = append(queryParams, "sort="+url.QueryEscape(strings.Join(param.Native(), ",")))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

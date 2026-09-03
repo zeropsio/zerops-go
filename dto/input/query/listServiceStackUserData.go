@@ -10,4 +10,5 @@ type ListServiceStackUserData struct {
 	Limit       types.IntNull
 	Offset      types.IntNull
 	KeyContains types.StringNull
+	Sort        types.StringArrayNull
 }

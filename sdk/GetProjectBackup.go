@@ -22,34 +22,34 @@ import (
 
 var _ strconv.NumError
 
-type GetProjectServiceStackResponse struct {
-	success            output.ServiceStackList
+type GetProjectBackupResponse struct {
+	success            output.ProjectBackupList
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetProjectServiceStackResponse) OutputInterface() (output interface{}, err error) {
+func (r GetProjectBackupResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectServiceStackResponse) Output() (output output.ServiceStackList, err error) {
+func (r GetProjectBackupResponse) Output() (output output.ProjectBackupList, err error) {
 	return r.success, r.err
 }
 
-func (r GetProjectServiceStackResponse) Err() error {
+func (r GetProjectBackupResponse) Err() error {
 	return r.err
 }
-func (r GetProjectServiceStackResponse) Headers() http.Header {
+func (r GetProjectBackupResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetProjectServiceStackResponse) StatusCode() int {
+func (r GetProjectBackupResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetProjectServiceStack(ctx context.Context, inputDtoPath path.ProjectId, inputDtoQuery query.ListProjectServiceStacks) (getProjectServiceStackResponse GetProjectServiceStackResponse, err error) {
-	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/service-stack"
+func (h Handler) GetProjectBackup(ctx context.Context, inputDtoPath path.ProjectId, inputDtoQuery query.ListProjectBackups) (getProjectBackupResponse GetProjectBackupResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/backup"
 
 	var queryParams []string
 	if param, ok := inputDtoQuery.Limit.Get(); ok {
@@ -58,14 +58,8 @@ func (h Handler) GetProjectServiceStack(ctx context.Context, inputDtoPath path.P
 	if param, ok := inputDtoQuery.Offset.Get(); ok {
 		queryParams = append(queryParams, "offset="+url.QueryEscape(strconv.Itoa(param.Native())))
 	}
-	if param, ok := inputDtoQuery.Statuses.Get(); ok {
-		queryParams = append(queryParams, "statuses="+url.QueryEscape(strings.Join(param.Native(), ",")))
-	}
-	if param, ok := inputDtoQuery.NameContains.Get(); ok {
-		queryParams = append(queryParams, "nameContains="+url.QueryEscape(param.Native()))
-	}
-	if param, ok := inputDtoQuery.IsSystem.Get(); ok {
-		queryParams = append(queryParams, "isSystem="+url.QueryEscape(strconv.FormatBool(param.Native())))
+	if param, ok := inputDtoQuery.ServiceStackId.Get(); ok {
+		queryParams = append(queryParams, "serviceStackId="+url.QueryEscape(param.Native()))
 	}
 	if param, ok := inputDtoQuery.Sort.Get(); ok {
 		queryParams = append(queryParams, "sort="+url.QueryEscape(strings.Join(param.Native(), ",")))
@@ -75,7 +69,7 @@ func (h Handler) GetProjectServiceStack(ctx context.Context, inputDtoPath path.P
 		u += "?" + strings.Join(queryParams, "&")
 	}
 
-	var response GetProjectServiceStackResponse
+	var response GetProjectBackupResponse
 	sdkResponse := sdkBase.Get(
 		ctx,
 		h.environment,

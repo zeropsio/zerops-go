@@ -12,8 +12,11 @@ import (
 var _ strconv.NumError
 
 type ProcessList struct {
-	List       ProcessListList `json:"list"`
-	TotalCount types.Int       `json:"totalCount"`
+	Count  types.Int       `json:"count"`
+	Total  types.Int       `json:"total"`
+	Limit  types.Int       `json:"limit"`
+	Offset types.Int       `json:"offset"`
+	List   ProcessListList `json:"list"`
 }
 
 type ProcessListList []Process

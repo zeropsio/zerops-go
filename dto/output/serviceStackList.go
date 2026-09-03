@@ -12,8 +12,11 @@ import (
 var _ strconv.NumError
 
 type ServiceStackList struct {
-	List       ServiceStackListList `json:"list"`
-	TotalCount types.Int            `json:"totalCount"`
+	Count  types.Int            `json:"count"`
+	Total  types.Int            `json:"total"`
+	Limit  types.Int            `json:"limit"`
+	Offset types.Int            `json:"offset"`
+	List   ServiceStackListList `json:"list"`
 }
 
 type ServiceStackListList []ServiceStack

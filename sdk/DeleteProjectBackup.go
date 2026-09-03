@@ -10,46 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
+	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PostCurrencySearchResponse struct {
-	success            output.EsCurrencyResponse
+type DeleteProjectBackupResponse struct {
+	success            output.Success
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PostCurrencySearchResponse) OutputInterface() (output interface{}, err error) {
+func (r DeleteProjectBackupResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PostCurrencySearchResponse) Output() (output output.EsCurrencyResponse, err error) {
+func (r DeleteProjectBackupResponse) Output() (output output.Success, err error) {
 	return r.success, r.err
 }
 
-func (r PostCurrencySearchResponse) Err() error {
+func (r DeleteProjectBackupResponse) Err() error {
 	return r.err
 }
-func (r PostCurrencySearchResponse) Headers() http.Header {
+func (r DeleteProjectBackupResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PostCurrencySearchResponse) StatusCode() int {
+func (r DeleteProjectBackupResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PostCurrencySearch(ctx context.Context, inputDtoBody body.EsFilter) (postCurrencySearchResponse PostCurrencySearchResponse, err error) {
-	u := "/api/rest/public/currency/search"
+func (h Handler) DeleteProjectBackup(ctx context.Context, inputDtoPath path.ProjectBackup) (deleteProjectBackupResponse DeleteProjectBackupResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/backup/" + inputDtoPath.ServiceStackId.Native() + "/" + inputDtoPath.Date.Native() + ""
 
-	var response PostCurrencySearchResponse
-	sdkResponse := sdkBase.Post(
+	var response DeleteProjectBackupResponse
+	sdkResponse := sdkBase.Delete(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

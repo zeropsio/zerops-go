@@ -10,4 +10,6 @@ type ListServiceStackAppVersions struct {
 	Limit    types.IntNull
 	Offset   types.IntNull
 	Statuses types.StringArrayNull
+	HasBuild types.BoolNull
+	Sort     types.StringArrayNull
 }

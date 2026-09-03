@@ -15,40 +15,41 @@ import (
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type GetCardPaymentInvoicePdfResponse struct {
+type PostProjectBackupDownloadUrlResponse struct {
 	success            output.Url
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r GetCardPaymentInvoicePdfResponse) OutputInterface() (output interface{}, err error) {
+func (r PostProjectBackupDownloadUrlResponse) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r GetCardPaymentInvoicePdfResponse) Output() (output output.Url, err error) {
+func (r PostProjectBackupDownloadUrlResponse) Output() (output output.Url, err error) {
 	return r.success, r.err
 }
 
-func (r GetCardPaymentInvoicePdfResponse) Err() error {
+func (r PostProjectBackupDownloadUrlResponse) Err() error {
 	return r.err
 }
-func (r GetCardPaymentInvoicePdfResponse) Headers() http.Header {
+func (r PostProjectBackupDownloadUrlResponse) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r GetCardPaymentInvoicePdfResponse) StatusCode() int {
+func (r PostProjectBackupDownloadUrlResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) GetCardPaymentInvoicePdf(ctx context.Context, inputDtoPath path.CardPaymentId) (getCardPaymentInvoicePdfResponse GetCardPaymentInvoicePdfResponse, err error) {
-	u := "/api/rest/public/card-payment/" + inputDtoPath.Id.Native() + "/invoice/pdf"
+func (h Handler) PostProjectBackupDownloadUrl(ctx context.Context, inputDtoPath path.ProjectBackup) (postProjectBackupDownloadUrlResponse PostProjectBackupDownloadUrlResponse, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/backup/download-url/" + inputDtoPath.ServiceStackId.Native() + "/" + inputDtoPath.Date.Native() + ""
 
-	var response GetCardPaymentInvoicePdfResponse
-	sdkResponse := sdkBase.Get(
+	var response PostProjectBackupDownloadUrlResponse
+	sdkResponse := sdkBase.Post(
 		ctx,
 		h.environment,
 		u,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

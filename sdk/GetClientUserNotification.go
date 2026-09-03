@@ -67,6 +67,9 @@ func (h Handler) GetClientUserNotification(ctx context.Context, inputDtoPath pat
 	if param, ok := inputDtoQuery.Types.Get(); ok {
 		queryParams = append(queryParams, "types="+url.QueryEscape(strings.Join(param.Native(), ",")))
 	}
+	if param, ok := inputDtoQuery.Sort.Get(); ok {
+		queryParams = append(queryParams, "sort="+url.QueryEscape(strings.Join(param.Native(), ",")))
+	}
 
 	if len(queryParams) > 0 {
 		u += "?" + strings.Join(queryParams, "&")

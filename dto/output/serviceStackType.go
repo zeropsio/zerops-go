@@ -28,6 +28,7 @@ type ServiceStackType struct {
 	HasBackup                   types.Bool                                  `json:"hasBackup"`
 	HasAccessDetails            types.Bool                                  `json:"hasAccessDetails"`
 	HasConfiguration            types.Bool                                  `json:"hasConfiguration"`
+	HasUiAccess                 types.Bool                                  `json:"hasUiAccess"`
 	OsList                      types.StringArray                           `json:"osList"`
 	ModeList                    types.StringArray                           `json:"modeList"`
 	ServiceStackTypeVersionList ServiceStackTypeServiceStackTypeVersionList `json:"serviceStackTypeVersionList"`

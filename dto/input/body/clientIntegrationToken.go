@@ -20,6 +20,7 @@ type ClientIntegrationToken struct {
 	CanViewFinances   types.Bool                     `json:"canViewFinances"`
 	CanEditFinances   types.Bool                     `json:"canEditFinances"`
 	CanCreateProjects types.Bool                     `json:"canCreateProjects"`
+	Sudo              types.Bool                     `json:"sudo"`
 	Projects          ClientIntegrationTokenProjects `json:"projects"`
 }
 
@@ -37,6 +38,9 @@ func (dto ClientIntegrationToken) GetCanEditFinances() types.Bool {
 }
 func (dto ClientIntegrationToken) GetCanCreateProjects() types.Bool {
 	return dto.CanCreateProjects
+}
+func (dto ClientIntegrationToken) GetSudo() types.Bool {
+	return dto.Sudo
 }
 func (dto ClientIntegrationToken) GetProjects() ClientIntegrationTokenProjects {
 	return dto.Projects
@@ -58,6 +62,7 @@ func (dto *ClientIntegrationToken) UnmarshalJSON(b []byte) error {
 		CanViewFinances   *types.Bool
 		CanEditFinances   *types.Bool
 		CanCreateProjects *types.Bool
+		Sudo              *types.Bool
 		Projects          *ClientIntegrationTokenProjects
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -80,6 +85,9 @@ func (dto *ClientIntegrationToken) UnmarshalJSON(b []byte) error {
 	if aux.CanCreateProjects == nil {
 		errorList = errorList.With(validator.NewError("canCreateProjects", "field is required"))
 	}
+	if aux.Sudo == nil {
+		errorList = errorList.With(validator.NewError("sudo", "field is required"))
+	}
 	if aux.Projects == nil {
 		errorList = errorList.With(validator.NewError("projects", "field is required"))
 	}
@@ -91,6 +99,7 @@ func (dto *ClientIntegrationToken) UnmarshalJSON(b []byte) error {
 	dto.CanViewFinances = *aux.CanViewFinances
 	dto.CanEditFinances = *aux.CanEditFinances
 	dto.CanCreateProjects = *aux.CanCreateProjects
+	dto.Sudo = *aux.Sudo
 	dto.Projects = *aux.Projects
 
 	return nil

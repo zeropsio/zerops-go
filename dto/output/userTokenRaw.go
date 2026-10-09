@@ -15,5 +15,6 @@ type UserTokenRaw struct {
 	Id      uuid.UserTokenId `json:"id"`
 	Name    types.String     `json:"name"`
 	Created types.DateTime   `json:"created"`
+	Sudo    types.Bool       `json:"sudo"`
 	Token   types.String     `json:"token"`
 }

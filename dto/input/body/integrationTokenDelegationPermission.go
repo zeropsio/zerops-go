@@ -19,6 +19,7 @@ type IntegrationTokenDelegationPermission struct {
 	CanCreateProjects  types.Bool                                             `json:"canCreateProjects"`
 	CanEditFinances    types.Bool                                             `json:"canEditFinances"`
 	CanViewFinances    types.Bool                                             `json:"canViewFinances"`
+	Sudo               types.Bool                                             `json:"sudo"`
 	ProjectPermissions IntegrationTokenDelegationPermissionProjectPermissions `json:"projectPermissions"`
 }
 
@@ -33,6 +34,9 @@ func (dto IntegrationTokenDelegationPermission) GetCanEditFinances() types.Bool 
 }
 func (dto IntegrationTokenDelegationPermission) GetCanViewFinances() types.Bool {
 	return dto.CanViewFinances
+}
+func (dto IntegrationTokenDelegationPermission) GetSudo() types.Bool {
+	return dto.Sudo
 }
 func (dto IntegrationTokenDelegationPermission) GetProjectPermissions() IntegrationTokenDelegationPermissionProjectPermissions {
 	return dto.ProjectPermissions
@@ -53,6 +57,7 @@ func (dto *IntegrationTokenDelegationPermission) UnmarshalJSON(b []byte) error {
 		CanCreateProjects  *types.Bool
 		CanEditFinances    *types.Bool
 		CanViewFinances    *types.Bool
+		Sudo               *types.Bool
 		ProjectPermissions *IntegrationTokenDelegationPermissionProjectPermissions
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -72,6 +77,9 @@ func (dto *IntegrationTokenDelegationPermission) UnmarshalJSON(b []byte) error {
 	if aux.CanViewFinances == nil {
 		errorList = errorList.With(validator.NewError("canViewFinances", "field is required"))
 	}
+	if aux.Sudo == nil {
+		errorList = errorList.With(validator.NewError("sudo", "field is required"))
+	}
 	if aux.ProjectPermissions == nil {
 		errorList = errorList.With(validator.NewError("projectPermissions", "field is required"))
 	}
@@ -82,6 +90,7 @@ func (dto *IntegrationTokenDelegationPermission) UnmarshalJSON(b []byte) error {
 	dto.CanCreateProjects = *aux.CanCreateProjects
 	dto.CanEditFinances = *aux.CanEditFinances
 	dto.CanViewFinances = *aux.CanViewFinances
+	dto.Sudo = *aux.Sudo
 	dto.ProjectPermissions = *aux.ProjectPermissions
 
 	return nil

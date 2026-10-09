@@ -17,6 +17,7 @@ type IntegrationTokenDelegationPermission struct {
 	CanCreateProjects  types.Bool                                             `json:"canCreateProjects"`
 	CanEditFinances    types.Bool                                             `json:"canEditFinances"`
 	CanViewFinances    types.Bool                                             `json:"canViewFinances"`
+	Sudo               types.Bool                                             `json:"sudo"`
 	ProjectPermissions IntegrationTokenDelegationPermissionProjectPermissions `json:"projectPermissions"`
 }
 

@@ -20,6 +20,7 @@ type ClientIntegrationTokenRaw struct {
 	CanViewFinances   types.Bool                        `json:"canViewFinances"`
 	CanEditFinances   types.Bool                        `json:"canEditFinances"`
 	CanCreateProjects types.Bool                        `json:"canCreateProjects"`
+	Sudo              types.Bool                        `json:"sudo"`
 	CreatedByUser     uuid.UserIdNull                   `json:"createdByUser"`
 	Created           types.DateTime                    `json:"created"`
 	LastUpdate        types.DateTime                    `json:"lastUpdate"`

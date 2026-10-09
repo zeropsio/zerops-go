@@ -15,15 +15,20 @@ var _ json.Unmarshaler = (*UserToken)(nil)
 
 type UserToken struct {
 	Name types.String `json:"name"`
+	Sudo types.Bool   `json:"sudo"`
 }
 
 func (dto UserToken) GetName() types.String {
 	return dto.Name
 }
+func (dto UserToken) GetSudo() types.Bool {
+	return dto.Sudo
+}
 
 func (dto *UserToken) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Name *types.String
+		Sudo *types.Bool
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -33,10 +38,14 @@ func (dto *UserToken) UnmarshalJSON(b []byte) error {
 	if aux.Name == nil {
 		errorList = errorList.With(validator.NewError("name", "field is required"))
 	}
+	if aux.Sudo == nil {
+		errorList = errorList.With(validator.NewError("sudo", "field is required"))
+	}
 	if errorList != nil {
 		return errorList.GetError()
 	}
 	dto.Name = *aux.Name
+	dto.Sudo = *aux.Sudo
 
 	return nil
 }

@@ -12,14 +12,15 @@ import (
 var _ strconv.NumError
 
 type PublicHttpRoutingDomain struct {
-	DomainName                      types.String                  `json:"domainName"`
-	DnsCheckStatus                  enum.DomainDnsCheckStatusEnum `json:"dnsCheckStatus"`
-	SslStatus                       enum.DomainSslStatusEnum      `json:"sslStatus"`
-	CdnStatus                       enum.DomainCdnStatusEnum      `json:"cdnStatus"`
-	NextDnsCheckAt                  types.DateTimeNull            `json:"nextDnsCheckAt"`
-	LastDnsCheckAt                  types.DateTimeNull            `json:"lastDnsCheckAt"`
-	LastDnsCheckDetail              *DomainDnsCheckDetail         `json:"lastDnsCheckDetail"`
-	BeingInstalledSslCertificate    *DomainCertificateInfo        `json:"beingInstalledSslCertificate"`
-	SslCertificateInstallationError types.MediumTextNull          `json:"sslCertificateInstallationError"`
-	DeployedSslCertificate          *DomainCertificateInfo        `json:"deployedSslCertificate"`
+	DomainName                      types.String                               `json:"domainName"`
+	DnsCheckStatus                  enum.DomainDnsCheckStatusEnum              `json:"dnsCheckStatus"`
+	SslStatus                       enum.DomainSslStatusEnum                   `json:"sslStatus"`
+	CdnStatus                       enum.DomainCdnStatusEnum                   `json:"cdnStatus"`
+	HostMatch                       *enum.PublicHttpRoutingDomainHostMatchEnum `json:"hostMatch"`
+	NextDnsCheckAt                  types.DateTimeNull                         `json:"nextDnsCheckAt"`
+	LastDnsCheckAt                  types.DateTimeNull                         `json:"lastDnsCheckAt"`
+	LastDnsCheckDetail              *DomainDnsCheckDetail                      `json:"lastDnsCheckDetail"`
+	BeingInstalledSslCertificate    *DomainCertificateInfo                     `json:"beingInstalledSslCertificate"`
+	SslCertificateInstallationError types.MediumTextNull                       `json:"sslCertificateInstallationError"`
+	DeployedSslCertificate          *DomainCertificateInfo                     `json:"deployedSslCertificate"`
 }

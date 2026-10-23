@@ -15,4 +15,5 @@ type ServiceStackUi struct {
 	AccessToken uuid.ServiceStackUiAccessToken `json:"accessToken"`
 	Expiration  types.DateTime                 `json:"expiration"`
 	UrlUi       types.String                   `json:"urlUi"`
+	UrlApi      types.String                   `json:"urlApi"`
 }

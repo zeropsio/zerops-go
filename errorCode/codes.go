@@ -138,6 +138,7 @@ const (
 	ServiceStackStorageInvalidPolicy                         ErrorCode = "serviceStackStorageInvalidPolicy"
 	ServiceStackStorageDiskMinLimit                          ErrorCode = "serviceStackStorageDiskMinLimit"
 	ServiceStackObjectStorageQuotaNotFound                   ErrorCode = "serviceStackObjectStorageQuotaNotFound"
+	ObjectStorageNotFound                                    ErrorCode = "objectStorageNotFound"
 	ServiceStackInitCommandsNotFound                         ErrorCode = "serviceStackInitCommandsNotFound"
 	ServiceStackTypeObjectStorageRequired                    ErrorCode = "serviceStackTypeObjectStorageRequired"
 	ServiceStackTypeObjectStorageForbidden                   ErrorCode = "serviceStackTypeObjectStorageForbidden"

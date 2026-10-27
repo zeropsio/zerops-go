@@ -10,47 +10,46 @@ import (
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
-	"github.com/zeropsio/zerops-go/dto/input/body"
 	"github.com/zeropsio/zerops-go/dto/input/path"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
 
-type PutBillingClientAddonResponse struct {
-	success            output.Success
+type PutProjectReleaseIpv4Response struct {
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
 }
 
-func (r PutBillingClientAddonResponse) OutputInterface() (output interface{}, err error) {
+func (r PutProjectReleaseIpv4Response) OutputInterface() (output interface{}, err error) {
 	return r.success, r.err
 }
 
-func (r PutBillingClientAddonResponse) Output() (output output.Success, err error) {
+func (r PutProjectReleaseIpv4Response) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 
-func (r PutBillingClientAddonResponse) Err() error {
+func (r PutProjectReleaseIpv4Response) Err() error {
 	return r.err
 }
-func (r PutBillingClientAddonResponse) Headers() http.Header {
+func (r PutProjectReleaseIpv4Response) Headers() http.Header {
 	return r.responseHeaders
 }
 
-func (r PutBillingClientAddonResponse) StatusCode() int {
+func (r PutProjectReleaseIpv4Response) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutBillingClientAddon(ctx context.Context, inputDtoPath path.BillingAddon, inputDtoBody body.PutBillingAddon) (putBillingClientAddonResponse PutBillingClientAddonResponse, err error) {
-	u := "/api/rest/public/billing/client/" + inputDtoPath.ClientId.Native() + "/addon/" + inputDtoPath.Id.Native() + ""
+func (h Handler) PutProjectReleaseIpv4(ctx context.Context, inputDtoPath path.ProjectId) (putProjectReleaseIpv4Response PutProjectReleaseIpv4Response, err error) {
+	u := "/api/rest/public/project/" + inputDtoPath.Id.Native() + "/release-ipv4"
 
-	var response PutBillingClientAddonResponse
+	var response PutProjectReleaseIpv4Response
 	sdkResponse := sdkBase.Put(
 		ctx,
 		h.environment,
 		u,
-		inputDtoBody,
+		struct{}{},
 	)
 	if sdkResponse.Err != nil {
 		return response, sdkResponse.Err

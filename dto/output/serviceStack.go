@@ -32,6 +32,7 @@ type ServiceStack struct {
 	BuildCache                  *BuildCache                        `json:"buildCache"`
 	CdnEnabled                  types.Bool                         `json:"cdnEnabled"`
 	NestId                      stringId.NestId                    `json:"nestId"`
+	ObjectStorageId             uuid.ObjectStorageIdNull           `json:"objectStorageId"`
 	RecipeSource                types.TextNull                     `json:"recipeSource"`
 	RecipeSourceUrl             types.TextNull                     `json:"recipeSourceUrl"`
 	Ports                       ServiceStackPorts                  `json:"ports"`

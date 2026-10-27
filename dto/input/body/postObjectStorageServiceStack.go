@@ -19,6 +19,7 @@ type PostObjectStorageServiceStack struct {
 	Policy     types.StringNull `json:"policy"`
 	RawPolicy  types.TextNull   `json:"rawPolicy"`
 	CdnEnabled types.BoolNull   `json:"cdnEnabled"`
+	Location   types.StringNull `json:"location"`
 }
 
 func (dto PostObjectStorageServiceStack) GetName() types.String {
@@ -36,6 +37,9 @@ func (dto PostObjectStorageServiceStack) GetRawPolicy() types.TextNull {
 func (dto PostObjectStorageServiceStack) GetCdnEnabled() types.BoolNull {
 	return dto.CdnEnabled
 }
+func (dto PostObjectStorageServiceStack) GetLocation() types.StringNull {
+	return dto.Location
+}
 
 func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -44,6 +48,7 @@ func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 		Policy     types.StringNull
 		RawPolicy  types.TextNull
 		CdnEnabled types.BoolNull
+		Location   types.StringNull
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -64,6 +69,7 @@ func (dto *PostObjectStorageServiceStack) UnmarshalJSON(b []byte) error {
 	dto.Policy = aux.Policy
 	dto.RawPolicy = aux.RawPolicy
 	dto.CdnEnabled = aux.CdnEnabled
+	dto.Location = aux.Location
 
 	return nil
 }

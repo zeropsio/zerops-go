@@ -29,7 +29,6 @@ type EsProject struct {
 	PublicZone          types.String           `json:"publicZone"`
 	ZeropsSubdomainHost types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType   types.StringNull       `json:"logForwardingType"`
-	AutoStartup         types.Bool             `json:"autoStartup"`
 	EnvList             EsProjectEnvList       `json:"envList"`
 	UserRoles           EsProjectUserRoles     `json:"userRoles"`
 }

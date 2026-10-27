@@ -32,8 +32,7 @@ type Project struct {
 	PublicZone              types.String           `json:"publicZone"`
 	ZeropsSubdomainHost     types.StringNull       `json:"zeropsSubdomainHost"`
 	LogForwardingType       types.StringNull       `json:"logForwardingType"`
-	AutoStartup             types.Bool             `json:"autoStartup"`
-	PrimaryInstanceLocation Location               `json:"primaryInstanceLocation"`
+	PrimaryInstanceLocation *Location              `json:"primaryInstanceLocation"`
 }
 
 type ProjectUserRoles []ProjectUserRole

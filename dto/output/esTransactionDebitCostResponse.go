@@ -10,9 +10,10 @@ import (
 var _ strconv.NumError
 
 type EsTransactionDebitCostResponse struct {
-	Client  EsTransactionDebitCostItem            `json:"client"`
-	Project EsTransactionDebitCostResponseProject `json:"project"`
-	Stack   EsTransactionDebitCostResponseStack   `json:"stack"`
+	Client   EsTransactionDebitCostItem             `json:"client"`
+	Project  EsTransactionDebitCostResponseProject  `json:"project"`
+	Stack    EsTransactionDebitCostResponseStack    `json:"stack"`
+	Resource EsTransactionDebitCostResponseResource `json:"resource"`
 }
 
 type EsTransactionDebitCostResponseProject []EsTransactionDebitCostItem
@@ -27,6 +28,15 @@ func (dto EsTransactionDebitCostResponseProject) MarshalJSON() ([]byte, error) {
 type EsTransactionDebitCostResponseStack []EsTransactionDebitCostItem
 
 func (dto EsTransactionDebitCostResponseStack) MarshalJSON() ([]byte, error) {
+	if dto == nil {
+		return []byte("[]"), nil
+	}
+	return json.Marshal([]EsTransactionDebitCostItem(dto))
+}
+
+type EsTransactionDebitCostResponseResource []EsTransactionDebitCostItem
+
+func (dto EsTransactionDebitCostResponseResource) MarshalJSON() ([]byte, error) {
 	if dto == nil {
 		return []byte("[]"), nil
 	}

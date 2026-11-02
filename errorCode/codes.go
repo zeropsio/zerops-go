@@ -464,5 +464,4 @@ const (
 	UnsupportedPublicGitRepositoryUrl                        ErrorCode = "unsupportedPublicGitRepositoryUrl"
 	ElkPublicPortAlreadyOccupied                             ErrorCode = "elkPublicPortAlreadyOccupied"
 	ElkLogstashMissing                                       ErrorCode = "elkLogstashMissing"
-	PublicSdkPublishTest                                     ErrorCode = "publicSdkPublishTest"
 )

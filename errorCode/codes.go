@@ -157,6 +157,8 @@ const (
 	ServiceStackNoActiveContainer                            ErrorCode = "serviceStackNoActiveContainer"
 	ActiveServiceStackRequired                               ErrorCode = "activeServiceStackRequired"
 	UserServiceStackRequired                                 ErrorCode = "userServiceStackRequired"
+	ContainerNotFound                                        ErrorCode = "containerNotFound"
+	ContainerStatusNotSupported                              ErrorCode = "containerStatusNotSupported"
 	DefiningTagRegexRequiresTagEventType                     ErrorCode = "definingTagRegexRequiresTagEventType"
 	DefiningBranchNameRequiresBranchEventType                ErrorCode = "definingBranchNameRequiresBranchEventType"
 	InvalidTagRegex                                          ErrorCode = "invalidTagRegex"

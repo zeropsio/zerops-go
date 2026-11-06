@@ -18,6 +18,7 @@ type GitlabAuth struct {
 	State        types.String     `json:"state"`
 	Email        types.StringNull `json:"email"`
 	PromoCode    types.StringNull `json:"promoCode"`
+	Reference    types.StringNull `json:"reference"`
 	ClaimZcpPool types.BoolNull   `json:"claimZcpPool"`
 }
 
@@ -33,6 +34,9 @@ func (dto GitlabAuth) GetEmail() types.StringNull {
 func (dto GitlabAuth) GetPromoCode() types.StringNull {
 	return dto.PromoCode
 }
+func (dto GitlabAuth) GetReference() types.StringNull {
+	return dto.Reference
+}
 func (dto GitlabAuth) GetClaimZcpPool() types.BoolNull {
 	return dto.ClaimZcpPool
 }
@@ -43,6 +47,7 @@ func (dto *GitlabAuth) UnmarshalJSON(b []byte) error {
 		State        *types.String
 		Email        types.StringNull
 		PromoCode    types.StringNull
+		Reference    types.StringNull
 		ClaimZcpPool types.BoolNull
 	}{}
 	err := json.Unmarshal(b, &aux)
@@ -63,6 +68,7 @@ func (dto *GitlabAuth) UnmarshalJSON(b []byte) error {
 	dto.State = *aux.State
 	dto.Email = aux.Email
 	dto.PromoCode = aux.PromoCode
+	dto.Reference = aux.Reference
 	dto.ClaimZcpPool = aux.ClaimZcpPool
 
 	return nil

@@ -16,7 +16,7 @@ import (
 )
 
 type PostGitlabUserRegistrationResponse struct {
-	success            output.AuthLogin
+	success            output.AuthRegistration
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r PostGitlabUserRegistrationResponse) OutputInterface() (output interface{
 	return r.success, r.err
 }
 
-func (r PostGitlabUserRegistrationResponse) Output() (output output.AuthLogin, err error) {
+func (r PostGitlabUserRegistrationResponse) Output() (output output.AuthRegistration, err error) {
 	return r.success, r.err
 }
 

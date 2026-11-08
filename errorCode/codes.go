@@ -462,6 +462,7 @@ const (
 	BuildCacheRemovalFilterRequired                          ErrorCode = "buildCacheRemovalFilterRequired"
 	BuildCacheRemovalAllWithFilter                           ErrorCode = "buildCacheRemovalAllWithFilter"
 	BuildCacheRemovalNotUsedForDaysInvalid                   ErrorCode = "buildCacheRemovalNotUsedForDaysInvalid"
+	ContainerTechnologyVersionInvalid                        ErrorCode = "containerTechnologyVersionInvalid"
 	ZeropsYamlBlocklistScanRunning                           ErrorCode = "zeropsYamlBlocklistScanRunning"
 	LocationInstanceNotFound                                 ErrorCode = "locationInstanceNotFound"
 	LocationNotFound                                         ErrorCode = "locationNotFound"

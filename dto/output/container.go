@@ -25,6 +25,7 @@ type Container struct {
 	CurrentHardwareResource HardwareResource         `json:"currentHardwareResource"`
 	FailReport              *ContainerFailReport     `json:"failReport"`
 	Balancing               *ContainerBalancing      `json:"balancing"`
+	TechnologyInfo          *ContainerTechnologyInfo `json:"technologyInfo"`
 	Created                 types.DateTime           `json:"created"`
 	LastUpdate              types.DateTime           `json:"lastUpdate"`
 }

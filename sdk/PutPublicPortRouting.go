@@ -17,7 +17,7 @@ import (
 )
 
 type PutPublicPortRoutingResponse struct {
-	success            output.PublicPortRouting
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutPublicPortRoutingResponse) OutputInterface() (output interface{}, err
 	return r.success, r.err
 }
 
-func (r PutPublicPortRoutingResponse) Output() (output output.PublicPortRouting, err error) {
+func (r PutPublicPortRoutingResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

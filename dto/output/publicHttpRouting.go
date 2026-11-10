@@ -13,18 +13,16 @@ import (
 var _ strconv.NumError
 
 type PublicHttpRouting struct {
-	Id           uuid.PublicHttpRoutingId   `json:"id"`
-	ClientId     uuid.ClientId              `json:"clientId"`
-	ProjectId    uuid.ProjectId             `json:"projectId"`
-	SslEnabled   types.Bool                 `json:"sslEnabled"`
-	Domains      PublicHttpRoutingDomains   `json:"domains"`
-	Locations    PublicHttpRoutingLocations `json:"locations"`
-	Created      types.DateTime             `json:"created"`
-	LastUpdate   types.DateTime             `json:"lastUpdate"`
-	IsSynced     types.Bool                 `json:"isSynced"`
-	IsEditable   types.Bool                 `json:"isEditable"`
-	DeleteOnSync types.Bool                 `json:"deleteOnSync"`
-	CdnEnabled   types.Bool                 `json:"cdnEnabled"`
+	Id         uuid.PublicHttpRoutingId   `json:"id"`
+	ClientId   uuid.ClientId              `json:"clientId"`
+	ProjectId  uuid.ProjectId             `json:"projectId"`
+	SslEnabled types.Bool                 `json:"sslEnabled"`
+	Domains    PublicHttpRoutingDomains   `json:"domains"`
+	Locations  PublicHttpRoutingLocations `json:"locations"`
+	Created    types.DateTime             `json:"created"`
+	LastUpdate types.DateTime             `json:"lastUpdate"`
+	IsEditable types.Bool                 `json:"isEditable"`
+	CdnEnabled types.Bool                 `json:"cdnEnabled"`
 }
 
 type PublicHttpRoutingDomains []PublicHttpRoutingDomain

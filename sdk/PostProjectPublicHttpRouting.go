@@ -17,7 +17,7 @@ import (
 )
 
 type PostProjectPublicHttpRoutingResponse struct {
-	success            output.PublicHttpRouting
+	success            output.PublicHttpRoutingProcess
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PostProjectPublicHttpRoutingResponse) OutputInterface() (output interfac
 	return r.success, r.err
 }
 
-func (r PostProjectPublicHttpRoutingResponse) Output() (output output.PublicHttpRouting, err error) {
+func (r PostProjectPublicHttpRoutingResponse) Output() (output output.PublicHttpRoutingProcess, err error) {
 	return r.success, r.err
 }
 

@@ -16,7 +16,7 @@ import (
 )
 
 type DeletePublicPortRoutingResponse struct {
-	success            output.DeletePublicPortRouting
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -26,7 +26,7 @@ func (r DeletePublicPortRoutingResponse) OutputInterface() (output interface{}, 
 	return r.success, r.err
 }
 
-func (r DeletePublicPortRoutingResponse) Output() (output output.DeletePublicPortRouting, err error) {
+func (r DeletePublicPortRoutingResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

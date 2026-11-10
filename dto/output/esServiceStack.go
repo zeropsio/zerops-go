@@ -15,41 +15,38 @@ import (
 var _ strconv.NumError
 
 type EsServiceStack struct {
-	Id                                 uuid.ServiceStackId                `json:"id"`
-	ClientId                           uuid.ClientId                      `json:"clientId"`
-	ProjectId                          uuid.ProjectId                     `json:"projectId"`
-	InstanceId                         uuid.InstanceId                    `json:"instanceId"`
-	ServiceStackTypeId                 stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
-	ServiceStackTypeVersionId          stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"` // Deprecated
-	DriverId                           stringId.DriverIdNull              `json:"driverId"`
-	ServiceStackTypeInfo               ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
-	Status                             enum.ServiceStackStatusEnum        `json:"status"`
-	Name                               types.String                       `json:"name"`
-	Created                            types.DateTime                     `json:"created"`
-	LastUpdate                         types.DateTime                     `json:"lastUpdate"`
-	Ports                              EsServiceStackPorts                `json:"ports"`
-	RequestedPorts                     RequestedPortsJsonObject           `json:"requestedPorts"`
-	IsSystem                           types.Bool                         `json:"isSystem"`
-	Mode                               types.StringNull                   `json:"mode"` // Deprecated
-	SubdomainAccess                    types.Bool                         `json:"subdomainAccess"`
-	VersionNumber                      types.EmptyString                  `json:"versionNumber"`
-	ReloadAvailable                    types.Bool                         `json:"reloadAvailable"`
-	Project                            ProjectLight                       `json:"project"`
-	UserData                           EsServiceStackUserData             `json:"userData"`
-	ActiveAppVersion                   *AppVersionLight                   `json:"activeAppVersion"`
-	HasUnsyncedUserDataRecord          types.Bool                         `json:"hasUnsyncedUserDataRecord"`
-	HasUnsyncedPublicHttpRoutingRecord types.Bool                         `json:"hasUnsyncedPublicHttpRoutingRecord"`
-	HasUnsyncedPublicPortRecord        types.Bool                         `json:"hasUnsyncedPublicPortRecord"`
-	HasPublicHttpRoutingAccess         types.Bool                         `json:"hasPublicHttpRoutingAccess"`
-	HasPublicPortRoutingAccess         types.Bool                         `json:"hasPublicPortRoutingAccess"`
-	ActivePublicHttpRoutingCount       types.IntNull                      `json:"activePublicHttpRoutingCount"`
-	ActivePublicPortRoutingCount       types.IntNull                      `json:"activePublicPortRoutingCount"`
-	StartOnProjectStart                types.Bool                         `json:"startOnProjectStart"`
-	GithubIntegration                  *GithubIntegration                 `json:"githubIntegration"`
-	GitlabIntegration                  *GitlabIntegration                 `json:"gitlabIntegration"`
-	CustomAutoscaling                  *CustomAutoscaling                 `json:"customAutoscaling"`
-	BuildCache                         *BuildCache                        `json:"buildCache"`
-	CdnEnabled                         types.Bool                         `json:"cdnEnabled"`
+	Id                           uuid.ServiceStackId                `json:"id"`
+	ClientId                     uuid.ClientId                      `json:"clientId"`
+	ProjectId                    uuid.ProjectId                     `json:"projectId"`
+	InstanceId                   uuid.InstanceId                    `json:"instanceId"`
+	ServiceStackTypeId           stringId.ServiceStackTypeId        `json:"serviceStackTypeId"`
+	ServiceStackTypeVersionId    stringId.ServiceStackTypeVersionId `json:"serviceStackTypeVersionId"` // Deprecated
+	DriverId                     stringId.DriverIdNull              `json:"driverId"`
+	ServiceStackTypeInfo         ServiceStackInfoJsonObject         `json:"serviceStackTypeInfo"`
+	Status                       enum.ServiceStackStatusEnum        `json:"status"`
+	Name                         types.String                       `json:"name"`
+	Created                      types.DateTime                     `json:"created"`
+	LastUpdate                   types.DateTime                     `json:"lastUpdate"`
+	Ports                        EsServiceStackPorts                `json:"ports"`
+	RequestedPorts               RequestedPortsJsonObject           `json:"requestedPorts"`
+	IsSystem                     types.Bool                         `json:"isSystem"`
+	Mode                         types.StringNull                   `json:"mode"` // Deprecated
+	SubdomainAccess              types.Bool                         `json:"subdomainAccess"`
+	VersionNumber                types.EmptyString                  `json:"versionNumber"`
+	ReloadAvailable              types.Bool                         `json:"reloadAvailable"`
+	Project                      ProjectLight                       `json:"project"`
+	UserData                     EsServiceStackUserData             `json:"userData"`
+	ActiveAppVersion             *AppVersionLight                   `json:"activeAppVersion"`
+	HasPublicHttpRoutingAccess   types.Bool                         `json:"hasPublicHttpRoutingAccess"`
+	HasPublicPortRoutingAccess   types.Bool                         `json:"hasPublicPortRoutingAccess"`
+	ActivePublicHttpRoutingCount types.IntNull                      `json:"activePublicHttpRoutingCount"`
+	ActivePublicPortRoutingCount types.IntNull                      `json:"activePublicPortRoutingCount"`
+	StartOnProjectStart          types.Bool                         `json:"startOnProjectStart"`
+	GithubIntegration            *GithubIntegration                 `json:"githubIntegration"`
+	GitlabIntegration            *GitlabIntegration                 `json:"gitlabIntegration"`
+	CustomAutoscaling            *CustomAutoscaling                 `json:"customAutoscaling"`
+	BuildCache                   *BuildCache                        `json:"buildCache"`
+	CdnEnabled                   types.Bool                         `json:"cdnEnabled"`
 }
 
 type EsServiceStackPorts []ServicePort

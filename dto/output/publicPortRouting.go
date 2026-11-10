@@ -26,6 +26,4 @@ type PublicPortRouting struct {
 	FirewallAllowMyIp types.Bool                               `json:"firewallAllowMyIp"`
 	Created           types.DateTime                           `json:"created"`
 	LastUpdate        types.DateTime                           `json:"lastUpdate"`
-	IsSynced          types.Bool                               `json:"isSynced"`
-	DeleteOnSync      types.Bool                               `json:"deleteOnSync"`
 }

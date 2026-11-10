@@ -17,7 +17,7 @@ import (
 )
 
 type PutPublicHttpRoutingLocationResponse struct {
-	success            output.PublicHttpRouting
+	success            output.Process
 	err                error
 	responseHeaders    http.Header
 	responseStatusCode int
@@ -27,7 +27,7 @@ func (r PutPublicHttpRoutingLocationResponse) OutputInterface() (output interfac
 	return r.success, r.err
 }
 
-func (r PutPublicHttpRoutingLocationResponse) Output() (output output.PublicHttpRouting, err error) {
+func (r PutPublicHttpRoutingLocationResponse) Output() (output output.Process, err error) {
 	return r.success, r.err
 }
 

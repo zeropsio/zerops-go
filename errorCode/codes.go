@@ -172,6 +172,7 @@ const (
 	InvalidOldPassword                                       ErrorCode = "invalidOldPassword"
 	ProjectStatusNotSupported                                ErrorCode = "projectStatusNotSupported"
 	ProjectNotFound                                          ErrorCode = "projectNotFound"
+	ProjectTransferNotAllowed                                ErrorCode = "projectTransferNotAllowed"
 	ProjectIsNotActive                                       ErrorCode = "projectIsNotActive"
 	ServiceStackNameUnavailable                              ErrorCode = "serviceStackNameUnavailable"
 	ServiceStackNameInvalid                                  ErrorCode = "serviceStackNameInvalid"

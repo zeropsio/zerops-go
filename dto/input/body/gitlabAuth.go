@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -14,12 +15,13 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*GitlabAuth)(nil)
 
 type GitlabAuth struct {
-	Code         types.String     `json:"code"`
-	State        types.String     `json:"state"`
-	Email        types.StringNull `json:"email"`
-	PromoCode    types.StringNull `json:"promoCode"`
-	Reference    types.StringNull `json:"reference"`
-	ClaimZcpPool types.BoolNull   `json:"claimZcpPool"`
+	Code         types.String               `json:"code"`
+	State        types.String               `json:"state"`
+	Email        types.StringNull           `json:"email"`
+	PromoCode    types.StringNull           `json:"promoCode"`
+	Reference    types.StringNull           `json:"reference"`
+	ClaimZcpPool types.BoolNull             `json:"claimZcpPool"`
+	App          *enum.UserCreatedByAppEnum `json:"app"`
 }
 
 func (dto GitlabAuth) GetCode() types.String {
@@ -40,6 +42,9 @@ func (dto GitlabAuth) GetReference() types.StringNull {
 func (dto GitlabAuth) GetClaimZcpPool() types.BoolNull {
 	return dto.ClaimZcpPool
 }
+func (dto GitlabAuth) GetApp() *enum.UserCreatedByAppEnum {
+	return dto.App
+}
 
 func (dto *GitlabAuth) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -49,6 +54,7 @@ func (dto *GitlabAuth) UnmarshalJSON(b []byte) error {
 		PromoCode    types.StringNull
 		Reference    types.StringNull
 		ClaimZcpPool types.BoolNull
+		App          *enum.UserCreatedByAppEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -70,6 +76,7 @@ func (dto *GitlabAuth) UnmarshalJSON(b []byte) error {
 	dto.PromoCode = aux.PromoCode
 	dto.Reference = aux.Reference
 	dto.ClaimZcpPool = aux.ClaimZcpPool
+	dto.App = aux.App
 
 	return nil
 }

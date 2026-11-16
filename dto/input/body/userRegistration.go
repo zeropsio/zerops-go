@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -14,15 +15,16 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*UserRegistration)(nil)
 
 type UserRegistration struct {
-	Email        types.Email      `json:"email"`
-	Password     types.StringNull `json:"password"`
-	AccountName  types.String     `json:"accountName"`
-	Name         types.String     `json:"name"`
-	PromoCode    types.StringNull `json:"promoCode"`
-	Reference    types.StringNull `json:"reference"`
-	Token        types.TextNull   `json:"token"`
-	Passkey      types.BoolNull   `json:"passkey"`
-	ClaimZcpPool types.BoolNull   `json:"claimZcpPool"`
+	Email        types.Email                `json:"email"`
+	Password     types.StringNull           `json:"password"`
+	AccountName  types.String               `json:"accountName"`
+	Name         types.String               `json:"name"`
+	PromoCode    types.StringNull           `json:"promoCode"`
+	Reference    types.StringNull           `json:"reference"`
+	Token        types.TextNull             `json:"token"`
+	Passkey      types.BoolNull             `json:"passkey"`
+	ClaimZcpPool types.BoolNull             `json:"claimZcpPool"`
+	App          *enum.UserCreatedByAppEnum `json:"app"`
 }
 
 func (dto UserRegistration) GetEmail() types.Email {
@@ -52,6 +54,9 @@ func (dto UserRegistration) GetPasskey() types.BoolNull {
 func (dto UserRegistration) GetClaimZcpPool() types.BoolNull {
 	return dto.ClaimZcpPool
 }
+func (dto UserRegistration) GetApp() *enum.UserCreatedByAppEnum {
+	return dto.App
+}
 
 func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -64,6 +69,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 		Token        types.TextNull
 		Passkey      types.BoolNull
 		ClaimZcpPool types.BoolNull
+		App          *enum.UserCreatedByAppEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -91,6 +97,7 @@ func (dto *UserRegistration) UnmarshalJSON(b []byte) error {
 	dto.Token = aux.Token
 	dto.Passkey = aux.Passkey
 	dto.ClaimZcpPool = aux.ClaimZcpPool
+	dto.App = aux.App
 
 	return nil
 }

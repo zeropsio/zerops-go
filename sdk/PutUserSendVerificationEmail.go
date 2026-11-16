@@ -7,13 +7,20 @@ import (
 	"errors"
 	"net/http"
 
+	"net/url"
+	"strconv"
+	"strings"
+
 	"context"
 
 	"github.com/zeropsio/zerops-go/apiError"
 	"github.com/zeropsio/zerops-go/dto/input/path"
+	"github.com/zeropsio/zerops-go/dto/input/query"
 	"github.com/zeropsio/zerops-go/dto/output"
 	"github.com/zeropsio/zerops-go/sdkBase"
 )
+
+var _ strconv.NumError
 
 type PutUserSendVerificationEmailResponse struct {
 	success            output.Success
@@ -41,8 +48,17 @@ func (r PutUserSendVerificationEmailResponse) StatusCode() int {
 	return r.responseStatusCode
 }
 
-func (h Handler) PutUserSendVerificationEmail(ctx context.Context, inputDtoPath path.UserId) (putUserSendVerificationEmailResponse PutUserSendVerificationEmailResponse, err error) {
+func (h Handler) PutUserSendVerificationEmail(ctx context.Context, inputDtoPath path.UserId, inputDtoQuery query.SendVerificationEmail) (putUserSendVerificationEmailResponse PutUserSendVerificationEmailResponse, err error) {
 	u := "/api/rest/public/user/" + inputDtoPath.Id.Native() + "/send-verification-email"
+
+	var queryParams []string
+	if param, ok := inputDtoQuery.App.Get(); ok {
+		queryParams = append(queryParams, "app="+url.QueryEscape(param.Native()))
+	}
+
+	if len(queryParams) > 0 {
+		u += "?" + strings.Join(queryParams, "&")
+	}
 
 	var response PutUserSendVerificationEmailResponse
 	sdkResponse := sdkBase.Put(

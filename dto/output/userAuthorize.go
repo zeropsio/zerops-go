@@ -27,6 +27,7 @@ type UserAuthorize struct {
 	Created            types.DateTime              `json:"created"`
 	LastUpdate         types.DateTime              `json:"lastUpdate"`
 	Status             enum.UserStatusEnum         `json:"status"`
+	CreatedByApp       *enum.UserCreatedByAppEnum  `json:"createdByApp"`
 	ClientUserList     UserAuthorizeClientUserList `json:"clientUserList"`
 	PasswordIsSet      types.Bool                  `json:"passwordIsSet"`
 	TotpIsSet          types.Bool                  `json:"totpIsSet"`

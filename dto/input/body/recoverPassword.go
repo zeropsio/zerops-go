@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/zeropsio/zerops-go/types"
+	"github.com/zeropsio/zerops-go/types/enum"
 	"github.com/zeropsio/zerops-go/validator"
 )
 
@@ -14,16 +15,21 @@ var _ strconv.NumError
 var _ json.Unmarshaler = (*RecoverPassword)(nil)
 
 type RecoverPassword struct {
-	Email types.Email `json:"email"`
+	Email types.Email                `json:"email"`
+	App   *enum.UserCreatedByAppEnum `json:"app"`
 }
 
 func (dto RecoverPassword) GetEmail() types.Email {
 	return dto.Email
 }
+func (dto RecoverPassword) GetApp() *enum.UserCreatedByAppEnum {
+	return dto.App
+}
 
 func (dto *RecoverPassword) UnmarshalJSON(b []byte) error {
 	var aux = struct {
 		Email *types.Email
+		App   *enum.UserCreatedByAppEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -37,6 +43,7 @@ func (dto *RecoverPassword) UnmarshalJSON(b []byte) error {
 		return errorList.GetError()
 	}
 	dto.Email = *aux.Email
+	dto.App = aux.App
 
 	return nil
 }

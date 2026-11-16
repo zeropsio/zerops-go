@@ -21,6 +21,7 @@ type ClientUser struct {
 	CanViewFinances   types.Bool                  `json:"canViewFinances"`
 	CanEditFinances   types.Bool                  `json:"canEditFinances"`
 	CanCreateProjects types.Bool                  `json:"canCreateProjects"`
+	App               *enum.UserCreatedByAppEnum  `json:"app"`
 }
 
 func (dto ClientUser) GetUserId() uuid.UserId {
@@ -38,6 +39,9 @@ func (dto ClientUser) GetCanEditFinances() types.Bool {
 func (dto ClientUser) GetCanCreateProjects() types.Bool {
 	return dto.CanCreateProjects
 }
+func (dto ClientUser) GetApp() *enum.UserCreatedByAppEnum {
+	return dto.App
+}
 
 func (dto *ClientUser) UnmarshalJSON(b []byte) error {
 	var aux = struct {
@@ -46,6 +50,7 @@ func (dto *ClientUser) UnmarshalJSON(b []byte) error {
 		CanViewFinances   *types.Bool
 		CanEditFinances   *types.Bool
 		CanCreateProjects *types.Bool
+		App               *enum.UserCreatedByAppEnum
 	}{}
 	err := json.Unmarshal(b, &aux)
 	if err != nil {
@@ -75,6 +80,7 @@ func (dto *ClientUser) UnmarshalJSON(b []byte) error {
 	dto.CanViewFinances = *aux.CanViewFinances
 	dto.CanEditFinances = *aux.CanEditFinances
 	dto.CanCreateProjects = *aux.CanCreateProjects
+	dto.App = aux.App
 
 	return nil
 }

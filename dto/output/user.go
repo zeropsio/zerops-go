@@ -14,20 +14,21 @@ import (
 var _ strconv.NumError
 
 type User struct {
-	Id                 uuid.UserId         `json:"id"`
-	Email              types.Email         `json:"email"`
-	EmailVerified      types.Bool          `json:"emailVerified"`
-	FullName           types.String        `json:"fullName"`
-	FirstName          types.String        `json:"firstName"`
-	LastName           types.EmptyString   `json:"lastName"`
-	Avatar             *UserAvatar         `json:"avatar"`
-	CountryCallingCode types.IntNull       `json:"countryCallingCode"`
-	PhoneNumber        types.IntNull       `json:"phoneNumber"`
-	Language           Language            `json:"language"`
-	Created            types.DateTime      `json:"created"`
-	LastUpdate         types.DateTime      `json:"lastUpdate"`
-	Status             enum.UserStatusEnum `json:"status"`
-	ClientUserList     UserClientUserList  `json:"clientUserList"`
+	Id                 uuid.UserId                `json:"id"`
+	Email              types.Email                `json:"email"`
+	EmailVerified      types.Bool                 `json:"emailVerified"`
+	FullName           types.String               `json:"fullName"`
+	FirstName          types.String               `json:"firstName"`
+	LastName           types.EmptyString          `json:"lastName"`
+	Avatar             *UserAvatar                `json:"avatar"`
+	CountryCallingCode types.IntNull              `json:"countryCallingCode"`
+	PhoneNumber        types.IntNull              `json:"phoneNumber"`
+	Language           Language                   `json:"language"`
+	Created            types.DateTime             `json:"created"`
+	LastUpdate         types.DateTime             `json:"lastUpdate"`
+	Status             enum.UserStatusEnum        `json:"status"`
+	CreatedByApp       *enum.UserCreatedByAppEnum `json:"createdByApp"`
+	ClientUserList     UserClientUserList         `json:"clientUserList"`
 }
 
 type UserClientUserList []ClientUserExtraWithClientLight

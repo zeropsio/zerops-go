@@ -27,6 +27,7 @@ const (
 	DeviceLoginForOtherUser                                  ErrorCode = "deviceLoginForOtherUser"
 	DeviceLoginNotPending                                    ErrorCode = "deviceLoginNotPending"
 	DeviceLoginNotAllowedForImpersonation                    ErrorCode = "deviceLoginNotAllowedForImpersonation"
+	SudoNotAllowedForImpersonation                           ErrorCode = "sudoNotAllowedForImpersonation"
 	LoginAppCodeAlreadyExists                                ErrorCode = "loginAppCodeAlreadyExists"
 	LoginAppCallbackUrlRequired                              ErrorCode = "loginAppCallbackUrlRequired"
 	LoginAppCallbackUrlInvalid                               ErrorCode = "loginAppCallbackUrlInvalid"

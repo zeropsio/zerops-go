@@ -27,6 +27,7 @@ type EsContainer struct {
 	FailReport              *ContainerFailReport     `json:"failReport"`
 	Balancing               *ContainerBalancing      `json:"balancing"`
 	HealthCheck             *ContainerHealthCheck    `json:"healthCheck"`
+	NodeRestarting          types.Bool               `json:"nodeRestarting"`
 	Created                 types.DateTime           `json:"created"`
 	LastUpdate              types.DateTime           `json:"lastUpdate"`
 }

@@ -22,4 +22,5 @@ type ServiceStackTypeVersionLight struct {
 	Description        types.Text                             `json:"description"`
 	VersionNumber      types.EmptyString                      `json:"versionNumber"`
 	ExactVersionNumber types.EmptyString                      `json:"exactVersionNumber"`
+	HasSecretsRotation types.Bool                             `json:"hasSecretsRotation"`
 }
